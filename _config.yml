@@ -1,0 +1,29 @@
+#baseurl: /tufte-jekyll
+title: Machine Learning and Medicine
+author: Sam Finlayson
+simple_search: http://google.com/search
+description: By Sam Finlayson, MD-PhD student at Harvard-MIT
+url: "http://sgfin.github.io"
+name: tufte
+twitter_username: IAmSamFin
+github_username: sgfin
+markdown: kramdown
+markdown_ext: "markdown,mkdown,mkdn,mkd,md"
+permalink: pretty #/articles/:short_year/:title
+timezone: America/New_York
+excerpt_separator: <!--more-->  # you can specify your own separator, of course.
+exclude: ['Gemfile', 'Gemfile.lock', 'Rakefile', 'UploadToGithub.Rakefile', 'README.md']
+post:
+  template: _post.txt
+  extension: md
+page:
+  template: _page.txt
+  extension: md
+#editor: gvim
+git:
+  branch: master
+# transfer:
+#   command: rsync
+#   settings: -av
+#   source: _site/
+#   destination:
