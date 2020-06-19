@@ -79,6 +79,7 @@ body {
 }
 
 
+
 p.align-right {
   width:100%;
   text-align:right;
@@ -250,6 +251,9 @@ div .pub-info {
 }
 
 
+.intro {
+  font-size: large;
+}
 
 
 
