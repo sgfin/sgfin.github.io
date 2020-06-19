@@ -17,12 +17,20 @@ I have allowed myself to get pulled down this rabbit hole far too many times, wa
 
 As time goes on, I might even write a bot to post this on relevant twitter threads. If I do, I will _intentionally_ code this bot using logistic regression and call it machine learning, just to maximize peskiness.
 
-**Outline**
-- [Neglected historical context: The term "machine learning" was not coined to contrast with statistics, but to contrast the field with competing paradigms for building intelligent computer systems.](#Sect1)
-- [Arguments about who "owns" regression miss the point](#Sect2)
-- [Distinctions in goals have yielded a divergence in methods and cultures, which explains shifting connotations of the term "machine learning."](#Sect3)
-- [Isn't this whole "debate" a massive waste of time?](#Sect4)
 
+**Outline**
+
+<div style="padding-top: 10px; font-size:large">
+
+<a href="#Sect1">-Neglected historical context: The term "machine learning" was not coined to contrast with statistics, but to contrast the field with competing paradigms for building intelligent computer systems.</a><br><br>
+
+<a href="#Sect2">-Arguments about who "owns" regression miss the point.</a><br><br>
+
+<a href="#Sect3">-Distinctions in goals have yielded a divergence in methods and cultures, which explains shifting connotations of the term "machine learning."</a><br><br>
+
+<a href="#Sect4">-Isn't this whole "debate" a massive waste of time?</a>
+
+</div>
 
 
 ### <a name="Sect1"></a> Neglected historical context: The term "machine learning" was _not_ coined to contrast with statistics, but to contrast the field with competing paradigms for building intelligent computer systems.

@@ -18,38 +18,41 @@ th, td {
 
 <h3>Outline:</h3>
 
-- [_Where Should I Start?_](#Start)
+<div style="padding-top: 10px; font-size:large">
 
-- [_Computer Science_](#CS)
+<a href="#Start">-Where Should I Start?</a><br>
 
-- [_Real Analysis_](#realA)
+<a href="#CS">-Computer Science</a><br>
 
-- [_Linear Algebra_](#LA)
+<a href="#realA">-Real Analysis</a><br>
 
-- [_Probability_](#prob)
+<a href="#LA">-Linear Algebra</a><br>
 
-- [_Statistics_](#stat)
+<a href="#prob">-Probability</a><br>
 
-- [_Causal Inference_](#causal)
+<a href="#stat">-Statistics</a><br>
 
-- [_Optimization_](#opt)
+<a href="#causal">-Causal Inference</a><br>
 
-- [_Information Theory_](#info)
+<a href="#opt">-Optimization</a><br>
 
-- [_Classic Machine Learning_](#ml)
+<a href="#info">-Information Theory</a><br>
 
-- [_Bayesian Machine Learning_](#bayesML)
+<a href="#ml">-Classic Machine Learning</a><br>
 
-- [_Deep Learning_](#DL)
+<a href="#bayesML">-Bayesian Machine Learning</a><br>
 
-- [_Natural Language Processing_](#NLP)
+<a href="#DL">-Deep Learning</a><br>
 
-- [_Reinforcement Learning_](#RL)
+<a href="#NLP">-Natural Language Processing</a><br>
 
-- [Applications in Biology and Medicine_](#bio)
+<a href="#RL">-Reinforcement Learning</a><br>
 
-- [_Favorite Websites_](#misc)
+<a href="#bio">-Applications in Biology and Medicine</a><br>
 
+<a href="#misc">-Favorite Websites</a>
+
+</div>
 
 ### <a name="Start"></a> Where should I start (in ML)?
 
