@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Deriving the information entropy of the multivariate gaussian</title>
+  <meta name="description" content="Derivation of the gaussian's entropy, in part to explain a trace trick.">
+
+  <!-- Google Fonts loaded here depending on setting in _data/options.yml true loads font, blank does not-->
+  
+    <link href='//fonts.googleapis.com/css?family=Lato:400,400italic' rel='stylesheet' type='text/css'>
+  
+  
+  <!-- Load up MathJax script if needed ... specify in /_data/options.yml file-->
+  
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: [
+      "MathMenu.js",
+      "MathZoom.js",
+      "AssistiveMML.js",
+      "a11y/accessibility-menu.js"
+    ],
+    jax: ["input/TeX", "output/CommonHTML"],
+    TeX: {
+      extensions: [
+        "AMSmath.js",
+        "AMSsymbols.js",
+        "noErrors.js",
+        "noUndefined.js",
+      ]
+    }
+  });
+</script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-122144402-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-122144402-1');
+    </script>
+
+ <!--   <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+  
+
+  <link rel="stylesheet" type="text/css" href="/css/tufte.css">
+  <!-- <link rel="stylesheet" type="text/css" href="/css/print.css" media="print"> -->
+
+  <link rel="canonical" href="http://sgfin.github.io/2017/03/11/Deriving-the-information-entropy-of-the-multivariate-gaussian/">
+
+  <link rel="alternate" type="application/rss+xml" title="Machine Learning and Medicine" href="http://sgfin.github.io/feed.xml" />
+</head>
+
+  <body>
+    <!--- Header and nav template site-wide -->
+<header>
+    <nav class="group" style="padding-bottom: 15px;">
+	<!-- <a href="/"><img class="badge" src="/assets/img/badge_1.png" alt="SGF"></a> -->
+	
+		
+  	
+		
+		    
+		      <a href="/">About</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/css/print.css"></a>
+		    
+	    
+  	
+		
+  	
+		
+		    
+		      <a href="/posts/">posts</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/learning-resources/">ML Resources</a>
+		    
+	    
+  	
+	</nav>
+</header>
+    <article class="group">
+      <h1>Deriving the information entropy of the multivariate gaussian</h1>
+<p class="subtitle">March 11, 2017</p>
+
+<ul id="markdown-toc">
+  <li><a href="#introduction-and-trace-tricks" id="markdown-toc-introduction-and-trace-tricks">Introduction and Trace Tricks</a></li>
+  <li><a href="#derivation" id="markdown-toc-derivation">Derivation</a>    <ul>
+      <li><a href="#setup" id="markdown-toc-setup">Setup</a></li>
+      <li><a href="#first-term" id="markdown-toc-first-term">First term</a></li>
+      <li><a href="#second-term--trace-trick-coming" id="markdown-toc-second-term--trace-trick-coming">Second term  (Trace Trick Coming!)</a></li>
+      <li><a href="#recombining-the-terms" id="markdown-toc-recombining-the-terms">Recombining the terms</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="introduction-and-trace-tricks">Introduction and Trace Tricks</h2>
+
+<p>The pdf of a <a href="https://en.wikipedia.org/wiki/Multivariate_normal_distribution">multivariate gaussian</a> is as follows:</p>
+
+\[p(x) = \frac{1}{(\sqrt{2\pi})^{N}\sqrt{\det\Sigma}}e^{-\frac{1}{2}(x-\mu)^{T}\Sigma^{-1}(x-\mu)}\]
+
+<p>, where</p>
+
+\[\Sigma_{i,j} = E[(x_{i} - \mu_{i})(x_{j} - \mu_{j})]\]
+
+<p>is the <a href="https://en.wikipedia.org/wiki/Covariance_matrix">covariance matrix</a>, which can be expressed in vector notation as</p>
+
+\[\Sigma = E[(X-E[X])(X-E[X])^{T}] = \int p(x)(x-\mu)(x-\mu)^{T}dx\]
+
+<p>. I might make the derivation of this formula its own post at some point, but it is in Strang’s intro to linear algebra text so I will hold off.  Instead, this post derives the <em>entropy</em> of the multivariate gaussian, which is equal to:</p>
+
+\[H=\frac{N}{2}\ln\left(2\pi e\right)+\frac{1}{2}\ln\det C\]
+
+<p>Part of the reason why I do this is because the second part of the derivation involves a “trace trick” that I want to remember how to use for the future.  The key to the “trace trick” is to recognize that a matrix (slash set of multiplied matrices) is 1x1, and that the value of any such matrix is, by definition, equal to its trace.  This then allows you to invoke the quasi-commutative property of the trace:</p>
+
+\[\text{tr}(UVW)=\text{tr}(WUV)\]
+
+<p>to push around the matrices however you desire until they become something tidy/useful.  The whole thing feels rather devious to me, personally.</p>
+
+<h2 id="derivation">Derivation</h2>
+<h3 id="setup">Setup</h3>
+
+<p>Beginning with the definition of entropy</p>
+
+\[H(x)=-\int p(x)*\ln p(x)dx\]
+
+<p>substituting in the probability function for the multivariate gaussian
+in only its second occurence in the formula,</p>
+
+\[H(x)=-\int p(x)*\ln\left(\frac{1}{(\sqrt{2\pi})^{N}\sqrt{\det\Sigma}}e^{-\frac{1}{2}(x-\mu)^{T}\Sigma^{-1}(x-\mu)}\right)dx\]
+
+\[=-\int p(x)*\ln\left(\frac{1}{(\sqrt{2\pi})^{N}\sqrt{\det\Sigma}}e^{-\frac{1}{2}(x-\mu)^{T}\Sigma^{-1}(x-\mu)}\right)dx\]
+
+\[=-\int p(x)*\ln\left(\frac{1}{(\sqrt{2\pi})^{N}\sqrt{\det\Sigma}}\right)dx-\int p(x)\ln\left(e^{-\frac{1}{2}(x-\mu)^{T}\Sigma^{-1}(x-\mu)}\right)dx\]
+
+<p>We will now consider these two terms separately.</p>
+
+<h3 id="first-term">First term</h3>
+
+<p>First, we concern ourselves with the first ln term:</p>
+
+\[-\int p(x)*\ln\left(\frac{1}{(\sqrt{2\pi})^{N}\sqrt{\det C}}\right)dx\]
+
+\[=\int p(x)*\ln\left((\sqrt{2\pi})^{N}\sqrt{\det C}\right)\]
+
+<p>since all the terms other than \(p(x)\) form a constant,</p>
+
+\[=\left(\ln\left((\sqrt{2\pi})^{N}\sqrt{\det C}\right)\right)\int p(x)\]
+
+<p>and because \(p(x)\) is a PDF, it integrates to 1. Thus, this component of
+the equation is</p>
+
+\[\ln\left((\sqrt{2\pi})^{N}\sqrt{\det C}\right)\]
+
+\[=\frac{N}{2}\ln\left(2\pi\right)+\frac{1}{2}\ln\det C\]
+
+<h3 id="second-term--trace-trick-coming">Second term  (Trace Trick Coming!)</h3>
+
+<p>Now we consider the second ln term</p>
+
+\[-\int p(x)\ln\left(e^{-\frac{1}{2}(x-\mu)^{T}\Sigma^{-1}(x-\mu)}\right)dx\]
+
+\[=\int p(x)\frac{1}{2}\ln\left(e^{(x-\mu)^{T}\Sigma^{-1}(x-\mu)}\right)dx\]
+
+<p>because \((x-\mu)^{T}\) is a 1 x N matrix, \(\Sigma^{-1}\) is a N x N
+matrix, and \((x-\mu)\) is a N x 1 matrix, the matrix product
+\((x-\mu)^{T}\Sigma^{-1}(x-\mu)\) is a 1 x 1 matrix. Further, because the
+trace of any 1 x 1 matrix
+\(\text{tr}(A)=\Sigma_{i=1}^{n}A_{i,i}=A_{1,1}=A\), we can conclude that
+the 1 x 1 matrix
+\((x-\mu)^{T}\Sigma^{-1}(x-\mu)=\text{tr}((x-\mu)^{T}\Sigma^{-1}(x-\mu))\).</p>
+
+<p>As such, our term becomes</p>
+
+\[=\int p(x)\frac{1}{2}\ln\left(e^{\text{tr}\left[(x-\mu)^{T}\Sigma^{-1}(x-\mu)\right]}\right)dx\]
+
+\[=\frac{1}{2}\int p(x)\ln\left(e^{\text{tr}\left[(x-\mu)^{T}\Sigma^{-1}(x-\mu)\right]}\right)dx\]
+
+<p>, which, by the quasi-commutativity property of the trace function,
+\(\text{tr}(UVW)=\text{tr}(WUV)\),</p>
+
+\[=\frac{1}{2}\int p(x)\ln\left(e^{\text{tr}\left[\Sigma^{-1}(x-\mu)(x-\mu)^{T}\right]}\right)dx\]
+
+<p>. Because \(p(x)\) is a scalar and the natural logarithm and exponentials
+may cancel, the properties of the trace function allow us to push the
+\(p(x)\) and the integral inside of the trace, so</p>
+
+\[=\frac{1}{2}\int\ln\left(e^{\text{tr}\left[\Sigma^{-1}p(x)(x-\mu)(x-\mu)^{T}\right]}\right)dx\]
+
+\[=\frac{1}{2}\ln\left(e^{\text{tr}\left[\Sigma^{-1}\int p(x)(x-\mu)(x-\mu)^{T}dx\right]}\right)\]
+
+<p>But, $\int p(x)(x-\mu)(x-\mu)^{T}dx=\Sigma$ is just the definition of the covariance matrix!  As such,</p>
+
+\[=\frac{1}{2}\ln\left(e^{\text{tr}\left[\Sigma^{-1}\Sigma\right]}\right)\]
+
+\[=\frac{1}{2}\ln\left(e^{\text{tr}\left[I_{N}\right]}\right)\]
+
+\[=\frac{1}{2}\ln\left(e^{N}\right)\]
+
+\[=\frac{N}{2}\ln\left(e\right)\]
+
+<h3 id="recombining-the-terms">Recombining the terms</h3>
+
+<p>Bringing the above terms back together, we have</p>
+
+\[H(x)=\frac{N}{2}\ln\left(2\pi\right)+\frac{1}{2}\ln\det C+\frac{N}{2}\ln\left(e\right)\]
+
+\[=\frac{N}{2}\ln\left(2\pi e\right)+\frac{1}{2}\ln\det C\]
+
+<p>as desired.</p>
+
+
+
+    </article>
+    <span class="print-footer">Deriving the information entropy of the multivariate gaussian - March 11, 2017 - Sam Finlayson</span>
+    <footer>
+  <hr class="slender">
+  <ul class="footer-links">
+    <li><a href="mailto:samuel_finlayson@hms.harvard.edu"><span class="icon-mail3"></span></a></li>    
+    
+      <li>
+        <a href="//www.twitter.com/IAmSamFin"><span class="icon-twitter"></span></a>
+      </li>
+    
+      <li>
+        <a href="//github.com/sgfin"><span class="icon-github"></span></a>
+      </li>
+    
+      <li>
+        <a href="/feed"><span class="icon-rss2"></span></a>
+      </li>
+      
+  </ul>
+<div class="credits">
+<span>&copy; 2020 &nbsp;&nbsp;SAM FINLAYSON</span></br> <br>
+<span>This site created with the <a href="//github.com/clayh53/tufte-jekyll">Tufte theme for  </a> in <a href="//jekyllrb.com">Jekyll</a>.</span> 
+</div>  
+</footer>
+  </body>
+</html>

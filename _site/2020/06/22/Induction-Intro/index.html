@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Induction Generalization, Inductive Biases, and Infusing Knowledge into Learned Representations</title>
+  <meta name="description" content="">
+
+  <!-- Google Fonts loaded here depending on setting in _data/options.yml true loads font, blank does not-->
+  
+    <link href='//fonts.googleapis.com/css?family=Lato:400,400italic' rel='stylesheet' type='text/css'>
+  
+  
+  <!-- Load up MathJax script if needed ... specify in /_data/options.yml file-->
+  
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: [
+      "MathMenu.js",
+      "MathZoom.js",
+      "AssistiveMML.js",
+      "a11y/accessibility-menu.js"
+    ],
+    jax: ["input/TeX", "output/CommonHTML"],
+    TeX: {
+      extensions: [
+        "AMSmath.js",
+        "AMSsymbols.js",
+        "noErrors.js",
+        "noUndefined.js",
+      ]
+    }
+  });
+</script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-122144402-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-122144402-1');
+    </script>
+
+ <!--   <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+  
+
+  <link rel="stylesheet" type="text/css" href="/css/tufte.css">
+  <!-- <link rel="stylesheet" type="text/css" href="/css/print.css" media="print"> -->
+
+  <link rel="canonical" href="http://sgfin.github.io/2020/06/22/Induction-Intro/">
+
+  <link rel="alternate" type="application/rss+xml" title="Machine Learning and Medicine" href="http://sgfin.github.io/feed.xml" />
+</head>
+
+  <body>
+    <!--- Header and nav template site-wide -->
+<header>
+    <nav class="group" style="padding-bottom: 15px;">
+	<!-- <a href="/"><img class="badge" src="/assets/img/badge_1.png" alt="SGF"></a> -->
+	
+		
+  	
+		
+		    
+		      <a href="/">About</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/css/print.css"></a>
+		    
+	    
+  	
+		
+  	
+		
+		    
+		      <a href="/posts/">posts</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/learning-resources/">ML Resources</a>
+		    
+	    
+  	
+	</nav>
+</header>
+    <article class="group">
+      <h1>Induction Generalization, Inductive Biases, and Infusing Knowledge into Learned Representations</h1>
+<p class="subtitle">June 22, 2020</p>
+
+<p><sub><sup>Note: This post is a modified excerpt from the introduction to my PhD thesis.<sub><sup></sup></sub></sup></sub></p>
+
+<h2 id="inductive-generalization-and-inductive-biases">Inductive Generalization and Inductive Biases</h2>
+
+<p>Our goal in building machine learning systems is, with rare exceptions, to create algorithms whose utility extends beyond the dataset in which they are trained. In other words, we desire intelligent systems that are capable of generalizing to future data. The process of leveraging observations to draw inferences about the unobserved is the principle of <em>induction</em><label for="induct_term" class="margin-toggle sidenote-number"></label><input type="checkbox" id="induct_term" class="margin-toggle" /><span class="sidenote">Terminological note: In a non-technical setting, the term <em>inductive</em> – denoting the inference of general laws from particular instances – is typically contrasted with the adjective <em>deductive</em>, which denotes the inference of particular instances from general laws. This broad definition of induction may be used in machine learning to describe, for example, the model fitting process as the <em>inductive step</em> and the deployment on new data as the <em>deductive step</em>. By the same token, some AI methods such as automated theorem provers are described as deductive. In the setting of current ML research, however, it is much more common for the term ‘inductive’ to refer specifically to methods that are structurally capable of operating on new data points without retraining. In contrast, <em>transductive</em> methods require a fixed or pre-specified dataset, and are used to make internal predictions about missing features or labels. While many ML methods are assumed to be inductive in both senses of the term, this section concerns itself primarily with the broader notion of induction as it relates to learning from observed data. In contrast, Chapters 1 and 2 involve the second use of this term, as I propose new methods that are inductive but whose predecessors were transductive <a class="citation" href="#chami2020machine"><span style="vertical-align: super">1</span></a>.</span>.
+<!--. --></p>
+
+<h3 id="philosophical-foundations-for-the-problem-of-induction">Philosophical Foundations for the Problem of Induction</h3>
+
+<p>Even ancient philosophers appreciated the tenuity of inductive generalization. As early as the second century, the Greek philosopher Sextus Empiricus argued that the very notion of induction was invalid, a conclusion independently argued by the Charvaka school of philosophy in ancient India <a class="citation" href="#empiricus1933outlines"><span style="vertical-align: super">2,3</span></a>. The so-called “problem of induction,” as it is best known today, was formulated by 18th-century philosopher David Hume in his twin works <em>A Treatise of Human Nature</em> and <em>An Enquiry Concerning Human Understanding</em> <a class="citation" href="#humeTreatise"><span style="vertical-align: super">4,5</span></a>. In these works, Hume argues that all inductive inference hinges upon the premise that the future will follow the past. This premise has since become known as his “Principle of Uniformity of Nature” (or simply, the “Uniformity Principle”), the “Resemblance Principle,” or his “Principle of Extrapolation” <a class="citation" href="#garrett2011reason"><span style="vertical-align: super">6</span></a>.</p>
+
+<p>In the <em>Treatise</em> and the <em>Inquiry</em>, Hume examines various arguments – intuitive, demonstrative, sensible, probabilistic – that could be proposed to establish the principle of extrapolation and, having rejected them all, concludes that inductive inference itself is “not determin’d by reason.” Hume thus places induction outside the scope of reason itself, casting it therefore as non-rational if not irrational. In his 1955 work <em>Fact, Fiction, and Forecast</em>, Nelson Goodman extended and reframed Hume’s arguments, proposing “a new riddle of induction”<a class="citation" href="#goodman1955fact"><span style="vertical-align: super">7</span></a>. For Goodman, the key challenge was not the validity of induction per se, but rather the recognition that for any set of observations, there are multiple contradictory generalizations that could be used to explain them.</p>
+
+<p>At least among scientists, the best known formal response to the problem of induction comes from the philosopher of science Karl Popper. In <em>Conjectures and Refutations</em>, Popper argues that science may sidestep the problem of induction by relying instead upon scientific conjecture followed by criticism <a class="citation" href="#popper2014conjectures"><span style="vertical-align: super">8</span></a>.  Stated otherwise, according to Popper, the central goal of scientists should be to formulate falsifiable theories which can be provisionally treated as true when they survive repeated attempts to prove them false <label for="popper_stats" class="margin-toggle sidenote-number"></label><input type="checkbox" id="popper_stats" class="margin-toggle" /><span class="sidenote"> Popper’s framing is frequently used to justify the statistical hypothesis testing frameworks proposed by the likes of Neyman, Pearson, and Fisher. However, the compatibility of Popperian falsification and statistical hypothesis testing is a matter of debate <a class="citation" href="#hilborn1997ecological"><span style="vertical-align: super">9,10,11</span></a>. </span>. Popper’s arguments may be helpful as we frame our evaluation of any specific ML system that has already been trained – and thus instantiated, in a sense, as a “conjecture” that can be refuted. However, the training process of ML systems is itself an act of inductive inference and thus relies on a Uniformity Principle in a way that Popper’s conjecture-refutation framework does not address.</p>
+
+<p>This thesis is not a work of philosophy. However, I consider it important to acknowledge that the entire field of machine learning – the branch of AI concerned with constructing computers that learn from experience <a class="citation" href="#mitchell1997machine"><span style="vertical-align: super">12</span></a> – is predicated upon a core premise that has, for centuries, been recognized as unprovable and arguably non-rational. To boot, even if the inductive framework is accepted as valid, there are an infinite number of contradictory generalizations that are equally consistent with our training data. While these observations may be philosophical in spirit and may appear impractical, they provide a framing for extremely practical questions:</p>
+
+<p>Under which circumstances can we reasonably expect the future to resemble the past, as far as our models are concerned? Given an infinite number of valid generalizations from our data – most of which are presumably useless or even dangerous – what guiding principles do we leverage to choose between them? What are the falsifiable empirical claims that we should be making about our models, and how should we test them? If we are to assume that prospective failure of our systems is the most likely outcome, as Popper would, what reasonable standards can be set to nevertheless trust ML in safety-critical settings such as healthcare?</p>
+
+<p>Each of these questions will be repeatedly considered throughout the course of this thesis.</p>
+
+<h3 id="inductive-biases-in-machine-learning">Inductive Biases in Machine Learning</h3>
+
+<p>As outlined above, the paradigm of machine learning presupposes the identification – a la Hume – of some set of tasks and environments for which we expect the future to resemble the past. At this point, we are thus forced to determine guiding principles – a la Goodman – that give our models strong <em>a priori</em> preferences for generalizations that we expect to extrapolate well into the future. When such guiding principles are instantiated as design decisions in our models, they are known as <em>inductive biases</em>.</p>
+
+<p>In his 1980 report <em>The Need for Biases in Learning Generalizations</em>, Tom M. Mitchell argues that inductive biases constitute the heart of generalization and indeed a key basis for learning itself:</p>
+
+<div class="epigraph"><blockquote><p>If consistency with the training instances is taken as the sole determiner of appropriate generalizations, then a program can never make the inductive leap necessary to classify instances beyond those it has observed. Only if the program has other sources of information, or biases for choosing one generalization over the other, can it non-arbitrarily classify instances beyond those in the training set....
+  <br /><br />
+  The impact of using a biased generalization language is clear: each subset of instances for which there is no expressible generalization is a concept that could be presented to the program, but which the program will be unable to describe and therefore unable to learn. If it is possible to know ahead of time that certain subsets of instances are irrelevant, then it may be useful to leave these out of the generalization language, in order to simplify the learning problem. ...<br /><br />
+
+  Although removing all biases from a generalization system may seem to be a desirable goal, in fact the result is nearly useless. An unbiased learning system’s ability to classify new instances is no better than if it simply stored all the training instances and performed a lookup when asked to classify a subsequent instance.</p><footer>Tom M. Mitchell, <cite>The Need for Biases in Learning Generalizations</cite></footer></blockquote></div>
+
+<p>A key challenge of machine learning, therefore, is to design systems whose inductive biases align with the structure of the problem at hand. The effect of such efforts is not merely to endow the model with the capacity to learn key patterns, but also – somewhat paradoxically – to deliberately hamper the capacity of the model to learn other (presumably less useful) patterns, or at least to drive the model away from learning them. In other words, inductive biases stipulate the properties that we believe our model should have in order to generalize to future data; they thus encode our key assumptions about the problem itself.</p>
+
+<p>The machine learning toolkit has a wide array of methods to induce inductive biases in learning systems. For example, regularization methods such as L1-/L2-penalties <a class="citation" href="#tibshirani1996regression"><span style="vertical-align: super">13</span></a>, dropout <a class="citation" href="#srivastava2014dropout"><span style="vertical-align: super">14</span></a>, or early stopping <a class="citation" href="#prechelt1998early"><span style="vertical-align: super">15</span></a> are a simple yet powerful means to impose Occam’s razor onto the training process. By the same token, the maximum margin loss of support vector machines <a class="citation" href="#cortes1995support"><span style="vertical-align: super">16</span></a>, or model selection based on cross-validation can be described as inductive biases <a class="citation" href="#girosi1995regularization"><span style="vertical-align: super">17,18</span></a>. Bayesian methods of almost any form induce inductive biases by placing explicit prior probabilities over model parameters. Machine learning systems that build on symbolic logic, such as inductive logic programming <a class="citation" href="#muggleton1991inductive"><span style="vertical-align: super">19</span></a>, encode established knowledge into very strict inductive biases, by forcing algorithms to reason about training examples explicitly in terms of hypotheses derived from pre-specified databases of facts. As nicely synthesized in Battaglia et al, the standard layer types of modern neural networks each have distinct invariances that induce corresponding <em>relational inductive biases</em>; for example, convolutional layers have spatial translational invariance and induce a relational inductive bias of locality, whereas recurrent layers have a temporal invariance that induces the inductive bias of sequentiality <a class="citation" href="#battaglia2018relational"><span style="vertical-align: super">20</span></a>. Such relational inductive biases are extremely powerful when well-matched to the data on which they are applied.</p>
+
+<p>In the next section, I will introduce the neural representation learning framework – the dominant paradigm of machine learning today – and discuss inductive biases in this setting, with a special emphasis on recent tools for infusing external knowledge into the inductive biases of our models.</p>
+
+<h2 id="learned-representations-of-data-and-knowledge">Learned Representations of Data and Knowledge</h2>
+
+<p>The performance of most information processing systems, including machine learning systems, typically depends heavily upon the data representations (or features) they employ. Historically, this meant the devotion of significant labor and expertise to <em>feature engineering</em>, the design of data transformations and preprocessing techniques to extract and organize discriminative features from data prior to the application of ML. <em>Representation learning</em><a class="citation" href="#bengio2013representation"><span style="vertical-align: super">21,22</span></a> is an alternative to feature engineering, and refers to the training of learned representations of data (or knowledge graphs <a class="citation" href="#bordes2013translating"><span style="vertical-align: super">23</span></a>) that are optimized for utility in downstream tasks such as prediction or information retrieval.</p>
+
+<h3 id="background-on-representation-learning">Background on Representation Learning</h3>
+
+<p>Many canonical methods in statistical learning can be considered representation learning methods. For example, low-dimensional data representations with desirable properties are learned by unsupervised methods such as principal components analysis <a class="citation" href="#pearson1901liii"><span style="vertical-align: super">24</span></a>, k-means clustering <a class="citation" href="#forgy1965cluster"><span style="vertical-align: super">25</span></a>, independent components analysis <a class="citation" href="#jutten1991blind"><span style="vertical-align: super">26</span></a>, and manifold learning methods such as Isomap <a class="citation" href="#tenenbaum2000global"><span style="vertical-align: super">27</span></a> and locally-linear embeddings <a class="citation" href="#roweis2000nonlinear"><span style="vertical-align: super">28</span></a>. Within the field of machine learning, the most popular paradigm for representation learning are neural networks<a class="citation" href="#bengio2013representation"><span style="vertical-align: super">21,22</span></a>, which provide an extremely flexible framework that can in theory be used to approximate any continuous function <a class="citation" href="#cybenko1989approximation"><span style="vertical-align: super">29</span></a>. Over the past two decades, representation learning with neural networks has steadily outperformed traditional feature engineering methods on a large family of tasks, including speech recognition (missing reference), and natural language processing <a class="citation" href="#mikolov2011empirical"><span style="vertical-align: super">30</span></a>.</p>
+
+<p>A common feature of all the representation learning methods just mentioned is that they are designed to learn data representations that have lower dimensionality than the original data. This basic inductive bias is motivated by the so-called <em>manifold hypothesis</em>, which states that most real world data – images, text, genomes, etc. – are captured and stored in high dimensions but actually consist of some lower-dimensional data manifold embedded in that high-dimensional space.</p>
+
+<p>Another desirable property of learned representations is that they be <em>distributed representations</em><a class="citation" href="#bengio2013representation"><span style="vertical-align: super">21,22</span></a>, composed of multiple elements that can be set separately from each other. Distributed representations are highly expressive: \(n\) learned features with \(k\) values can represent \(k^n\) different concepts, with each feature element representing a degree of meaning along its own axis. This results in a rich similarity space that improves the generalizability of resultant models. The benefits of distributed representations apply to any data type, but are particularly obvious from a conceptual level when considering settings such as natural language processing <a class="citation" href="#mikolov2013distributed"><span style="vertical-align: super">31</span></a>, where the initial data representation are encoded as symbols that lack any relationship with their underlying meaning. For example, the two sentences (or their equivalent triples, in a knowledge graph setting) ‘ibuprofen impairs renal function’ and ‘Advil damages the kidneys’ have zero tokens or ngrams in common. Thus, machine learning programs based only on symbols would be unable to extrapolate from one sentence to the other without relying upon explicit mappings such as ‘ibuprofen has_name Advil’, ‘impairs has_synonym damages’, etc. In contrast, the distributed representations of these sentences should, in principle, be nearly identical, facilitating direct extrapolation.</p>
+
+<p>Over the past decade, neural networks have established themselves as the <em>de facto</em> approach to representation learning for essentially every ML problem in which their training has been shown feasible <a class="citation" href="#bengio2013representation"><span style="vertical-align: super">21,22</span></a>. While some neural architectures – e.g. Word2vec<a class="citation" href="#mikolov2013efficient"><span style="vertical-align: super">32</span></a> –  are designed exclusively to produce embeddings that will be utilized in downstream tasks, the primary appeal of neural networks is that <em>every</em> deep learning architecture serves as a representation learning system. More specifically, the activations of each layer of neurons serves as a distributed representation of the input that is progressively refined in a hierarchical manner to produce representations of increased abstraction with increasing depth <label for="depth_comment" class="margin-toggle sidenote-number"></label><input type="checkbox" id="depth_comment" class="margin-toggle" /><span class="sidenote">  While even single-layer neural networks can provably approximate any continuous function, this guarantee is impractical because the proof assumes an infinite number of hidden nodes<a class="citation" href="#cybenko1989approximation"><span style="vertical-align: super">29</span></a>. Deep neural networks, in contrast, allow for feature re-use that is exponential in the number of layers, which makes deep networks more expressive and more statistically efficient to train <a class="citation" href="#haastad1991power"><span style="vertical-align: super">33,21</span></a> </span>. In this light, a typical supervised neural network architecture of depth \(k\), for example, can arguably be best understood as a representation learning architecture of depth \(k-1\) followed by a simple linear or logistic regression.</p>
+
+<p>Representations learned by neural networks have a number of desirable properties. First, neural representations are low-dimensional, distributed, and hierarchically organized, as described above. Neural networks have the ability to learn parameterized mappings that are strongly nonlinear but can still be used to directly compute embeddings for new data points. Yoshuo Bengio and others have extensively argued that neural networks have a higher capacity for generalization versus other well-established ML methods such as kernels <a class="citation" href="#bengio2005non"><span style="vertical-align: super">34,35</span></a> and decision trees <a class="citation" href="#bengio2010decision"><span style="vertical-align: super">36</span></a>, specifically because they avoid an excessively strong inductive bias towards <em>smoothness</em>; in other words, when making a new prediction for some new data point \(x\), deep representation learning methods do not exclusively rely upon the training points that are immediately nearby \(x\) in the original feature space.</p>
+
+<p>Representation learning using neural networks also benefits from being modular, and therefore flexible <label for="flexibility_cost" class="margin-toggle sidenote-number"></label><input type="checkbox" id="flexibility_cost" class="margin-toggle" /><span class="sidenote">  The flexibility of neural networks doesn’t come without a price: In addition to obvious concerns about highly parameterized models and overfitting<a class="citation" href="#friedman2001elements"><span style="vertical-align: super">37</span></a>, for example, the ease of implementing complicated DL architectures has arguably produced a research culture focused on ever-larger – and more costly<a class="citation" href="#lacoste2019quantifying"><span style="vertical-align: super">38</span></a> – models that are often poorly characterised and very difficult to reproduce <a class="citation" href="#lipton2018troubling"><span style="vertical-align: super">39</span></a> </span> and extensible to design. For example, given two neural architectures that each create a distributed representation of a unique data modality, these can be straightforwardly combined into a single, fused architecture that creates a composite multi-modal representation (e.g. combining audio embeddings and visual embeddings into composite video embeddings<a class="citation" href="#ngiam2011multimodal"><span style="vertical-align: super">40</span></a>). Such an approach is leveraged in Chapter 2. Another example of the power afforded by the modularity of neural architectures are <em>Generative Adversarial Networks</em> (GANs) (missing reference) , which learn to generate richly structured data by pitting a data-simulating ‘generator’ model against a jointly-trained ‘discrimator’ model that is optimized to distinguish real from generated data. In Supplemental Chapter 1, I demonstrate this approach using a GAN trained to simulate hip radiographs.</p>
+
+<p>Taken together, neural architectures can be designed to expressively implement a broad array of inductive biases, while still allowing the network parameters to search over millions of compatible functions.</p>
+
+<h3 id="infusing-domain-knowledge-into-neural-representations">Infusing Domain Knowledge into Neural Representations</h3>
+
+<p>Neural networks have largely absolved the contemporary researcher of the need to hand-engineer features, but this reality has not eliminated the role of external knowledge in ML design. In this section, I compare and contrast the various methods for explicitly and implicitly infusing domain knowledge into neural representations.</p>
+
+<p>The first paradigm involves the design of layers and architectures that align the representational capacity of the network with our prior knowledge of the problem domain. For instance, if we know that the data we provide have a particular property (e.g. unordered features), we can enforce corresponding constraints in our architecture (e.g. permutation invariance, as in DeepSet <a class="citation" href="#zhang2019deep"><span style="vertical-align: super">41</span></a> or self-attention<a class="citation" href="#vaswani2017attention"><span style="vertical-align: super">42</span></a> without position encodings). This is an example of a relational inductive bias <label for="rel_ind_bias" class="margin-toggle">⊕</label><input type="checkbox" id="rel_ind_bias" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/../assets/thesis_images/relational.png" /><br /></span> <a class="citation" href="#battaglia2018relational"><span style="vertical-align: super">20</span></a>. Relatedly, we can manually wire the network in a manner that corresponds with our prior understanding of relationships between variables. Peng et al <a class="citation" href="#peng2019combining"><span style="vertical-align: super">43</span></a> adopted this approach by building a feed forward neural network for single cell RNA-Seq data in which the input neurons for each gene were wired according to the Gene Ontology <a class="citation" href="#ashburner2000gene"><span style="vertical-align: super">44</span></a>; this approach strictly weakens the capacity of the network, but may be useful if we have a strong prior that particular relationships would be confounding. An alternative means to a similar end is to perform graph convolutions over edges that reflect domain knowledge <a class="citation" href="#mcdermott2019deep"><span style="vertical-align: super">45</span></a>.</p>
+
+<p>Another explicit paradigm for infusing knowledge into neural networks is to augment the architecture with the ability to query external information. For example, models can be augmented with knowledge graphs in the form of fact triples, which they can query using an attention mechanism <label for="attention" class="margin-toggle">⊕</label><input type="checkbox" id="attention" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/../assets/thesis_images/attention.png" /><br /></span> <a class="citation" href="#annervaz2018learning"><span style="vertical-align: super">46,47</span></a>. More generally, attention can be used to allow modules to incorporate relevant information from embeddings of any knowledge source or data modality. For example, \citet{xu2015show} introduced an architecture in which a language model attends to images to generate image captions. Self-attention, or intra-attention, is an attention mechanism that allows for relating different positions within a single sequence <a class="citation" href="#cheng2016long"><span style="vertical-align: super">48,42</span></a>, image <a class="citation" href="#parmar2018image"><span style="vertical-align: super">49</span></a>, or other instance of input data; this allows representations to better share and synthesis information across features.</p>
+
+<p>Transfer learning<a class="citation" href="#yang200610"><span style="vertical-align: super">50,51</span></a> provides a family of methods to infuse knowledge into a learning algorithm that has been gained from a previous learning task. This is related to, but distinct from <em>multi-task learning</em>, which seeks to learn several tasks simultaneously under the premise that performance and efficiency can be improved by sharing knowledge between the tasks during learning. While there are many forms of transfer learning <label for="transfer" class="margin-toggle">⊕</label><input type="checkbox" id="transfer" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/../assets/thesis_images/transfer.png" /><br /></span> <a class="citation" href="#zhuang2019comprehensive"><span style="vertical-align: super">52</span></a>, the canonical form in the setting of deep learning is <em>pretraining</em>. In pretraining, model weights from a trained neural network are used to initialize some subset of the weights in another network; these parameters can then be either frozen or “fine-tuned” with further training on a the target task. Initial transfer learning experiments were conducted using unsupervised pretraining with autoencoders 
+<label for="autoencoders" class="margin-toggle sidenote-number"></label><input type="checkbox" id="autoencoders" class="margin-toggle" /><span class="sidenote">  “<em>Autoencoders</em> <a class="citation" href="#hinton2006reducing"><span style="vertical-align: super">53</span></a> learn representations guided by the inductive bias that a good representation should be able to be used to reconstruct its raw input. They are an example of an ‘encoder-decoder’ architecture, which consist of an encoder, which take the raw input and use a series of layers to embed it into a low-dimensional space, and a decoder, which takes an embedding from the encoder and tries to construct raw data; this combined architecture is then trained in an end-to-end fashion. When the decoder is trained specifically to reconstruct the exact same input passed into the encoder, this is called an autoencoder. (Alternatively, decoders can be trained to produce related data, a prominent example being Seq2seq models that can, for example, encode a sentence from one language and decode it into another<a class="citation" href="#sutskever2014sequence"><span style="vertical-align: super">54</span></a>.) <em>Variational autoencoders</em> <a class="citation" href="#kingma2013auto"><span style="vertical-align: super">55</span></a> combine autoencoding with stochastic variational inference to build generative models that can be use for sampling entirely new data. </span> before transferring weights to a supervised model for a downstream task; this technique is an example of inductive <em>semi-supervised learning</em><a class="citation" href="#van2020survey"><span style="vertical-align: super">56</span></a>. In the past decade, supervised pretraining has become very popular, with the quintessential example being the initialization of an image processing architecture with all but the final layer of a model trained on the ImageNet dataset <a class="citation" href="#deng2009imagenet"><span style="vertical-align: super">57</span></a>. More recently, <em>self-supervised</em> transfer learning has received significant attention, particularly in natural language processing. In self-supervised learning, subsets of a data or feature set are masked, and neural networks are trained to predict them from remaining features. The resulting representations can then be used directly for downstream tasks, such as information retrieval, or be leveraged for transfer learning. Word embeddings <a class="citation" href="#mikolov2013distributed"><span style="vertical-align: super">31</span></a> are arguably the first widespread instance of self-supervised transfer learning, with more recent methods including language model pretraining <a class="citation" href="#howard2018universal"><span style="vertical-align: super">58,59,42</span></a>.</p>
+
+<p><em>Contrastive learning</em> methods <label for="contrastive" class="margin-toggle">⊕</label><input type="checkbox" id="contrastive" class="margin-toggle" /><span class="marginnote"><img class="fullwidth" src="/../assets/thesis_images/contrastive.png" /><br /></span> learn representations by taking in small sets of examples and optimize embeddings to bring similar data together while driving dissimilar data apart. This is a form of <em>metric learning</em>. Early methods in this field include Siamese (missing reference) and Triplet networks (missing reference), which were initially developed to learn deep representations of images. Recent analyses suggest that many methods developed in the past several years have failed to advance beyond triplet networks <a class="citation" href="#musgrave2020metric"><span style="vertical-align: super">60</span></a>. Contrastive methods have been used in the pretraining step of a semi-supervised framework to achieve the current state-of-the-art in limited data image classification <a class="citation" href="#chen2020simple"><span style="vertical-align: super">61</span></a>. In addition, contrastive optimization can be leveraged using multi-modal data to create aligned representations across modalities (missing reference).</p>
+
+<p>The methods described in this section can be described as a spectrum. Hand-engineered architectures are based on strong and specific prior assumptions about the problem domain, and are used to fundamentally alter the <em>representational capacity</em> of the network. In contrast, self-supervised and contrastive architectures make very minimal specific assumptions about the problem domain, and do nothing to alter the representational capacity of the algorithm; instead their innovation lies in devising <em>training schemes and loss functions</em> that will guide the network to learn underlying relationships and find a generalizable solution. In between these two extremes, augmenting networks with access to external knowledge through attention mechanisms often make the assumption that specific knowledge will be helpful, but allow the model to determine for itself which knowledge to employ. Transfer learning makes the assumption that other specific learning tasks will provide useful knowledge and experience for the target domain, but makes minimal assumptions about precisely what this knowledge would be. Despite (arguably significant) philosophical differences, these and yet other paradigms are not mutually exclusive, and share the common goal of improving generalization and data efficiency by introducing richer domain understanding into the neural networks.</p>
+
+<p><br /></p>
+
+<figure><img src="/../assets/thesis_images/knowledge_paradigms.png" /><figcaption class="maincolumn-figure">Example paradigms for infusing domain knowledge into learned representations.</figcaption></figure>
+
+<p>Finally, while this section – and indeed several chapters of this thesis – focuses on the design of neural architectures and training curricula, the role of domain knowledge is truly inescapable when it comes to the evaluation of deployable systems. Accordingly, the topic of deployment analysis will also be a major theme of this thesis.</p>
+
+<p>The current draft of my full PhD thesis can be found <a href="https://www.dropbox.com/s/slw2vkxajgwgp6i/PhD_Thesis.pdf?dl=0">here</a>.</p>
+
+<h2 id="bibliography">Bibliography</h2>
+
+<ol class="bibliography"><li><span id="chami2020machine">1.Chami, I., Abu-El-Haija, S., Perozzi, B., Ré, C., and Murphy, K. (2020). Machine Learning on Graphs: A Model and Comprehensive Taxonomy.</span></li>
+<li><span id="empiricus1933outlines">2.Empiricus, S., and Bury, R.G. (1933). Outlines of pyrrhonism. Eng. trans, by RG Bury (Cambridge Mass.: Harvard UP, 1976), II <i>20</i>, 90–1.</span></li>
+<li><span id="perrett1984problem">3.Perrett, R.W. (1984). The problem of induction in Indian philosophy. Philosophy East and West <i>34</i>, 161–174.</span></li>
+<li><span id="humeTreatise">4.Hume, D. (1739). A treatise of human nature (Oxford University Press).</span></li>
+<li><span id="humeEnquiry">5.Hume, D. (1748). An Enquiry Concerning Human Understanding (Oxford University Press).</span></li>
+<li><span id="garrett2011reason">6.Garrett, D., and Millican, P.J.R. (2011). Reason, Induction, and Causation in Hume’s Philosophy (Institute for Advanced Studies in the Humanities, The University of Edinburgh).</span></li>
+<li><span id="goodman1955fact">7.Goodman, N. (1955). Fact, fiction, and forecast (Harvard University Press).</span></li>
+<li><span id="popper2014conjectures">8.Popper, K. (2014). Conjectures and refutations: The growth of scientific knowledge (routledge).</span></li>
+<li><span id="hilborn1997ecological">9.Hilborn, R., and Mangel, M. (1997). The ecological detective: confronting models with data (Princeton University Press).</span></li>
+<li><span id="mayo1996ducks">10.Mayo, D.G. (1996). Ducks, rabbits, and normal science: Recasting the Kuhn’s-eye view of Popper’s demarcation of science. The British Journal for the Philosophy of Science <i>47</i>, 271–290.</span></li>
+<li><span id="queen2002experimental">11.Queen, J.P., Quinn, G.P., and Keough, M.J. (2002). Experimental design and data analysis for biologists (Cambridge University Press).</span></li>
+<li><span id="mitchell1997machine">12.Mitchell, T.M., and others (1997). Machine learning.</span></li>
+<li><span id="tibshirani1996regression">13.Tibshirani, R. (1996). Regression shrinkage and selection via the lasso. Journal of the Royal Statistical Society: Series B (Methodological) <i>58</i>, 267–288.</span></li>
+<li><span id="srivastava2014dropout">14.Srivastava, N., Hinton, G., Krizhevsky, A., Sutskever, I., and Salakhutdinov, R. (2014). Dropout: a simple way to prevent neural networks from overfitting. The journal of machine learning research <i>15</i>, 1929–1958.</span></li>
+<li><span id="prechelt1998early">15.Prechelt, L. (1998). Early stopping-but when? In Neural Networks: Tricks of the trade (Springer), pp. 55–69.</span></li>
+<li><span id="cortes1995support">16.Cortes, C., and Vapnik, V. (1995). Support-vector networks. Machine learning <i>20</i>, 273–297.</span></li>
+<li><span id="girosi1995regularization">17.Girosi, F., Jones, M., and Poggio, T. (1995). Regularization theory and neural networks architectures. Neural computation <i>7</i>, 219–269.</span></li>
+<li><span id="mitchell1980need">18.Mitchell, T.M. (1980). The need for biases in learning generalizations (Department of Computer Science, Laboratory for Computer Science Research …).</span></li>
+<li><span id="muggleton1991inductive">19.Muggleton, S. (1991). Inductive logic programming. New generation computing <i>8</i>, 295–318.</span></li>
+<li><span id="battaglia2018relational">20.Battaglia, P.W., Hamrick, J.B., Bapst, V., Sanchez-Gonzalez, A., Zambaldi, V., Malinowski, M., Tacchetti, A., Raposo, D., Santoro, A., Faulkner, R., et al. (2018). Relational inductive biases, deep learning, and graph networks. arXiv preprint arXiv:1806.01261.</span></li>
+<li><span id="bengio2013representation">21.Bengio, Y., Courville, A., and Vincent, P. (2013). Representation learning: A review and new perspectives. IEEE transactions on pattern analysis and machine intelligence <i>35</i>, 1798–1828.</span></li>
+<li><span id="goodfellow2016representation">22.Goodfellow, I., Bengio, Y., and Courville, A. (2016). Representation learning. Deep Learning, 517–548.</span></li>
+<li><span id="bordes2013translating">23.Bordes, A., Usunier, N., Garcia-Duran, A., Weston, J., and Yakhnenko, O. (2013). Translating embeddings for modeling multi-relational data. In Advances in neural information processing systems, pp. 2787–2795.</span></li>
+<li><span id="pearson1901liii">24.Pearson, K. (1901). LIII. On lines and planes of closest fit to systems of points in space. The London, Edinburgh, and Dublin Philosophical Magazine and Journal of Science <i>2</i>, 559–572.</span></li>
+<li><span id="forgy1965cluster">25.Forgy, E.W. (1965). Cluster analysis of multivariate data: efficiency versus interpretability of classifications. biometrics <i>21</i>, 768–769.</span></li>
+<li><span id="jutten1991blind">26.Jutten, C., and Herault, J. (1991). Blind separation of sources, part I: An adaptive algorithm based on neuromimetic architecture. Signal processing <i>24</i>, 1–10.</span></li>
+<li><span id="tenenbaum2000global">27.Tenenbaum, J.B., De Silva, V., and Langford, J.C. (2000). A global geometric framework for nonlinear dimensionality reduction. science <i>290</i>, 2319–2323.</span></li>
+<li><span id="roweis2000nonlinear">28.Roweis, S.T., and Saul, L.K. (2000). Nonlinear dimensionality reduction by locally linear embedding. science <i>290</i>, 2323–2326.</span></li>
+<li><span id="cybenko1989approximation">29.Cybenko, G. (1989). Approximation by superpositions of a sigmoidal function. Mathematics of control, signals and systems <i>2</i>, 303–314.</span></li>
+<li><span id="mikolov2011empirical">30.Mikolov, T., Deoras, A., Kombrink, S., Burget, L., and Černockỳ, J. (2011). Empirical evaluation and combination of advanced language modeling techniques. In Twelfth Annual Conference of the International Speech Communication Association.</span></li>
+<li><span id="mikolov2013distributed">31.Mikolov, T., Sutskever, I., Chen, K., Corrado, G.S., and Dean, J. (2013). Distributed representations of words and phrases and their compositionality. In Advances in neural information processing systems, pp. 3111–3119.</span></li>
+<li><span id="mikolov2013efficient">32.Mikolov, T., Chen, K., Corrado, G., and Dean, J. (2013). Efficient estimation of word representations in vector space. arXiv preprint arXiv:1301.3781.</span></li>
+<li><span id="haastad1991power">33.Håstad, J., and Goldmann, M. (1991). On the power of small-depth threshold circuits. Computational Complexity <i>1</i>, 113–129.</span></li>
+<li><span id="bengio2005non">34.Bengio, Y., and Monperrus, M. (2005). Non-local manifold tangent learning. In Advances in Neural Information Processing Systems, pp. 129–136.</span></li>
+<li><span id="bengio2006curse">35.Bengio, Y., Delalleau, O., and Roux, N.L. (2006). The curse of highly variable functions for local kernel machines. In Advances in neural information processing systems, pp. 107–114.</span></li>
+<li><span id="bengio2010decision">36.Bengio, Y., Delalleau, O., and Simard, C. (2010). Decision trees do not generalize to new variations. Computational Intelligence <i>26</i>, 449–467.</span></li>
+<li><span id="friedman2001elements">37.Friedman, J., Hastie, T., and Tibshirani, R. (2001). The elements of statistical learning (Springer series in statistics New York).</span></li>
+<li><span id="lacoste2019quantifying">38.Lacoste, A., Luccioni, A., Schmidt, V., and Dandres, T. (2019). Quantifying the Carbon Emissions of Machine Learning. arXiv preprint arXiv:1910.09700.</span></li>
+<li><span id="lipton2018troubling">39.Lipton, Z.C., and Steinhardt, J. (2018). Troubling Trends in Machine Learning Scholarship.</span></li>
+<li><span id="ngiam2011multimodal">40.Ngiam, J., Khosla, A., Kim, M., Nam, J., Lee, H., and Ng, A.Y. (2011). Multimodal deep learning.</span></li>
+<li><span id="zhang2019deep">41.Zhang, Y., Hare, J., and Prugel-Bennett, A. (2019). Deep set prediction networks. In Advances in Neural Information Processing Systems, pp. 3207–3217.</span></li>
+<li><span id="vaswani2017attention">42.Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A.N., Kaiser, Ł., and Polosukhin, I. (2017). Attention is all you need. In Advances in neural information processing systems, pp. 5998–6008.</span></li>
+<li><span id="peng2019combining">43.Peng, J., Wang, X., and Shang, X. (2019). Combining gene ontology with deep neural networks to enhance the clustering of single cell RNA-Seq data. BMC bioinformatics <i>20</i>, 284.</span></li>
+<li><span id="ashburner2000gene">44.Ashburner, M., Ball, C.A., Blake, J.A., Botstein, D., Butler, H., Cherry, J.M., Davis, A.P., Dolinski, K., Dwight, S.S., Eppig, J.T., et al. (2000). Gene ontology: tool for the unification of biology. Nature genetics <i>25</i>, 25–29.</span></li>
+<li><span id="mcdermott2019deep">45.McDermott, M., Wang, J., Zhao, W.N., Sheridan, S.D., Szolovits, P., Kohane, I., Haggarty, S.J., and Perlis, R.H. (2019). Deep Learning Benchmarks on L1000 Gene Expression Data. IEEE/ACM transactions on computational biology and bioinformatics.</span></li>
+<li><span id="annervaz2018learning">46.Annervaz, K.M., Chowdhury, S.B.R., and Dukkipati, A. (2018). Learning beyond datasets: Knowledge graph augmented neural networks for natural language processing. arXiv preprint arXiv:1802.05930.</span></li>
+<li><span id="kishimoto2018knowledge">47.Kishimoto, Y., Murawaki, Y., and Kurohashi, S. (2018). A knowledge-augmented neural network model for implicit discourse relation classification. In Proceedings of the 27th International Conference on Computational Linguistics, pp. 584–595.</span></li>
+<li><span id="cheng2016long">48.Cheng, J., Dong, L., and Lapata, M. (2016). Long short-term memory-networks for machine reading. arXiv preprint arXiv:1601.06733.</span></li>
+<li><span id="parmar2018image">49.Parmar, N., Vaswani, A., Uszkoreit, J., Kaiser, Ł., Shazeer, N., Ku, A., and Tran, D. (2018). Image transformer. arXiv preprint arXiv:1802.05751.</span></li>
+<li><span id="yang200610">50.Yang, Q., and Wu, X. (2006). 10 challenging problems in data mining research. International Journal of Information Technology &amp; Decision Making <i>5</i>, 597–604.</span></li>
+<li><span id="pan2009survey">51.Pan, S.J., and Yang, Q. (2009). A survey on transfer learning. IEEE Transactions on knowledge and data engineering <i>22</i>, 1345–1359.</span></li>
+<li><span id="zhuang2019comprehensive">52.Zhuang, F., Qi, Z., Duan, K., Xi, D., Zhu, Y., Zhu, H., Xiong, H., and He, Q. (2019). A Comprehensive Survey on Transfer Learning. arXiv preprint arXiv:1911.02685.</span></li>
+<li><span id="hinton2006reducing">53.Hinton, G.E., and Salakhutdinov, R.R. (2006). Reducing the dimensionality of data with neural networks. science <i>313</i>, 504–507.</span></li>
+<li><span id="sutskever2014sequence">54.Sutskever, I., Vinyals, O., and Le, Q.V. (2014). Sequence to sequence learning with neural networks. In Advances in neural information processing systems, pp. 3104–3112.</span></li>
+<li><span id="kingma2013auto">55.Kingma, D.P., and Welling, M. (2013). Auto-encoding variational bayes. arXiv preprint arXiv:1312.6114.</span></li>
+<li><span id="van2020survey">56.Van Engelen, J.E., and Hoos, H.H. (2020). A survey on semi-supervised learning. Machine Learning <i>109</i>, 373–440.</span></li>
+<li><span id="deng2009imagenet">57.Deng, J., Dong, W., Socher, R., Li, L.-J., Li, K., and Fei-Fei, L. (2009). Imagenet: A large-scale hierarchical image database. In 2009 IEEE conference on computer vision and pattern recognition (Ieee), pp. 248–255.</span></li>
+<li><span id="howard2018universal">58.Howard, J., and Ruder, S. (2018). Universal language model fine-tuning for text classification. arXiv preprint arXiv:1801.06146.</span></li>
+<li><span id="devlin2018bert">59.Devlin, J., Chang, M.-W., Lee, K., and Toutanova, K. (2018). Bert: Pre-training of deep bidirectional transformers for language understanding. arXiv preprint arXiv:1810.04805.</span></li>
+<li><span id="musgrave2020metric">60.Musgrave, K., Belongie, S., and Lim, S.-N. (2020). A Metric Learning Reality Check. arXiv preprint arXiv:2003.08505.</span></li>
+<li><span id="chen2020simple">61.Chen, T., Kornblith, S., Norouzi, M., and Hinton, G. (2020). A simple framework for contrastive learning of visual representations. arXiv preprint arXiv:2002.05709.</span></li></ol>
+
+
+
+    </article>
+    <span class="print-footer">Induction Generalization, Inductive Biases, and Infusing Knowledge into Learned Representations - June 22, 2020 - Sam Finlayson</span>
+    <footer>
+  <hr class="slender">
+  <ul class="footer-links">
+    <li><a href="mailto:samuel_finlayson@hms.harvard.edu"><span class="icon-mail3"></span></a></li>    
+    
+      <li>
+        <a href="//www.twitter.com/IAmSamFin"><span class="icon-twitter"></span></a>
+      </li>
+    
+      <li>
+        <a href="//github.com/sgfin"><span class="icon-github"></span></a>
+      </li>
+    
+      <li>
+        <a href="/feed"><span class="icon-rss2"></span></a>
+      </li>
+      
+  </ul>
+<div class="credits">
+<span>&copy; 2020 &nbsp;&nbsp;SAM FINLAYSON</span></br> <br>
+<span>This site created with the <a href="//github.com/clayh53/tufte-jekyll">Tufte theme for  </a> in <a href="//jekyllrb.com">Jekyll</a>.</span> 
+</div>  
+</footer>
+  </body>
+</html>

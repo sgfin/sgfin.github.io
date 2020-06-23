@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>All the DAGs from Hernan and Robins' Causal Inference Book</title>
+  <meta name="description" content="My attempt to tidy up the DAG treasure trove from Hernan and Robins">
+
+  <!-- Google Fonts loaded here depending on setting in _data/options.yml true loads font, blank does not-->
+  
+    <link href='//fonts.googleapis.com/css?family=Lato:400,400italic' rel='stylesheet' type='text/css'>
+  
+  
+  <!-- Load up MathJax script if needed ... specify in /_data/options.yml file-->
+  
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: [
+      "MathMenu.js",
+      "MathZoom.js",
+      "AssistiveMML.js",
+      "a11y/accessibility-menu.js"
+    ],
+    jax: ["input/TeX", "output/CommonHTML"],
+    TeX: {
+      extensions: [
+        "AMSmath.js",
+        "AMSsymbols.js",
+        "noErrors.js",
+        "noUndefined.js",
+      ]
+    }
+  });
+</script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-122144402-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-122144402-1');
+    </script>
+
+ <!--   <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+  
+
+  <link rel="stylesheet" type="text/css" href="/css/tufte.css">
+  <!-- <link rel="stylesheet" type="text/css" href="/css/print.css" media="print"> -->
+
+  <link rel="canonical" href="http://sgfin.github.io/2019/06/19/Causal-Inference-Book-All-DAGs/">
+
+  <link rel="alternate" type="application/rss+xml" title="Machine Learning and Medicine" href="http://sgfin.github.io/feed.xml" />
+</head>
+
+  <body>
+    <!--- Header and nav template site-wide -->
+<header>
+    <nav class="group" style="padding-bottom: 15px;">
+	<!-- <a href="/"><img class="badge" src="/assets/img/badge_1.png" alt="SGF"></a> -->
+	
+		
+  	
+		
+		    
+		      <a href="/">About</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/css/print.css"></a>
+		    
+	    
+  	
+		
+  	
+		
+		    
+		      <a href="/posts/">posts</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/learning-resources/">ML Resources</a>
+		    
+	    
+  	
+	</nav>
+</header>
+    <article class="group">
+      <h1>All the DAGs from Hernan and Robins' Causal Inference Book</h1>
+<p class="subtitle">June 19, 2019</p>
+
+<p>This is my preliminary attempt to organize and present all the DAGs from Miguel Hernan and Jamie Robin’s excellent <a href="https://www.hsph.harvard.edu/miguel-hernan/causal-inference-book/">Causal Inference Book</a>.  So far, I’ve only done Part I.</p>
+
+<p>Why create this page?</p>
+
+<ul>
+  <li>First, I love the Causal Inference book, but sometimes I find it easy to lose track of the variables when I read it.  Having the variables right alongside the DAG makes it easier for me to remember what’s going on, especially when the book refers back to a DAG from a previous chapter and I don’t want to dig back through the text.</li>
+  <li>Second, I hope this will be a really fun way to occasionally review the main concepts from the text in the future.</li>
+  <li>Finally, making this as I read forced me to read the book more carefully.</li>
+</ul>
+
+<p>Again, this page is meant to be fairly raw and only contain the DAGs. If you use it, you might also find it useful to open up <a href="https://sgfin.github.io/2019/06/19/Causal-Inference-Book-Glossary-and-Notes/">this page</a>, which is where I have more traditional notes covering the main concepts from the book. But of course, the text itself has no substitute.</p>
+
+<p><strong>Table of Contents</strong>:</p>
+<ul id="markdown-toc">
+  <li><a href="#refresher-visual-rules-of-d-separation" id="markdown-toc-refresher-visual-rules-of-d-separation">Refresher: Visual rules of d-separation.</a></li>
+  <li><a href="#refresher-backdoor-criterion" id="markdown-toc-refresher-backdoor-criterion">Refresher: Backdoor criterion</a></li>
+  <li><a href="#basics-of-causal-diagrams-61-65" id="markdown-toc-basics-of-causal-diagrams-61-65">Basics of Causal Diagrams (6.1-6.5)</a></li>
+  <li><a href="#effect-modification-66" id="markdown-toc-effect-modification-66">Effect Modification (6.6)</a></li>
+  <li><a href="#confounding-chapter-7" id="markdown-toc-confounding-chapter-7">Confounding (Chapter 7)</a></li>
+  <li><a href="#selection-bias-chapter-8" id="markdown-toc-selection-bias-chapter-8">Selection Bias (Chapter 8)</a></li>
+  <li><a href="#measurement-bias-chapter-9" id="markdown-toc-measurement-bias-chapter-9">Measurement Bias (Chapter 9)</a></li>
+</ul>
+
+<h3 id="refresher-visual-rules-of-d-separation">Refresher: Visual rules of d-separation.</h3>
+
+<p>Two variables on a DAG are <strong>d-separated</strong> if all paths between them are blocked. The following four rules defined what it means to be “blocked.”</p>
+
+<p>(This is just meant to be a refresher – see the second half of this post or Fine Point 6.1 of the text for more definitions.)</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Rule</th>
+      <th style="text-align: center">Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">1. If there are no variables being conditioned on, a path is blocked if and only if two arrowheads on the path collide at some variable on the path.</td>
+      <td style="text-align: center"><img src="/assets/hernan_dags/6_1.png" width="175" /> <br /><br /> \(L \rightarrow A \rightarrow Y\) is open. <br /><br /> \(A \rightarrow Y \leftarrow L\) is blocked at \(Y\)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2. Any path that contains a noncollider that has been conditioned on is blocked.</td>
+      <td style="text-align: center"><img src="/assets/hernan_dags/6_5.png" width="175" /> <br /><br /> Conditioning on \(B\) blocks the path from \(A\) to \(Y\).</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">3. A collider that has been conditioned on does not block a path</td>
+      <td style="text-align: center"><img src="/assets/hernan_dags/6_7.png" width="175" /> <br /><br /> The path between \(A\) and \(Y\) is open after conditioning on \(L\).</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">4. A collider that has a descendant that has been conditioned on does not block a path.</td>
+      <td style="text-align: center"><img src="/assets/hernan_dags/6_8.png" width="175" /> <br /><br /> The path between \(A\) and \(Y\) is open after conditioning on \(C\), a descendant of collider \(L\).</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="refresher-backdoor-criterion">Refresher: Backdoor criterion</h3>
+
+<p>Assuming positivity and consistency, confounding can be eliminated and causal effects are identifiable in the following two settings:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Rule</th>
+      <th style="text-align: center">Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">1. No common causes of treatment and outcome.</td>
+      <td style="text-align: center"><img src="/assets/hernan_dags/6_2.png" width="150" /> <br /><br /> There are no common causes of treatment and outcome. Hence no backdoor paths need to be blocked. <br /><br /> No confounding; equivalent to a marginally randomized trial.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2. Common causes are present, but there are enough measured variables to block all colliders. (i.e. No unmeasured confounding.)</td>
+      <td style="text-align: center"><img src="/assets/hernan_dags/6_1.png" width="175" /> <br /><br /> Backdoor path through the common cause \(L\) can be blocked by conditioning on measured covariates (in this case, \(L\) itself) that are non-descendants of treatment. <br /><br /> There will be no residual confounding after controlling for \(L\); equivalent to a conditionally randomized trial.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>And now we can finally:</p>
+
+<p style="text-align:center;">
+<img src="/assets/hernan_dags/all_the_dags.jpg" width="400" />
+</p>
+
+<h3 id="basics-of-causal-diagrams-61-65">Basics of Causal Diagrams (6.1-6.5)</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">DAG</th>
+      <th style="text-align: center">Example</th>
+      <th>Notes</th>
+      <th>Page</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><img src="/assets/hernan_dags/6_2.png" width="150" /></td>
+      <td style="text-align: center"><em>Marginally randomized experiment</em> <br /><br />  <strong>A</strong>: Treatment <br /><br /> <strong>Y</strong>: Outcome</td>
+      <td>Arrow doesn’t specifically imply protection vs risk, just causal effect. <br /><br /> <strong>Unconditional exchangeability</strong> assumption means that association implies causation and vice versa.</td>
+      <td>I.70</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="/assets/hernan_dags/6_1.png" width="175" /></td>
+      <td style="text-align: center"><em>Conditionally randomized experiment</em> <br /><br /> <strong>L</strong>: Stratification Variable <br /><br /> <strong>A</strong>: Treatment <br /><br /> <strong>Y</strong>: Outcome</td>
+      <td>Also equivalent to an <em>Observational Study</em> that assumes A depends on L and on <em>no other causes of Y</em> (else they’d need to be added). <br /><br /> Implies <strong>conditional exchangeability</strong>.</td>
+      <td>I.69-I.70</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="/assets/hernan_dags/6_5.png" width="175" /></td>
+      <td style="text-align: center"><strong>A</strong>: Aspirin <br /><br /> <strong>B</strong>: Platelet aggregation  <br /><br /> <strong>Y</strong>: Heart Disease</td>
+      <td>\(B\) is a <strong>mediator</strong> of \(A\)’s effect on \(Y\), but conditioning on \(B\) (e.g by restricting the analysis to people with a specific lab value) blocks the flow of association through the path A \(\rightarrow\) B \(\rightarrow\) Y. <br /><br /> Even though \(A\) and \(Y\) are <em>marginally</em> associated, they are <strong>conditionally independent</strong> given \(B\).  In other words,  A \(\unicode{x2AEB}\) Y | B. <br /><br /> Thus, knowing aspirin status gives you no more information once platelets are measured, at least according to this graph.</td>
+      <td>I.73</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="/assets/hernan_dags/6_3.png" width="175" /></td>
+      <td style="text-align: center"><strong>L</strong>: Smoking status <br /><br /> <strong>A</strong>: Carrying a lighter <br /><br /> <strong>Y</strong>: Lung cancer</td>
+      <td>Graph says that carrying a lighter (A) has no causal effect on outcome (Y). <br /> Math form of this assumption is:  Pr[Y^(a=1)=1]=Pr[Y^(a=0)=1] <br /><br /> However, \(A\) will be spuriously associated with \(Y\), because path <br /> A \(\leftarrow\) L \(\rightarrow\) Y is open to flow from A to Y: they share a common cause.</td>
+      <td>I.72</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="/assets/hernan_dags/6_6.png" width="175" /></td>
+      <td style="text-align: center"><strong>L</strong>: Smoking status <br /><br /> <strong>A</strong>: Carrying a lighter <br /><br /> <strong>Y</strong>: Lung cancer</td>
+      <td>A \(\unicode{x2AEB}\) Y | L, because the path A \(\leftarrow\) L \(\rightarrow\) Y is closed by conditioning on L. <br /><br />  Thus, restricting the analysis to either smokers or non-smokers (box around L) means that lighter carrying will no longer be associated with lung cancer.</td>
+      <td>I.74</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="/assets/hernan_dags/6_4.png" width="175" /></td>
+      <td style="text-align: center"><strong>A</strong>: Genetic predisposition for heart disease <br /><br /> <strong>Y</strong>: Smoking status <br /><br /> <strong>L</strong>: Heart disease</td>
+      <td>\(A\) and \(Y\) are not marginally associated, because they share no common causes.  (i.e. Genetic risk for heart disease says nothing, in a vaccuum, about smoking status.)  <br /><br /> \(L\) here is a <strong>collider</strong> on the path A \(\rightarrow\) L \(\leftarrow\) Y, because the two arrows collide on this node. But there is no causal path from \(A\) to \(Y\).</td>
+      <td>I.73</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="/assets/hernan_dags/6_7.png" width="175" /></td>
+      <td style="text-align: center"><strong>A</strong>: Genetic predisposition for heart disease <br /><br /> <strong>Y</strong>: Smoking status <br /><br /> <strong>L</strong>: Heart disease</td>
+      <td><strong>Conditioning on the collider</strong> \(L\) opens the causal path A \(\rightarrow\) L \(\leftarrow\) Y.  <br /><br />  Put another way, two causes of a given effect generally become associated once we stratify on the common effect. <br /><br />  In the example, knowing someone with heart disease lacks haplotype A makes it more likely that the individual is a smoker, because, in the absence of \(A\), it is more likely that some other cause of \(L\) is present. Or, conversely, the population of non-smokers with heart disease will be enriched for people with haplotype A. Thus, if one restricts the analysis to people with heart disease, he will find a spurious anti-correlation between the haplotype predictive of heart disease and smoking status.</td>
+      <td>I.74</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="/assets/hernan_dags/6_8.png" width="175" /></td>
+      <td style="text-align: center"><strong>A</strong>: Genetic predisposition for heart disease <br /><br /> <strong>Y</strong>: Smoking status <br /><br /> <strong>L</strong>: Heart disease  <br /><br /> <strong>C</strong>:  Diuretic medication (given after heart disease diagnosis)</td>
+      <td>Conditioning on variable \(C\) <strong>downstream from collider</strong> \(L\) also opens up causal path A \(\rightarrow\) L \(\leftarrow\) Y. <br /><br />  Thus, in the example, stratifying on \(C\) (diuretic status) will induce a spurious relationship between \(A\) (genetic heart disease risk) and \(Y\) (smoking status).</td>
+      <td>I.75</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><em>Before matching</em>: <br /> <img src="/assets/hernan_dags/6_1.png" width="175" /><br /><br /> <em>After matching</em>:<br /> <img src="/assets/hernan_dags/6_9.png" width="175" /></td>
+      <td style="text-align: center"><em>Matched analysis</em> <br /><br /> <strong>L</strong>: Critical Condition  <br /><br />  <strong>A</strong>: Heart Transplant  <br /><br /> <strong>Y</strong>: Death <br /><br /> <strong>S</strong>: Selection for inclusion via matching criteria</td>
+      <td>In this study design, the average causal effect of \(A\) on \(Y\) is computed after matching on \(L\). <br /><br /> Before matching, \(L\) and \(A\) are associated via the path \(L \rightarrow A\) . <br /><br /> Matching is represented in the DAG through the addition of \(S\), the selection criteria. The study is obviously restricted to patients that are selected (\(S\)=1), hence we condition on \(S\). <br /><br /> d-separation rules say that there are now two open paths between \(A\) and \(L\) after conditioning on \(S\):  \(L \rightarrow A\) and \(L \rightarrow S \leftarrow A\). This seems to indicate an association between \(L\) and \(A\).  However, the point of matching is supposed to be to make sure that \(L\) and \(A\) not associated! <br /><br />  The resolution comes from the observation that \(S\) has been constructed specifically to induce the distribution of \(L\) to be the same in the treated (\(A\)=1) and untreated (\(A\)=0) population. This means that the association in \(L \rightarrow S \leftarrow A\) is of equal magnitude but opposite direction of \(L \rightarrow A\). Thus there is no net association between \(A\) and \(L\). <br /><br />  This disconnect between the associations visible in the DAG and the associations actually present is an example of <strong>unfaithfulness</strong>, but here it has been introduced by design.</td>
+      <td>I.49 and I.79</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="/assets/hernan_dags/6_10.png" width="175" /></td>
+      <td style="text-align: center"><strong>R</strong>: Compound treatment (see right) <br /><br /> <strong>A</strong>: Vector of treatment versions \(A( r )\) (see right) <br /><br /> <strong>Y</strong>: Outcome <br /><br />  <strong>L</strong> and <strong>W</strong>: unnamed causes  <br /><br /> <strong>U</strong>: unnmeasured variables</td>
+      <td>This is the example the book uses of how to encode compound treatments. <br /><br /> The example compound treatment is as follows: <br /><br /> R=0 corresponds to “exercising <em>less</em> than 30 minutes daily”. <br /> R=1 corresponds to “exercising <em>more</em> than 30 minutes daily.” <br /><br /> \(A\) is a vector corresponding to different <em>versions</em> of the treatment, where \(A(r=0)\) can take on values \(0,1,2,\dots, 29\) and \(A(r=1)\) can take on values \(30,31\dots, max\)  <br /><br /> Taken together, we can have a mapping from multiple values \(A( r )\) onto a single value \(R=r\).</td>
+      <td>I.78</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="effect-modification-66">Effect Modification (6.6)</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">DAG</th>
+      <th style="text-align: center">Example</th>
+      <th>Notes</th>
+      <th>Page</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><img src="/assets/hernan_dags/6_11.png" width="175" /></td>
+      <td style="text-align: center"><strong>A</strong>: Heart Transplant <br /><br /> <strong>Y</strong>: Outcome <br /><br /> <strong>M</strong>: Quality of Care. High (\(M=1\)) vs Low (\(M=0\))</td>
+      <td>This DAG reflects the assumption that quality of care influences quality of transplant procedure and thus of outcomes, BUT still assumes random assignment of treatment. <br /><br /> Given random assignment, \(M\) is not strictly necessary but added if you want to use it to stratify. <br /><br /> Causal diagram as such does not distinguish between: <br /> 1. Causal effect of treatment \(A\) on mortality \(Y\) is in the same direction in both stratum \(M=1\) and \(M=0\). <br /> 2. The causal effect of \(A\) on \(Y\) is in the opposite direction in \(M=1\) vs \(M=0\). <br /> 3. Treatment \(A\) as a causal effect on \(Y\) in one straum of \(M\) but no effect in other stratum.</td>
+      <td>I.80</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="/assets/hernan_dags/6_12.png" width="175" /></td>
+      <td style="text-align: center"><strong>A</strong>: Heart Transplant <br /><br /> <strong>Y</strong>: Outcome <br /><br /> <strong>M</strong>: Quality of Care. High (\(M=1\)) vs Low (\(M=0\))  <br /><br /> <strong>N</strong>: Therapy Complications</td>
+      <td>Same example as above, except assumes that other variables along the path of a modifier can also influence outcomes.</td>
+      <td>I.80</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="/assets/hernan_dags/6_13.png" width="175" /></td>
+      <td style="text-align: center"><strong>A</strong>: Heart Transplant <br /><br /> <strong>Y</strong>: Outcome <br /><br /> <strong>M</strong>: Quality of Care. High (\(M=1\)) vs Low (\(M=0\))  <br /><br /> <strong>S</strong>: Cost of treatment</td>
+      <td>Same example as above, except assumes that the quality of care effects the cost, but that the cost does not influence the outcome. <br /><br /> This is the example of an effect modifier that does not have a causal effect on the outcome, but rather stands as a <strong>surrogate effect modifier</strong>. <br /><br /> Analysis stratifying on \(S\) – which is available/objective – might be used to detect effect modification that actually comes from \(M\) but is harder to measure.</td>
+      <td>I.80</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="/assets/hernan_dags/6_14.png" width="175" /></td>
+      <td style="text-align: center"><strong>A</strong>: Heart Transplant <br /><br /> <strong>Y</strong>: Outcome <br /><br /> <strong>M</strong>: Quality of Care. High (\(M=1\)) vs Low (\(M=0\))  <br /><br /> <strong>U</strong>: Place of residence <br /><br /> <strong>P</strong>: Passport-defined nationality</td>
+      <td>Example where the surrogate effect modifier (passport) is not driven by the causal effect modifier (quality of care), but rather both are driven by a common cause (place of residence).</td>
+      <td>I.80</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="/assets/hernan_dags/6_15.png" width="175" /></td>
+      <td style="text-align: center"><strong>A</strong>: Heart Transplant <br /><br /> <strong>Y</strong>: Outcome <br /><br /> <strong>M</strong>: Quality of Care. High (\(M=1\)) vs Low (\(M=0\))  <br /><br />  <strong>S</strong>: Cost of Care <br /><br />  <strong>W</strong>: Use of mineral water vs tap</td>
+      <td>Example where the surrogate effect modifier (cost) is influenced by <em>both</em> the causal effect modifier (quality) and something spurious. <br /><br />  If the study were restricted to low-cost hospitals by conditioning on \(S=0\), then use of mineral water would become associated with medical care \(M\) and would behave as a surrogate effect modifier. <br /><br /> Addendum: How?  One example might be that conditioned on a low cost, a zero sum situation may arise in which spending more on fancy water means less is being spent on quality care, which could yield an inverse correlation between mineral water and medical quality.</td>
+      <td>I.81</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="confounding-chapter-7">Confounding (Chapter 7)</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">DAG</th>
+      <th style="text-align: center">Example</th>
+      <th>Notes</th>
+      <th>Page</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><img src="/assets/hernan_dags/7_1.png" width="175" /></td>
+      <td style="text-align: center"><strong>L</strong>: Being physicially fit <br /><br /> <strong>A</strong>: Working as a firefighter <br /><br /> <strong>Y</strong>: Mortality</td>
+      <td>The path \(A \rightarrow Y\) is a causal path from \(A\) to \(Y\). <br /><br /> \(A \leftarrow L \rightarrow Y\) is a <strong>backdoor path</strong> between \(A\) and \(Y\), mediated by common cause (<strong>confounder</strong>) \(L\). <br /><br /> Conditioning on \(L\) will block the backdoor path, induce conditional exchangeability, and allow for causal inference. <br /><br /> <em>Note</em>: This is an example of “healthy worker bias.”</td>
+      <td>I.83</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="/assets/hernan_dags/7_2.png" width="175" /></td>
+      <td style="text-align: center"><strong>A</strong>: Aspirin <br /><br /> <strong>Y</strong>: Stroke <br /><br /> <strong>L</strong>: Heart Disease  <br /><br /> <strong>U</strong>: Atherosclerosis (unmeasured)</td>
+      <td>This DAG is an example of <strong>confounding by indication</strong> (or <strong>channeling</strong>). <br /><br /> Aspirin will have a confounded association with stroke, both from heart disease (\(L \rightarrow A \rightarrow Y\)), and from atherosclerosis (\(U \rightarrow L \rightarrow A \rightarrow Y\)). <br /><br /> Conditioning on unmeasured \(U\) is impossible, but there is <em>no unmeasured confounding</em> given \(L\), so conditioning on \(L\) is sufficient.</td>
+      <td>I.84</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="/assets/hernan_dags/7_3.png" width="175" /></td>
+      <td style="text-align: center"><strong>A</strong>: Exercise <br /><br /> <strong>Y</strong>: Death <br /><br /> <strong>L</strong>: Smoking status  <br /><br /> <strong>U</strong>: Social Factors (unmeasured) or Sublinical Disease (undetected)</td>
+      <td>Conditioning on \(L\) is again sufficient to block the backdoor path in this case.</td>
+      <td>I.84</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="/assets/hernan_dags/7_4.png" width="175" /></td>
+      <td style="text-align: center"><strong>A</strong>: Physical activity <br /><br /> <strong>Y</strong>: Cervical Cancer <br /><br /> <strong>L</strong>: Pap smear  <br /><br /> <strong>U_1</strong>: Pre-cancer lesion (unmeasured here) <br /><br /> <strong>U_2</strong>: Health-conscious personality (unmeasured)</td>
+      <td>Example shows how <strong>conditioning on a collider can induce bias</strong>. <br /><br />  Adjustment for \(L\) (e.g. by restricting to negative tests \(L=0\)) will <em>induce</em> bias by opening a backdoor path between \(A\) and \(Y\) (\(A \leftarrow U_2 \rightarrow L \leftarrow U_1 \rightarrow Y\)), previously blocked by the collider. This is a case of <em>selection bias</em>. <br /><br /> Thus, after conditioning, association between \(A\) and \(Y\) would be a mixture of association due to effect of \(A\) on \(Y\) and backdoor path. In other words, there is no <em>unconditional bias</em>, but there would be a conditional bias for at least one stratum of \(L\).</td>
+      <td>I.88</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="/assets/hernan_dags/7_5.png" width="175" /></td>
+      <td style="text-align: center">(Labels not in book)<br /><br /> <strong>A</strong>: Antacid  <br /><br />  <strong>L</strong>: Heartburn   <br /><br />  <strong>Y</strong>: Heart attack  <br /><br />  <strong>U</strong>: Obesity</td>
+      <td>A nonconfounding example in which traditional analysis might lead you to adjust for \(L\), but doing so would <em>induce a bias</em>.</td>
+      <td>I.89</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="/assets/hernan_dags/7_6.png" width="175" /></td>
+      <td style="text-align: center"><strong>A</strong>: Physical activity  <br /><br />  <strong>L</strong>: Income   <br /><br />  <strong>Y</strong>: Cardiovascular disease  <br /><br />  <strong>U</strong>: Socioeconomic status</td>
+      <td>\(L\) (income) is <em>not</em> a confounder, but is a measurable variable that could serve as a <strong>surrogate confounder</strong> for \(U\) (socioeconomic status) and thus could be used to partially adjust for the confounding from \(U\). <br /><br /> In other words, conditioning on \(L\) will result in a partial blockage of the backdoor path \(A \leftarrow U \rightarrow Y\).</td>
+      <td>I.90</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><em>Normal DAG</em>: <br />  <img src="/assets/hernan_dags/7_2.png" width="175" /> <br /><br /> <em>Corresponding SWIG</em>: <br /> <img src="/assets/hernan_dags/7_7.png" width="175" /></td>
+      <td style="text-align: center"><strong>A</strong>: Aspirin <br /><br /> <strong>Y</strong>: Stroke <br /><br /> <strong>L</strong>: Heart Disease  <br /><br /> <strong>U</strong>: Atherosclerosis (unmeasured)</td>
+      <td>Represents data from a hypothetical intervention in which all individuals receive the same treatment level \(a\). <br /><br /> Treatment is split into two sides: <br /> (a) Left side encodes the values of treatment \(A\) that would have been observed in the absence of intervention (<em>the natural value of treatment</em>) <br /> (b) Right side encodes the treatment value under the intervention. <br />  \(A\) has no variable into \(a\) bc \(a\) is the same everywhere. <br /><br /> Conditional exchangeability \(Y^{a} \unicode{x2AEB} A | L\) holds because all paths between \(Y^{a}\) and \(A\) are blocked after conditioning on \(L\).</td>
+      <td>I.91</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><em>Normal DAG</em>: <br />  <img src="/assets/hernan_dags/7_4.png" width="175" /> <br /><br /> <em>Corresponding SWIG</em>: <br /> <img src="/assets/hernan_dags/7_8.png" width="175" /></td>
+      <td style="text-align: center"><strong>A</strong>: Physical activity <br /><br /> <strong>Y</strong>: Cervical Cancer <br /><br /> <strong>L</strong>: Pap smear  <br /><br /> <strong>U_1</strong>: Pre-cancer lesion (unmeasured here) <br /><br /> <strong>U_2</strong>: Health-conscious personality (unmeasured)</td>
+      <td>Here, marginal exchangeability \(Y^{a} \unicode{x2AEB} A\) holds because, on the SWIG, all paths between \(Y^{a}\) and \(A\) are blocked without conditioning on \(L\). <br /><br /> Conditional exchangeability \(Y^{a} \unicode{x2AEB} A | L\) does not hold because, on the SWIG, the path \(Y^{a} \leftarrow U_1 \rightarrow L \leftarrow U_2 \rightarrow A\) is open when the collider \(L\) is conditioned on. <br /><br />  Taken together, marginal \(A-Y\) association is causal but conidtional association \(A-Y\) given \(L\) is not.</td>
+      <td>I.91</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><em>Normal DAG</em>: <br />  <img src="/assets/hernan_dags/7_9.png" width="175" /> <br /><br /> <em>Corresponding SWIG</em>: <br /> <img src="/assets/hernan_dags/7_10.png" width="175" /></td>
+      <td style="text-align: center">(Example labels not in book)<br /><br /> <strong>A</strong>: Statins  <br /><br /> <strong>Y</strong>: Coronary artery disease <br /><br /> <strong>L</strong>: HDL/LDL   <br /><br /> <strong>U</strong>: Race</td>
+      <td>In this example, the SWIG is used to highlight a failure of the DAG to provide conditional exchangeability \(Y^{a} \unicode{x2AEB} A | L\). <br /><br /> In the SWIG, the factual variable \(L\) is replaced by the counterfactual variable \(L^{a}\).  In this SWIG, counterfactual exchangeability \(Y^{a} \unicode{x2AEB} A | L_{a}\) holds, since \(L^{a}\) blocks the paths from \(Y^{a}\) to \(A\). But \(L\) is not even on the graph, so we can’t conclude \(Y^{a} \unicode{x2AEB} A | L\) holds.  <br /><br /> The problem being highlighted here is that \(L\) is a <em>descendent</em> of the treatment \(A\) blocking the path to \(Y\). <br /><br /> In contrast, if the arrow from \(A\) to \(L\) didn’t exist, \(L\) would not be a descendent of \(A\) and adjusting for \(L\) <em>would</em> eliminate all bias, even if \(L\) were still in the future of \(A\). Thus, confounders are allowed to be in the future of the treatment, they just can’t be descendents.</td>
+      <td>I.92</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="/assets/hernan_dags/7_11.png" width="175" /></td>
+      <td style="text-align: center"><strong>A</strong>: Aspirin  <br /><br /> <strong>Y</strong>: Blood Pressure   <br /><br />  <strong>U</strong>: History of heart disease (unmeasured) <br /><br /> <strong>C</strong>: Blood pressure right before treatment (“placebo test” aka “negative outcome control”)</td>
+      <td>This example was used to show <strong>difference-in-difference</strong> and <strong>negative outcome controls</strong>. <br /><br /> The idea: We cannot compute the effect of \(A\) on \(Y\) via standardization or IP weighting because there is unmeasured confounding. Instead, we first measure the (“negative”) outcome \(C\) right before treatment. Obviously \(A\) has no effect on \(C\), but we can assume that \(U\) will have the same confounding effect on \(C\) that it has on \(Y\). <br /><br /> As such, we take the effect in the treated to be the effect of \(A\) on \(Y\) (treatment effect + confounding effect) <em>minus</em> the effect of \(A\) on \(C\) (confounding effect). This is the difference-in-differences. <br /><br /> Negative outcome controls are sometimes used to try to <em>detect</em> confounding.</td>
+      <td>I.95</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="/assets/hernan_dags/7_12.png" width="175" /></td>
+      <td style="text-align: center">(No example labels in text) <br /><br /> <strong>A</strong>: Aspirin  <br /><br /> <strong>M</strong>: Platelet Aggregation <br /><br /> <strong>Y</strong>: Heart Attack <br /><br /> <strong>U</strong>: High Cardiovascular Risk</td>
+      <td>This example is to demonstrate the <strong>frontdoor criterion</strong> (see notes or page I.96 for more details). <br /><br /> Given this DAG, it is impossible to directly use standardization or IP weighting, because the unmeasured variable \(U\) is necessary to block the backdoor path between \(A\) and \(Y\). <br /><br /> However, the frontdoor adjustment can be used because: <br /> (i) the effect of \(A\) on \(&lt;\) can be computed without confounding, and <br /> (ii) the effect of \(M\) on \(Y\) can be computed because \(A\) blocks only the backdoor path. <br /><br /> Hence, <strong>frontdoor adjustment</strong> can be used.</td>
+      <td>I.95</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Some additional (but structurally redundant) examples of confounding from chapter 7</strong>:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">DAG</th>
+      <th style="text-align: center">Example</th>
+      <th>Notes</th>
+      <th>Page</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><img src="/assets/hernan_dags/7_3.png" width="175" /></td>
+      <td style="text-align: center"><strong>A</strong>: Exercise <br /><br /> <strong>Y</strong>: Death <br /><br /> <strong>L</strong>: Smoking status  <br /><br /> <strong>U</strong>: Social Factors (unmeasured) or Sublinical Disease (undetected)</td>
+      <td><em>Subclinical disease</em> could also result both in lack of exercise \(A\) and increased risk of a clinical diseae \(Y\). This is an example of <strong>reverse causation</strong>.</td>
+      <td>I.84</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="/assets/hernan_dags/7_3.png" width="175" /></td>
+      <td style="text-align: center"><strong>A</strong>: Gene being tested <br /><br /> <strong>Y</strong>: Trait <br /><br /> <strong>L</strong>: Different gene in LD with gene A   <br /><br /> <strong>U</strong>: Ethnicity</td>
+      <td><em>Linkage disequilibrium</em> can drive spurious associations between gene \(A\) and trait \(Y\) if the true causal gene \(L\) is in LD with \(A\) in patients with ethnicity \(U\).</td>
+      <td>I.84</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="/assets/hernan_dags/7_3.png" width="175" /></td>
+      <td style="text-align: center"><strong>A</strong>: Airborne particulate matter <br /><br /> <strong>Y</strong>: Coronary artery disease <br /><br /> <strong>L</strong>: Other pollutants  <br /><br /> <strong>U</strong>: Weather conditions</td>
+      <td><em>Environmental exposures</em> often co-vary with the weather conditions.  As such, certain pollutants \(A\) may be spuriously associated with outcome \(Y\) simply because the weather drives them to co-occur with \(L\).</td>
+      <td>I.84</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="selection-bias-chapter-8">Selection Bias (Chapter 8)</h3>
+
+<p><strong>Note</strong>:  While randomization eliminates <em>confounding</em>, it does not eliminate <em>selection bias</em>.  All of the issues in this section apply just as much to prospective and/or randomized trials as they do to observational studies.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">DAG</th>
+      <th style="text-align: center">Example</th>
+      <th>Notes</th>
+      <th>Page</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><img src="/assets/hernan_dags/8_1.png" width="175" /></td>
+      <td style="text-align: center"><strong>A</strong>: Folic Acid supplements  <br /><br /> <strong>Y</strong>: Cardiac Malformation <br /><br /> <strong>C</strong>: Death before birth</td>
+      <td>In this example, we assume folic acid supplements <em>decrease</em> mortality by reducing non-cardiac malformations, cardiac malformatins <em>increase</em> mortality, and cardiac malformations <em>increase</em> mortality.  <br /><br /> Study restricted participants to fetuses who survived until birth (\(C=0\)).  <br /><br /> Two sources of association between treatment and outcome: <br /> 1. Open path \(A \rightarrow Y\), the causal effect. <br /> 2. Open path \(A \rightarrow C \leftarrow Y\) linking \(A\) and \(Y\) due to <strong>conditioning on common effect (collider)</strong> \(C\).  This is the <strong>selection bias</strong>, specifically, <strong>selection bias under the null</strong>.  <br /><br /> The selection bias eliminates ability to make causal inference. If analysis were not conditioned on \(C\), causal inference would be valid.</td>
+      <td>I.97</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="/assets/hernan_dags/8_2.png" width="175" /></td>
+      <td style="text-align: center"><strong>A</strong>: Folic Acid supplements  <br /><br /> <strong>Y</strong>: Cardiac Malformation <br /><br /> <strong>C</strong>: Death before birth <br /><br />  <strong>S</strong>: Parental Grief</td>
+      <td>This example is the same as the above, except we consider if the researchers instead conditioned on the <strong>effect of the collider</strong>, namely \(S\), parental grief. <br /><br /> This is <em>still</em> <strong>selection bias</strong>, \(A \rightarrow C \leftarrow Y\) linking \(A\) is open, and association is not causation.</td>
+      <td>I.98</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="/assets/hernan_dags/8_3.png" width="175" /> <br /><br /><br /> <img src="/assets/hernan_dags/8_5.png" width="175" /></td>
+      <td style="text-align: center">(<em>Note: Missing arrow: \(A \rightarrow Y\)</em> ) <br /><br />   <strong>A</strong>: Antiretroviral treatment  <br /><br /> <strong>Y</strong>: 3-year death <br /><br /> <strong>C</strong>: Censoring from study or Missing Data <br /><br /> <strong>U</strong>: High immunosuppresion (unmeasured) <br /><br />  <strong>L</strong>: Symptoms, CD4 count, viral load (unmeasured) <br /><br />  ———— <br /><br /> <strong>W</strong>: Lifestyle, personality, educational variables (unmeasured)</td>
+      <td>Figure 8.3:<br /> In this example, individuals with high immunosuppresion – in addition to having higher risk of death – manifest worse physical symptoms that mediates censoring from the study.  Treatment also worsens side effects, which increases censoring, as well. <br /><br />  \(C\) is conditioned upon, because those are the only ones who actually contribute data to the study. <br /><br /> Per d-separation, \(A \rightarrow C \leftarrow L \leftarrow U \rightarrow Y\) is open due to conditioning on \(C\), allowing association to flow from \(A\) to \(Y\) and killing causal inference.  <br /><br /> Note: This is a transformation of figure 8.1, except instead of \(Y\) acting directly on \(C\), we have \(U\) acting on both \(Y\) and \(C\). <br /><br /> Intuition for the bias: if a treated individual with treatment-induced side effects does not drop out (\(C=0\)), this implies that he probably didn’t have high immunosuppresion \(U\), and low immunosuppresion means better outcomes. Hence, there is probably an inverse association between \(A\) and \(U\) among those that don’t drop out. <br /><br /> This is an example of <strong>selection bias</strong> that arises from <strong>conditioning on a censoring variable that is a comon effect of both treatment \(A\) and cause \(U\) of the outcome \(Y\).</strong> <br /><br />  ———— <br /><br /> Figure 8.5 is the same idea, except it notes that sometimes additional unmeasured variables may contribute to both treatment and censoring.</td>
+      <td>I.98</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="/assets/hernan_dags/8_4.png" width="175" /> <br /><br /><br /> <img src="/assets/hernan_dags/8_6.png" width="175" /></td>
+      <td style="text-align: center">(<em>Note: Missing arrow: \(A \rightarrow Y\)</em> ) <br /><br />   <strong>A</strong>: Antiretroviral treatment  <br /><br /> <strong>Y</strong>: 3-year death <br /><br /> <strong>C</strong>: Censoring from study or Missing Data <br /><br /> <strong>U</strong>: High immunosuppresion (unmeasured) <br /><br />  <strong>L</strong>: Symptoms, CD4 count, viral load (unmeasured) <br /><br />  ———— <br /><br /> <strong>W</strong>: Lifestyle, personality, educational variables (unmeasured)</td>
+      <td>Same example as 8.3/8.5, except we assume that treatment (especially prior treatment) has direct effect on symptoms \(L\). <br /><br /> Restricting to uncensored individuals still implies conditioning on a <strong>common effect</strong> \(C\) of both \(A\) and \(U\), introducing an association between treatment and outcome. <br /><br /> (<strong>Note</strong>: Unlike in Figure 8.3/8.5, even if we had access to \(L\), stratification is impossible in these DAGs, because while conditioning on \(L\) blocks the backdoor path from \(C\) to \(Y\), it also opens the backdoor path \(A \rightarrow L \leftarrow U \rightarrow Y\) because \(L\) is a collider on that path. IP-weighting, in contrast, could work here.  See page I.108 in section 8.5 for a discussion.)</td>
+      <td>I.98</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="/assets/hernan_dags/8_7.png" width="175" /></td>
+      <td style="text-align: center"><strong>A</strong>: Physical activity  <br /><br /> <strong>Y</strong>: Heart Disease <br /><br /> <strong>C</strong>: Becoming a firefighter <br /><br />  <strong>L</strong>: Parental socioeconomic status <br /><br /> <strong>U</strong>: Interest in physical activites (unmeasured)</td>
+      <td>The goal of this example is to show that while <em>confounding</em> and <em>selection bias</em> are distinct, they can often become functionally the same; this is why some call selection bias “confounding”. <br /><br /> Assume that – unknown to the investigators – \(A\) does not cause \(Y\).  Parental SES \(L\) affects becoming a firefighter \(C\), and, through childhood diet, heart disease risk \(Y\). But we assume that \(L\) doesn’t affect \(A\). Attraction to physical activity \(U\) affects being physically active \(A\) and being a firefighter \(C\), but not \(Y\). <br /><br /> Per these assumptions, there is <em>no confounding</em>, bc no common causes of \(A\) and \(Y\). However, restricting the study to firefighters (\(C=0\)), induces a <em>selection bias</em> that can be eliminated by adjusting for \(L\). Thus, some economists would call \(L\) a “confounder” because adjusting for it eliminates the bias.</td>
+      <td>I.101</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="/assets/hernan_dags/8_8.png" width="175" /> <br /><br /><br /> <img src="/assets/hernan_dags/8_9.png" width="175" /></td>
+      <td style="text-align: center"><strong>A</strong>: Heart Transplant  <br /><br /> <strong>Y_1</strong>: Death at time point 1 <br /><br /> <strong>Y_2</strong>: Death at time point 2 <br /><br />  <strong>U</strong>: Protective genetic haplotype (unmeasured)</td>
+      <td>The purpose of this example is to show the potential for selection bias in <em>time-specific hazard ratios</em>. <br /><br /> The example depicts a <em>randomized experiment</em> representing the effect of heart transplant on risk of death at two time points, for which we assume the true causal DAG is figure 8.8. <br /><br /> In figure 8.8, we assume that \(A\) only directly affects death at the first time point and that \(U\) decreases risk of death at all times but doesn’t affect treatment. <br /><br /> In this circumstance, the unconditional associated risk ratios are not confounded.  In other words, \(aRR_{AY_1} = \frac{[Y_{1}|A=1]}{[Y_{1}|A=0]}\) and  \(aRR_{AY_2} = \frac{[Y_{2}|A=1]}{[Y_{2}|A=0]}\) are unbiased and valid for causal inference. <br /><br /> However, trying to compute time-specific hazard ratios is risky. The process is valid at time point 1 (\(aRR_{AY_1}\) is the same as above), but the hazard ratio at time point 2 is inherently conditional on having survived at time point 1: \(aRR_{AY_2|Y_{1}=0} = \frac{[Y_{2}|A=1,Y_{1}=0]}{[Y_{2}|A=0,Y_{1}=0]}\). Since \(U\) affects survival at time point 1, however, this induces a selection bias that opens a path \(A\rightarrow Y_{1} \leftarrow U \rightarrow Y_{2}\) beteween \(A\) and \(Y_2\).  <br /><br /> If we could condition on \(U\), then \(aRR_{AY_2|Y_{1}=0,U}\) would be valid for causal inference. But we can’t, so conditioning on \(Y_{1}=0\) makes the DAG functionally equivalent to Figure 8.9.  This issue is relevant to observational and randomized experiments over time.</td>
+      <td>I.102</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="/assets/hernan_dags/8_3.png" width="175" /></td>
+      <td style="text-align: center">(<em>Note: Missing arrow: \(A \rightarrow Y\)</em> ) <br /><br />   <strong>A</strong>: Wasabi consumption (randomized)  <br /><br /> <strong>Y</strong>: 1-year death <br /><br /> <strong>C</strong>: Censoring   <br /><br />  <strong>L</strong>: Heart Disease <br /><br /> <strong>U</strong>: Atherosclerosis (unmeasured)</td>
+      <td>This example is of an <strong>RCT with censoring</strong>. We imagine that there was in reality an equal number of deaths in treatment and control, but there was higher censoring (\(C=1\)) among patients with heart disease and higher censoring among the wasabi arm.  As such, we observe more deaths in the wasabi group than in control. Thus, we see a <strong>selection bias</strong> due to <strong>conditioning on common effect</strong> \(C\). <br /><br /> There are <em>no common causes</em> of \(A\) and \(Y\) – expected in a marginally randomized experiment – so there is no need to adjust for <em>confounding</em> per se.  However, there is a common cause \(U\) of both \(C\) and \(Y\), inducing a backdoor path \(C \leftarrow L \leftarrow U \rightarrow Y\).  As such, conditioning on non-censored patients \(C=0\) means we have a selection bias that turns \(U\) functionally into a confounder. \(U\) is unmeasured, but the backdoor criterion says that <strong>adjusting for \(L\)</strong> here blocks the backdoor path. <br /><br /> The takeaway here is that <strong>censoring or other selection changes the causal question</strong>, and turns the counterfactual outcome into \(Y^{a=1,c=0}\) – the outcome of receiving the treatment <em>and</em> being uncensored.  The relevant causal risk ratio, for example, is thus now \(\frac{E[Y^{a=1,c=0}]}{E[Y^{a=0,c=0}]}\) – “the risk if everyone had been treated and was uncensored” vs “the risk if everyone were untreated and remained uncensored.” In this sense, <strong>censoring is another treatment</strong>.</td>
+      <td>I.105</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="/assets/hernan_dags/8_12.png" width="175" /> <br /><br /><br /> <img src="/assets/hernan_dags/8_13.png" width="175" /></td>
+      <td style="text-align: center"><strong>A</strong>: Surgery  <br /><br /> <strong>Y</strong>: Death <br /><br /> <strong>E</strong>: Genetic hapltype <br /><br />  ———— <br /><br /> <em>Death subsplit by causes</em>: (not recorded) <br /><br /> <strong>Y_A</strong>: Death from tumor <br /><br />  <strong>Y_E</strong>: Death from heart attack <br /><br /> <strong>Y_A</strong>: Death from other causes</td>
+      <td>In this example, Figure 8.12, surgery \(A\) and haplotype \(E\) are: <br /> (i) marginally independent (i.e. haplotype doesn’t affect probability of receiving surgery), and <br /> (ii) associated conditionally on \(Y\) (i.e. probability of receiving surgery <em>does</em> vary by haplotype within at least one stratum of the haplotype). <br /><br /> The purpose of this example is to show that despite this fact, situations exist in which \(A\) and \(E\) remain conditionally independent within <em>some</em> haplotypes. <br /><br /> Key idea here is that to recognize that if you split death into different causes (even if this isn’t recorded), \(A\) and \(E\) affect different sub-causes in different ways (specifically, \(A\) removes tumor, and \(E\) prevents heart attack). <br /><br /> Arrows from \(Y_{A}\), \(Y_{E}\), and \(Y_{O}\) to \(Y\) are deterministic, and \(Y=0\) if and only if \(Y_{A} = Y_{E}=Y_{O}=0\), so conditioning on \(Y_{0}=0\) implicitly conditions the other \(Y\)s to zero. This also blocks the path between \(A\) and \(E\), since it is conditioning on non-colliders \(Y_{A}\), \(Y_{E}\), and \(Y_{O}\). <br /><br /> In contrast, conditioning on \(Y=1\) is compatible with any combination of \(Y_{A}\), \(Y_{E}\), and \(Y_{O}\) being equal to 1, so the path between \(A\) and \(E\) is not blocked. <br /><br /> The ability to break the conditional probability of survival down in this way is an example of a <strong>multiplicative survival model</strong>.</td>
+      <td>I.105</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="/assets/hernan_dags/8_14.png" width="175" /> <br /><br /><br /> <img src="/assets/hernan_dags/8_15.png" width="175" /> <br /><br /><br /> <img src="/assets/hernan_dags/8_16.png" width="175" /></td>
+      <td style="text-align: center"><strong>A</strong>: Surgery  <br /><br /> <strong>Y</strong>: Death <br /><br /> <strong>E</strong>: Genetic hapltype <br /><br />  ———— <br /><br /> <em>Death subsplit by causes</em>: (not recorded) <br /><br /> <strong>Y_A</strong>: Death from tumor <br /><br />  <strong>Y_E</strong>: Death from heart attack <br /><br /> <strong>Y_A</strong>: Death from other causes</td>
+      <td>Same setup as in the examples of Figure 8.12 and 8.13.  However, in all of these DAGs, \(A\) and \(E\) affect survival thrugh a common mechanism, either directly or indirectly.  In such cases, \(A\) and \(E\) are dependent in <em>both</em> strata of \(Y\). <br /><br /> Taken together with the example above, the point is that <strong>conditioning on a collider <em>always</em> induces an association between its causes, but that this association <em>may</em> or <em>may not</em> be restricted to certain levels of the common effect</strong>.</td>
+      <td>I.105</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Some additional (but structurally redundant) examples of selection bias from chapter 8</strong>:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">DAG</th>
+      <th style="text-align: center">Example</th>
+      <th>Notes</th>
+      <th>Page</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><img src="/assets/hernan_dags/8_4.png" width="175" /> <br /><br /><br /> <img src="/assets/hernan_dags/8_6.png" width="175" /></td>
+      <td style="text-align: center">(<em>Note: Missing arrow: \(A \rightarrow Y\)</em> ) <br /><br /> <strong>A</strong>: Occupational exposure  <br /><br /> <strong>Y</strong>: Mortality <br /><br /> <strong>C</strong>: Being at Work <br /><br /> <strong>U</strong>: True health status <br /><br />  <strong>L</strong>: Blood tests and physical exam ———— <br /><br /> <strong>W</strong>: Exposed jobs are eliminated and workers laid off</td>
+      <td>(<em>Note</em>: DAGS 8.3/8.5 work just as well, here.) <br /><br /> <strong>Healthy worker bias</strong>: <br /> If we restrict a factory cohort study to those individuals who are actually at work, we miss out on the people that are not working due to either: <br /> (a) disability caused by exposure, or <br /> (b) a common cause of not working and not being exposed.</td>
+      <td>I.99</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="/assets/hernan_dags/8_3.png" width="175" /> <br /><br /><br /> <img src="/assets/hernan_dags/8_5.png" width="175" /></td>
+      <td style="text-align: center">(<em>Note: Missing arrow: \(A \rightarrow Y\)</em> ) <br /><br /> <strong>A</strong>: Smoking status  <br /><br /> <strong>Y</strong>: Coronary heart disease <br /><br /> <strong>C</strong>: Consent to participate <br /><br /> <strong>U</strong>: Family history <br /><br />  <strong>L</strong>: Heart disease awareness ———— <br /><br /> <strong>W</strong>: Lifestyle</td>
+      <td>(<em>Note</em>: DAGS 8.4/8.6 work just as well, here.) <br /><br /> <strong>Self-selection bias or Volunteer bias</strong>: <br /> Under any of the above structures, if the study is restricted to people who volunteer or choose to participate, this can induce a selection bias.</td>
+      <td>I.100</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="/assets/hernan_dags/8_3.png" width="175" /> <br /><br /><br /> <img src="/assets/hernan_dags/8_5.png" width="175" /></td>
+      <td style="text-align: center">(<em>Note: Missing arrow: \(A \rightarrow Y\)</em> ) <br /><br /> <strong>A</strong>: Smoking status  <br /><br /> <strong>Y</strong>: Coronary heart disease <br /><br /> <strong>C</strong>: Consent to participate <br /><br /> <strong>U</strong>: Family history <br /><br />  <strong>L</strong>: Heart disease awareness ———— <br /><br /> <strong>W</strong>: Lifestyle</td>
+      <td>(<em>Note</em>: DAGS 8.4/8.6 work just as well, here.) <br /><br /> <strong>Selection affected by treatment received before study entry</strong>: <br /> Generalization of self-selection bias. Under any of the above structures, if the treatment takes place before the study selection or includes a pre-study component, a selection bias can arise. <br /><br /> Particularly high-risk in studies that look at lifetime exposure to something in middle-aged volunteers.  <br /><br /> Similar issues often arise with confounding if confounders are only measured during the study.</td>
+      <td>I.100</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="measurement-bias-chapter-9">Measurement Bias (Chapter 9)</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">DAG</th>
+      <th style="text-align: center">Example</th>
+      <th>Notes</th>
+      <th>Page</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><img src="/assets/hernan_dags/9_1.png" width="175" /></td>
+      <td style="text-align: center"><strong>A</strong>: True Treatment <br /><br /> <strong>A*</strong>: Measured treatment <br /><br /> <strong>Y</strong>: True Outcome  <br /><br /> <strong>U_A</strong>: Measurement error</td>
+      <td>This DAG is simply to demonstrate how the <strong>measured treatment</strong> \(A^{*}\) (aka “measure” or “indicator”) recorded in the study is different from the <em>true</em> treatment (aka “construct”).  It also introduces \(U_{A}\), the <strong>measurement error</strong> variable, which encodes all the factors other than \(A\) that determine \(A^{*}\)  <br /><br /> <em>Note</em>:  \(U_{A}\) and \(A^{*}\) were unnecessary in discussions of <em>confounding</em> or <em>selection bias</em> because they are not a part of a backdoor path and no variables are conditioned on them.</td>
+      <td>I.111</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="/assets/hernan_dags/9_2.png" width="175" /></td>
+      <td style="text-align: center"><strong>A</strong>: True Treatment <br /><br /> <strong>A*</strong>: Measured treatment  <br /><br /> <strong>Y</strong>: True Outcome <br /><br /> <strong>Y*</strong>: Measured outcome  <br /><br /> <strong>U_A</strong>: Measurement error for A <br /><br /> <strong>U_Y</strong>: Measurement error for Y</td>
+      <td>This DAG adds in the notion of imperfect measurement for the outcome as well as the treatment.   <br /><br />  Note that there is still no <em>confounding</em> or <em>selection bias</em> at play here, so <strong>measurement bias</strong> or <strong>information bias</strong> is the only thing that would break the link between association and causation. <br /><br /> Figure 9.2 is an example of a DAG with <strong>independent nondifferential error</strong>.</td>
+      <td>I.112</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="/assets/hernan_dags/9_3.png" width="175" /></td>
+      <td style="text-align: center"><strong>A</strong>: Drug use <br /><br /> <strong>A*</strong>: Recorded history of drug use  <br /><br /> <strong>Y</strong>: Liver toxicity <br /><br /> <strong>Y*</strong>: Liver lab values  <br /><br /> <strong>U_A</strong>: Measurement error for A <br /><br /> <strong>U_Y</strong>: Measurement error for Y <br /><br /> <strong>U_AY</strong>: Measurement error affecting A and Y (e.g memory and language gaps during interview)</td>
+      <td>In Figure 9.2 above, \(U_{A}\) and \(U_{Y}\) are independent according to d-separation, because the path between them is blocked by colliders. Independent errors could include EHR data entry errors that occur by chance, technical errors at a lab, etc. <br /><br /> In this figure, we add \(U_{AY}\) to note the existence of <em>dependent</em> errors. For example, communication errors that take place during an interview with a patient could effect both recorded drug use and previous recorded lab tests.  <br /><br /> Figure 9.3 is an example of <strong>dependent nondifferential error</strong>.</td>
+      <td>I.112</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="/assets/hernan_dags/9_4.png" width="175" /> <br /><br /><br /> <img src="/assets/hernan_dags/9_6.png" width="175" /></td>
+      <td style="text-align: center"><strong>A</strong>: Drug use <br /><br /> <strong>A*</strong>: History of drug use per patient interview  <br /><br /> <strong>Y</strong>: Dementia <br /><br /> <strong>Y*</strong>: Dementia diagnosis  <br /><br /> <strong>U_A</strong>: Measurement error for A <br /><br /> <strong>U_Y</strong>: Measurement error for Y  <br /><strong>__</strong><strong>__ <br /> __U_AY</strong>:  Measurement error affecting A and Y</td>
+      <td><strong>Recall bias</strong> is one example of how the <em>true outcome</em> can bias <em>treatment measurement error</em>. <br /><br /> In this example, patients with dementia are less able to effectively communicate, so true cases of the disease are more likely to have faulty medical histories. <br /><br /> Another example of <em>recall bias</em> could be in a study of the effect of alcohol use during pregancy \(A\) on birth defects \(Y\), if the alcohol intake is measured by recall after delivery. Bad medical outcomes, especially ones like complicated births, often affect patient recall and patient reporting. <br /><br />  Figure 9.4 is an example of <strong>independent differential measurement error</strong>. <br /><br /> Adding dependent errors such as a faulty interview makes Figure 9.6 an example of <strong>dependent differential error</strong>.</td>
+      <td>I.113</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="/assets/hernan_dags/9_5.png" width="175" /> <br /><br /><br /> <img src="/assets/hernan_dags/9_7.png" width="175" /></td>
+      <td style="text-align: center"><strong>A</strong>: Drug use <br /><br /> <strong>A*</strong>: Recorded history of drug use  <br /><br /> <strong>Y</strong>: Liver toxicity <br /><br /> <strong>Y*</strong>: Liver lab values  <br /><br /> <strong>U_A</strong>: Measurement error for A <br /><br /> <strong>U_Y</strong>: Measurement error for Y <br /><strong>__</strong><strong>__ <br /> __U_AY</strong>:  Measurement error affecting A and Y</td>
+      <td>An example of <em>true treatment</em> affecting the <em>measurement error of the outcome</em> could also arise in the setting of drug use and liver toxicity. <br /><br /> For example, if a doctor finds out a patient has a drug problem, he may start monitoring the patients liver more frequently, and become more likely to catch aberrant liver lab values and record them in the EHR. <br /><br />  Figure 9.5 is an example of <strong>independent differential measurement error</strong>. <br /><br /> Adding dependent errors such as a faulty interview makes Figure 9.7 an example of <strong>dependent differential error</strong>.</td>
+      <td>I.113</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="/assets/hernan_dags/9_8.png" width="175" /> <br /><br /> <img src="/assets/hernan_dags/7_5.png" width="175" /></td>
+      <td style="text-align: center"><strong>A</strong>: Drug use  <br /><br /> <strong>Y</strong>: Liver toxicity <br /><br /> <strong>L</strong>: History of hepatitis  <br /><br /> <strong>L*</strong>: Measured history of hepatitis</td>
+      <td>This example demonstrates <strong>mismeasured confounders</strong>. <br /><br /> Controlling for \(L\) in Figure 9.8 would be sufficient to allow for causal inference. However, if \(L\) is imperfectly measured – say, because it was retrospectively recorded from memory – then the standardized or IP-weighted risk ratio based on \(L^{*}\) will generally differ from the true causal risk ratio.  <br /><br /> A cool observation is that since noisy measurement of confounding can be thought of as unmeasured confounding, Figure 9.9 is actually equivalent to Figure 7.5:  \(L^{*}\) is essentially a <em>surrogate confounder</em> (like Figure 7.5’s \(L\)) for an unmeasured actual confounder (Figure 7.5’s \(U\) playing the role of Figure 9.9’s \(L\)). Hence, controlling for \(L^{*}\) will be better than nothing but still flawed.</td>
+      <td>I.114</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="/assets/hernan_dags/9_9.png" width="175" /></td>
+      <td style="text-align: center"><strong>A</strong>: Aspirin <br /><br /> <strong>Y</strong>: Stroke <br /><br /> <strong>L</strong>: Heart Disease  <br /><br /> <strong>U</strong>: Atherosclerosis (unmeasured) <br /><br /> <strong>L*</strong>: Measured history of heart disease</td>
+      <td>Figure 9.9 is the same idea as Figure 9.8:  Even though controlling for \(L\) <em>would</em> be sufficient, a mismatched \(L^{*}\) is insufficient to block the backdoor path in general. <br /><br /> Another note here is that <strong>mismeasurement of confounders can result in apparent effect modification</strong>. For example, if all participants who reported a history of heart disease (\(L^{*}=1\)) and half the participants who reported no such history (\(L^{*}=0\)) actually had heart disease, then stratifying on (\(L^{*}=1\)) would eliminate all confounding in that stratum, but statifying on (\(L^{*}=0\)) would fail to do so. Thus one could detect a spurious assocation in (\(L^{*}=0\)) but not in (\(L^{*}=1\)) and falsely conclude that \(L^{*}\) is an effect modifier. (See discussion on I.115.)</td>
+      <td>I.114</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="/assets/hernan_dags/9_10.png" width="175" /></td>
+      <td style="text-align: center"><strong>A</strong>: Folic Acid supplements  <br /><br /> <strong>Y</strong>: Cardiac Malformation <br /><br /> <strong>C</strong>: Death before birth  <br /><br /> <strong>C*</strong>: Death records</td>
+      <td><strong>Conditioning on a mismeasured collider induces a selection bias</strong>, because \(C^{*}\) is a common effect of treatment \(A\) and outcome \(Y\).</td>
+      <td>I.115</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="/assets/hernan_dags/9_11.png" width="175" /> <br /><br /> <img src="/assets/hernan_dags/9_12.png" width="175" /></td>
+      <td style="text-align: center"><strong>Z</strong>: Assigned treatment  <br /><br /> <strong>A</strong>: Heart Transplant  <br /><br /> <strong>Y</strong>: 5-year Mortality <br /><br /> (Ignore <strong>U</strong> here)</td>
+      <td>Figure 9.11 is an example of an <strong>intention-to-treat</strong> RCT. <br /><br /> ITT RCT’s can be almost thought of as an RCT with a potentially <em>misclassified treatment</em>. However, unlike a misclassifed treatment, the treatment assignment \(Z\) has a causal effect on the outcome \(Y\), both <br /> (a) by influencing the actual treatment \(A\), and <br />(b) by influencing study participants who know what \(Z\) is and change their behavior accordingly.<br /> Hence, the causal effect of \(Z\) on \(Y\) depends on the strength of the arrow \(Z \rightarrow Y\), the arrow \(Z \rightarrow A\), and the arrow \(A \rightarrow Y\).  <br /><br />  Double-blinding attempts to remove \(Z \rightarrow Y\) (Figure 9.12).</td>
+      <td>I.115</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="/assets/hernan_dags/9_11.png" width="175" /></td>
+      <td style="text-align: center"><strong>Z</strong>: Assigned treatment  <br /><br /> <strong>A</strong>: Heart Transplant  <br /><br /> <strong>Y</strong>: 5-year Mortality <br /><br /> <strong>U</strong>: Illness Severity (unmeasured)</td>
+      <td>By including \(U\), we are considering the fact that in an IIT study, severe illness (or other variables) contribute to some patients to seek out different treatment than they’ve been assigned. <br /><br />  Note that there is a backdoor path \(A \leftarrow U \rightarrow Y\) and thus <strong>confounding for the effect of \(A\) on \(Y\)</strong>, requiring adjustment. <br /><br /> However, there is <strong>no confounding of \(Z\) and \(Y\)</strong>, and thus no need for adjustment. <br /><br /> This explains why the <strong>intention-to-treat effect</strong> is often estimated in lieu of the <strong>per-protocol effect</strong>.  <br /><br /> Taken together, <strong><em>per-protocol effect</em> brings with it unmeasured confounding</strong>, and <strong><em>IIT</em> brings risk of misclassification bias</strong>. So one needs to trade these off when deciding which to use. (Full discussion below and on I.120)</td>
+      <td>I.115</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="/assets/hernan_dags/9_13.png" width="175" /></td>
+      <td style="text-align: center"><strong>Z</strong>: Assigned treatment  <br /><br /> <strong>A</strong>: Heart Transplant  <br /><br /> <strong>Y</strong>: 5-year Mortality <br /><br /> <strong>U</strong>: Illness Severity (unmeasured) <br /><br /> <strong>L</strong>: Measured factors that mediate U</td>
+      <td>This example is of a <strong>as-treated analysis</strong>, a type of per-protocol analysis <br /><br /> <em>As-treated</em> includes <em>all patients</em> and compares those treated (\(A=1\)) vs not treated (\(A=0\)), independent of their assignment \(Z\).  <br /><br /> As-treated analyses are <em>confounded</em> by \(U\), and thus depend entirely on whether they can accurately adjust for measurable factors \(L\) to block the backdoor paths between \(A\) and \(Y\).</td>
+      <td>I.118</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><img src="/assets/hernan_dags/9_14.png" width="175" /></td>
+      <td style="text-align: center"><strong>Z</strong>: Assigned treatment  <br /><br /> <strong>A</strong>: Heart Transplant  <br /><br /> <strong>Y</strong>: 5-year Mortality <br /><br /> <strong>U</strong>: Illness Severity (unmeasured) <br /><br /> <strong>L</strong>: Measured factors that mediate U <br /><br /> <strong>S</strong>: Selection filter (A=Z)</td>
+      <td>This example is of a <strong>conventional per-protocol analysis</strong>, a second method to measure per-protocol effect.  <br /><br />  Conventional per-protocol analyses limit the population to those who adhered to the study protocol, subsetting to those for whom \(A=Z\). <br /><br />  This method induces a <em>selection bias</em> on \(A=Z\), and thus still requires adjustment on \(L\).</td>
+      <td>I.118</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Some additional (but structurally redundant) examples of measurement bias from chapter 9:</strong></p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">DAG</th>
+      <th style="text-align: center">Example</th>
+      <th>Notes</th>
+      <th>Page</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><img src="/assets/hernan_dags/9_4.png" width="175" /></td>
+      <td style="text-align: center"><strong>A</strong>: Drug use <br /><br /> <strong>A*</strong>: Recorded history of drug use  <br /><br /> <strong>Y</strong>: Liver toxicity <br /><br /> <strong>Y*</strong>: Liver lab values  <br /><br /> <strong>U_A</strong>: Measurement error for A <br /><br /> <strong>U_Y</strong>: Measurement error for Y</td>
+      <td><strong>Reverse causation bias</strong> is another example of how the <em>true outcome</em> can bias <em>treatment measurement error</em>. <br /><br /> In this example, liver toxicity worsens clearance of drugs from the body, which could affect blood levels of the drugs.</td>
+      <td>I.112</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+    </article>
+    <span class="print-footer">All the DAGs from Hernan and Robins' Causal Inference Book - June 19, 2019 - Sam Finlayson</span>
+    <footer>
+  <hr class="slender">
+  <ul class="footer-links">
+    <li><a href="mailto:samuel_finlayson@hms.harvard.edu"><span class="icon-mail3"></span></a></li>    
+    
+      <li>
+        <a href="//www.twitter.com/IAmSamFin"><span class="icon-twitter"></span></a>
+      </li>
+    
+      <li>
+        <a href="//github.com/sgfin"><span class="icon-github"></span></a>
+      </li>
+    
+      <li>
+        <a href="/feed"><span class="icon-rss2"></span></a>
+      </li>
+      
+  </ul>
+<div class="credits">
+<span>&copy; 2020 &nbsp;&nbsp;SAM FINLAYSON</span></br> <br>
+<span>This site created with the <a href="//github.com/clayh53/tufte-jekyll">Tufte theme for  </a> in <a href="//jekyllrb.com">Jekyll</a>.</span> 
+</div>  
+</footer>
+  </body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>FAQ on Medical Adversarial Attacks Policy Paper</title>
+  <meta name="description" content="">
+
+  <!-- Google Fonts loaded here depending on setting in _data/options.yml true loads font, blank does not-->
+  
+    <link href='//fonts.googleapis.com/css?family=Lato:400,400italic' rel='stylesheet' type='text/css'>
+  
+  
+  <!-- Load up MathJax script if needed ... specify in /_data/options.yml file-->
+  
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: [
+      "MathMenu.js",
+      "MathZoom.js",
+      "AssistiveMML.js",
+      "a11y/accessibility-menu.js"
+    ],
+    jax: ["input/TeX", "output/CommonHTML"],
+    TeX: {
+      extensions: [
+        "AMSmath.js",
+        "AMSsymbols.js",
+        "noErrors.js",
+        "noUndefined.js",
+      ]
+    }
+  });
+</script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-122144402-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-122144402-1');
+    </script>
+
+ <!--   <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+  
+
+  <link rel="stylesheet" type="text/css" href="/css/tufte.css">
+  <!-- <link rel="stylesheet" type="text/css" href="/css/print.css" media="print"> -->
+
+  <link rel="canonical" href="http://sgfin.github.io/2019/03/21/FAQ-On-Adversarial-Science-Paper/">
+
+  <link rel="alternate" type="application/rss+xml" title="Machine Learning and Medicine" href="http://sgfin.github.io/feed.xml" />
+</head>
+
+  <body>
+    <!--- Header and nav template site-wide -->
+<header>
+    <nav class="group" style="padding-bottom: 15px;">
+	<!-- <a href="/"><img class="badge" src="/assets/img/badge_1.png" alt="SGF"></a> -->
+	
+		
+  	
+		
+		    
+		      <a href="/">About</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/css/print.css"></a>
+		    
+	    
+  	
+		
+  	
+		
+		    
+		      <a href="/posts/">posts</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/learning-resources/">ML Resources</a>
+		    
+	    
+  	
+	</nav>
+</header>
+    <article class="group">
+      <h1>FAQ on Medical Adversarial Attacks Policy Paper</h1>
+<p class="subtitle">March 21, 2019</p>
+
+<ul id="markdown-toc">
+  <li><a href="#whats-the-paper-and-why-this-faq" id="markdown-toc-whats-the-paper-and-why-this-faq">What’s the paper and why this FAQ?</a></li>
+  <li><a href="#do-you-think-adversarial-attacks-are-the-biggest-concern-in-using-machine-learning-in-healthcare-a-nowhere-close-then-why-write-the-paper" id="markdown-toc-do-you-think-adversarial-attacks-are-the-biggest-concern-in-using-machine-learning-in-healthcare-a-nowhere-close-then-why-write-the-paper">Do you think adversarial attacks are the biggest concern in using machine learning in healthcare? (A: Nowhere close!) Then why write the paper?</a></li>
+  <li><a href="#there-seems-to-have-been-something-of-a-pivot-between-the-preprint-and-the-policy-forum-discussion-with-the-latter-focusing-much-less-on-images--was-this-intentional" id="markdown-toc-there-seems-to-have-been-something-of-a-pivot-between-the-preprint-and-the-policy-forum-discussion-with-the-latter-focusing-much-less-on-images--was-this-intentional">There seems to have been something of a pivot between the preprint and the policy forum discussion, with the latter focusing much less on images.  Was this intentional?</a></li>
+  <li><a href="#in-the-paper-you-frame-existing-examples-like-upcoding-and-claims-craftsmanship-as-adversarial-attacks-or-at-least-as-their-precursors--is-that-fair" id="markdown-toc-in-the-paper-you-frame-existing-examples-like-upcoding-and-claims-craftsmanship-as-adversarial-attacks-or-at-least-as-their-precursors--is-that-fair">In the paper, you frame existing examples like upcoding and claims craftsmanship as adversarial attacks, or at least as their precursors.  Is that fair?</a></li>
+  <li><a href="#isnt-this-unrealistic--i-mean-would-there-ever-be-cases-when-someone-actually-uses-adversarial-examples" id="markdown-toc-isnt-this-unrealistic--i-mean-would-there-ever-be-cases-when-someone-actually-uses-adversarial-examples">Isn’t this unrealistic?  I mean, would there ever be cases when someone <em>actually</em> uses adversarial examples?</a></li>
+  <li><a href="#adversarial-attacks-sounds-scary--do-you-think-people-will-use-these-as-tools-to-hurt-people-by-hacking-diagnostics-etc" id="markdown-toc-adversarial-attacks-sounds-scary--do-you-think-people-will-use-these-as-tools-to-hurt-people-by-hacking-diagnostics-etc">“Adversarial attacks” sounds scary.  Do you think people will use these as tools to hurt people by hacking diagnostics, etc?</a></li>
+  <li><a href="#are-you-hoping-to-stall-the-development-of-medical-ml-because-of-adversarial-attacks" id="markdown-toc-are-you-hoping-to-stall-the-development-of-medical-ml-because-of-adversarial-attacks">Are you hoping to stall the development of medical ML because of adversarial attacks?</a></li>
+  <li><a href="#small-note-on-the-figure" id="markdown-toc-small-note-on-the-figure">Small note on the figure</a></li>
+</ul>
+
+<h3 id="whats-the-paper-and-why-this-faq">What’s the paper and why this FAQ?</h3>
+
+<p>Last spring, some colleages (chiefly Andy Beam) and I released a <a href="https://arxiv.org/pdf/1804.05296.pdf">preprint</a> on adversarial attacks on medical computer visions systems. This manuscript was targeted at a technical audience. It was written with the goal of explaining why adversarial attacks researchers should consider healthcare applications among their threat models, as well as to provide a few technical examples as a proof of concept. I ended up getting a lot of great feedback/pushback via email and twitter, which I really appreciated and which informed an update of the preprint on arxiv.</p>
+
+<p>After the article was released, we were also put in touch with <a href="https://hls.harvard.edu/faculty/directory/10992/Zittrain">Jonathan Zittrain</a> and John Bowers from Harvard Law School as well as <a href="https://www.media.mit.edu/people/joi/overview/">Joi Ito</a> of the MIT Media Lab. These are incredibly thoughtful people with a lot of amazing experience. We decided to write a follow-up article targeted more at medical and policy folks, with the intention of examining precedence for adversarial attacks in the healthcare system as it exists today and initiating a conversation about what to do about them going forward. The result is being published today in Science, <a href="http://science.sciencemag.org/content/363/6433/1287">here</a>. It’s been an absolute pleasure working with these guys.</p>
+
+<p>We really tried hard to be thoughtful and measured. Given the nature of the topic, however, I’ve been fretting a bit that the paper will be misconstrued/taken out of context. At a minimum, I anticipate getting a lot of the same questions I got the first time around on the preprint, and figured it’d be easier to write up answers to these in one place. The paper is short and non-technical enough that it doesn’t really need a blog post/explainer per se, so I opted to go with a “FAQ.” Hope it’s not too obnoxious.</p>
+
+<h3 id="do-you-think-adversarial-attacks-are-the-biggest-concern-in-using-machine-learning-in-healthcare-a-nowhere-close-then-why-write-the-paper">Do you think adversarial attacks are the biggest concern in using machine learning in healthcare? (A: Nowhere close!) Then why write the paper?</h3>
+
+<p>Adversarial attacks consitute just one small part of a large taxonomy of potential pitfalls of machine learning (both ML in general and medical ML in particular).</p>
+
+<p>When I think about points of failure of medical machine learning, I think first about things like: <a href="https://arxiv.org/abs/1811.12583">dataset shift</a>, accidentally fitting <a href="https://arxiv.org/abs/1811.03695">confounders</a> or healthcare <a href="https://www.bmj.com/content/361/bmj.k1479">dynamics</a> instead of true signal, <a href="http://papers.nips.cc/paper/7613-why-is-my-classifier-discriminatory.pdf">discriminatory bias</a>, <a href="https://www.theatlantic.com/technology/archive/2018/09/the-new-apple-watchs-heart-monitoring-is-complicated/570115/">overdiagnosis</a>, or job displacement.  Especially given recent challenges in getting ML to <a href="https://www.thelancet.com/action/showPdf?pii=S2589-5370%2819%2930037-9">generalize to new populations</a>, there are also uncomfortable questions to ask about when and how we can be sure we’re ready to deploy a ML algorithm in a new patient population.</p>
+
+<p>While all of these issues may have general implications for policy, the way I think about them most is in context of how they inform our evaluations of individual ML systems. Each of the above issues demands that specific questions be asked of the systems that we’re evaluating.  Questions like:  what population was this model fit on, and how does it compare to the population the system will be used in?  How could the data I’m feeding this algorithm have changed in the time since the model was developed?  Have we thought carefully about the workflow so these algorithms are getting applied to patients with the right priors and the healthcare providers know how to properly act upon positive tests when the time comes?</p>
+
+<p>Our main goal in this work was, in many ways, simply to point out that adversarial attacks at least deserve ackowledgement as one of these potential pitfalls. Questions this reality might prompt us to ask when evaluating a specific system include:  Is there a mismatch in incentives between the person developing/hosting the algorithm and the person sending data into that algorithm?  If so, are we prepared for the fact that those providing data to the algorithm might try to intentionally craft that data to achieve the results they want?  If we decide to try to use models more robust to adversarial attacks, to what extent are we comfortable trading off accuracy in order to do so?</p>
+
+<p>In many application settings, the answer to the incentives question may simply be “no.”  But I don’t think that’s necessarily the case for all possible applications of machine learning in healthcare.  To boot, we as authors have been slightly disconcerted by the fact that when speaking to high-level decision makers at hospitals, insurance companies, and elsewhere who are investing heavily in ML, they generally aren’t even aware of the existance of adversarial examples.  So it’s really that mismatch in awareness relative to other pitfalls of ML that prompted the paper, even if in the grand scheme of things adversarial attacks are just one piece of a very large pie.</p>
+
+<p>Finally – and perhaps most importantly – adversarial examples provide a proof-of-concept for a certain collection of issues with modern machine learning methods. More specificially, adversarial techniques help us assess the worst-case performance against new data distributions, and demonstrate that current models fail to encode key invariants in the classes that we trying to model. This has implications not just for the susceptibility of these algorithms to manipulation, but more fundamentally for our ability to trust these systems in <em>any</em> safety-critical settings. To boot, it does so in a way that is very tangible for researchers who are trying to design better models that <em>can</em> encode arbitrary invariants and whose behavior align exactly with how humans would want/expect them to behave. Alexander Madry calls this field of research “ML alignment,” which I think is a good phrase. (Addendum: Catherine Olsson has written <a href="https://medium.com/@catherio/unsolved-research-problems-vs-real-world-threat-models-e270e256bc9e">a great medium post</a> that makes many of these same points more thoughtfully and with more nuance. I highly recommend it if you’re interested in this topic.)</p>
+
+<h3 id="there-seems-to-have-been-something-of-a-pivot-between-the-preprint-and-the-policy-forum-discussion-with-the-latter-focusing-much-less-on-images--was-this-intentional">There seems to have been something of a pivot between the preprint and the policy forum discussion, with the latter focusing much less on images.  Was this intentional?</h3>
+
+<p>Yes!  Our <a href="https://arxiv.org/pdf/1804.05296.pdf">preprint</a> was geared toward a technical audience, and was largely motivated by a desire to get people who work on ML security/robustness research to start thinking about healthcare when considering attacks and defenses, rather than just things more native to the CS world like self-driving cars.  At the time, the bulk of high-profile work – both in adversarial attacks and in medical ML – had been done in the computer vision space, so we decided to focus on this for our initial deep dive and in building our three proofs of concept.</p>
+
+<p>As we thought a lot more deeply about the problem, however, we realized that we should probably expand our scope.  The bulk of ML happening <em>today</em> in the healthcare industry isn’t in the form of diagnostics algorithms, but is being used internally at insurance companies to process claims directly for first-pass approvals/denials. And the best examples for existing adversarial attack-like behavior takes place in context of providers manipulating these claims. These provide a jumping off point to understand a spectrum of emerging motivations for adversarial behavior across all aspects of the healthcare system and across many different forms of ML. (See the next section on this as well.)</p>
+
+<h3 id="in-the-paper-you-frame-existing-examples-like-upcoding-and-claims-craftsmanship-as-adversarial-attacks-or-at-least-as-their-precursors--is-that-fair">In the paper, you frame existing examples like upcoding and claims craftsmanship as adversarial attacks, or at least as their precursors.  Is that fair?</h3>
+
+<p>I think so. The paper “adversarial classification” from KDD ‘04 even talks specifically about fraud detection along with spam and other applications of adversarial attacks.</p>
+
+<p>For a few years, the adversarial examples community focused really heavily on <em>human-imperceptible</em> changes to <em>images,</em> usually computed using <em>gradient</em> tricks.  But more recently, I think the community has (appropriately) returned to defining adversarial attacks as any method employed to craft one’s data to influence the behavior of an ML algorithm that processes it.  As <a href="https://arxiv.org/pdf/1807.06732.pdf">Gilmer et al</a> say, “what is important about an adversarial example is that an adversary supplied it, not that the example itself is somehow special.”  Such framings of the problem allow even for natural data identified through simple techniques like guess-and-check and grid search to be adversarial examples, so long as they are used with adversarial intent, and indeed some recent papers in major CS venues have employed such techinques.</p>
+
+<p>At present, the adversarial behavior in context of things like medical claims appears to be limited to providers stumbling upon or essentially guess-and-checking combinations of codes that will provide higher rates of reimbursement/approval without commiting overt fraud.  (Some <a href="https://jamanetwork.com/journals/jama/fullarticle/192577">studies like this one</a> have suggested a hefty cohort of physicians think that manipulating claims is even <em>necessary</em> in order to provide high-quality care.) In light of the last paragraph, I think you can make a reasonable case that this behavior itselft already constitues an adversarial attack on the ML systems used by insurance companies, though admittedly a fairly boring one from a technical point of view. But it may be getting more interesting. Hospitals invest <em>immense</em> resources in this process – up to <a href="https://jamanetwork.com/journals/jama/article-abstract/2673148?redirect=true">$99k per physician per year</a> – and I know for a fact that some providers are already investing heavily in software solutions to more explicitly optimize this stuff.  Likewise, <a href="https://www.forbes.com/sites/insights-intelai/2019/02/11/how-ai-can-battle-a-beastmedical-insurance-fraud/#20fa437e363e">insurance companies</a> are doubling down on AI solutions to fraud detection, including processing not just claims but things like medical notes. Now that computer vision algorithms are starting to get <a href="https://www.fda.gov/newsevents/newsroom/pressannouncements/ucm604357.htm">FDA approved</a> for medical purposes, I think it’s also likely that payors and regulators will start leveraging this tech as well, which may lead to incentives for computer vision adversarial attacks, a hypothetical scenario at the center of our preprint.</p>
+
+<p>In any event, the real motivation for the claims examples we focus on in the paper is not to call these out as adversarial attacks per se.  Rather, it’s to demosntrate how motivations – both positive and negative – already exist in the healthcare system that motivate various players to subtly manipulate their data in order to achieve specific results. This is the soul of the adversarial attacks problem.  As both the reach and sophistication of medical machine learning expands across the healthcare system, the techniques used to game these algorithms will likely expand significantly as well.</p>
+
+<h3 id="isnt-this-unrealistic--i-mean-would-there-ever-be-cases-when-someone-actually-uses-adversarial-examples">Isn’t this unrealistic?  I mean, would there ever be cases when someone <em>actually</em> uses adversarial examples?</h3>
+
+<p>We got some really good and reasonable pushback on this point the first time around, and once again, I really appreciated it. (Partly) as a result, we’ve spent a lot more time the last few months thinking about the range of adversarial behavior in healthcare information exchange. We ended up shifting the focus a bit as a result. In any event, there’s a whole spectrum of threat models at play here.</p>
+
+<p>Without rehashing the information about claims in the question just above this one too much, machine learning <em>is</em> being used pretty extensively (and moreso every day, at increasing sophistication) to make first-pass approvals on claims. And while this seems like a purely financial/bureaucratic concern, this process does already have a major impact on healthcare – at least in the U.S. – <em>today</em>. <a href="https://www.kevinmd.com/blog/2016/07/time-doctors-tell-insurance-companies-really-feel.html">Here is an example</a> of writing from a doctor that explains the level of frustration here, which is reflected of common experiences. What’s more, there is something more subtle here; when I speak with clinicians, most of them feel like they get no formal feedback from what’s happening under the hood at insurance so they don’t have any real rhyme or reason for what combination of claims it is that’s resulting in their denials.  To boot, there are often many possible codes that could apply to any given procedure or diagnosis, and it’s a bit of a black box for which will be likely to receive pushback and which will get you the most reimbursement. Currently, most hospitals use extensive teams of human billers to manually try to do this process, but companies for automated billing exist, and I have personally spoken to physicians that are hoping to seek more sophisticated software solutions to more explicitly optimize their billing to avoid these “hurdles.” And since many insurance companies are already starting to use NLP on notes, that will open up a whole new layer of complexity in the process. In light of all this, I actually feel that the dynamics we describe in this paper are not unrealistic at all.</p>
+
+<p>Where we do get (explicitly) hypothetical is when it comes to things like adversarial attacks on imaging systems. I don’t think these are that realistic today, because I can’t find examples of insurance companies or regulators using computer vision algorithms for approvals yet.  But in fairness, the first FDA approval for a CV algorithm just happened in 2018 and many more are on the way. Once CV is established as “legit” I think it’s likely that we’ll see them get more integrated into such decisions.  But we aren’t there yet. Of course, even when we do get there, the adversarial imaging threat model also requires users to feel comfortable sending in adversarial attacks but not straight up fake images from other patients. But I think that there are technical and – probably moreso – legal and moral reasons why physicians/companies would hesitate to send in overtly fraudulent images to a diagnostic algorithm at an insurance/regulatory body. In contrast, I think that many would be comfortable doing more subtle things like rotations/scalings or even just cherry-picking images that give them the best shot from the many images that are often acquired per patient. According to the recently published <a href="https://arxiv.org/pdf/1807.06732.pdf">Rules of the Game</a>, this type of behavior “counts” as adversarial attacks according at least to many in the field. To boot, doing this effectively (and surely being robust to it) could entail advanced software even if the modifications themselves are simple. In other words, I continue to think that robustness/adversarial attacks researchers should take healthcare seriously as an area of application.</p>
+
+<h3 id="adversarial-attacks-sounds-scary--do-you-think-people-will-use-these-as-tools-to-hurt-people-by-hacking-diagnostics-etc">“Adversarial attacks” sounds scary.  Do you think people will use these as tools to hurt people by hacking diagnostics, etc?</h3>
+
+<p>While this is may be possible in certain circumstances in theory, I don’t think it’s particularly likely.  By analogy, <a href="https://www.wired.com/story/pacemaker-hack-malware-black-hat/">pacemaker hacks</a> have been around for more than a decade, but I don’t see many people feeling motivated to execute them.</p>
+
+<h3 id="are-you-hoping-to-stall-the-development-of-medical-ml-because-of-adversarial-attacks">Are you hoping to stall the development of medical ML because of adversarial attacks?</h3>
+
+<p>Nope!  Every author on this paper is very bullish on machine learning as a way to achieve positive impact in all aspects of the healthcare system.  We explicitly state this in the paper, as well as the fact that we don’t think these concerns should slow things down, just be a part of an ongoing conversation.</p>
+
+<h3 id="small-note-on-the-figure">Small note on the figure</h3>
+
+<p>As will be immediately recognized by anyone familiar with adversarial examples, the design for the top part of Figure 1 was inspired by Figure 1 in <a href="https://arxiv.org/abs/1412.6572">Goodfellow et al</a> – though the noise itself was generated using a different attack method (the PGD) and applied to different data. As it stands, the figure in our Science paper points to our preprint for details of how the attack was generated, and Goodfellow et al paper is cited in the preprint. However, the Science paper itself doesn’t explicitly credit Goodfellow et al for the design idea. This wasn’t intentional. I pointed this out to the Science team, which decided against updating with a citation since the paper is cited via the preprint and all the actual content in the figure are either original or CC0. But I still feel bad about this. Sorry!</p>
+
+
+
+
+    </article>
+    <span class="print-footer">FAQ on Medical Adversarial Attacks Policy Paper - March 21, 2019 - Sam Finlayson</span>
+    <footer>
+  <hr class="slender">
+  <ul class="footer-links">
+    <li><a href="mailto:samuel_finlayson@hms.harvard.edu"><span class="icon-mail3"></span></a></li>    
+    
+      <li>
+        <a href="//www.twitter.com/IAmSamFin"><span class="icon-twitter"></span></a>
+      </li>
+    
+      <li>
+        <a href="//github.com/sgfin"><span class="icon-github"></span></a>
+      </li>
+    
+      <li>
+        <a href="/feed"><span class="icon-rss2"></span></a>
+      </li>
+      
+  </ul>
+<div class="credits">
+<span>&copy; 2020 &nbsp;&nbsp;SAM FINLAYSON</span></br> <br>
+<span>This site created with the <a href="//github.com/clayh53/tufte-jekyll">Tufte theme for  </a> in <a href="//jekyllrb.com">Jekyll</a>.</span> 
+</div>  
+</footer>
+  </body>
+</html>

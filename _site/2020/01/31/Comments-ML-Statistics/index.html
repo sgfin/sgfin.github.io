@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Comments on ML "versus" statistics</title>
+  <meta name="description" content="">
+
+  <!-- Google Fonts loaded here depending on setting in _data/options.yml true loads font, blank does not-->
+  
+    <link href='//fonts.googleapis.com/css?family=Lato:400,400italic' rel='stylesheet' type='text/css'>
+  
+  
+  <!-- Load up MathJax script if needed ... specify in /_data/options.yml file-->
+  
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: [
+      "MathMenu.js",
+      "MathZoom.js",
+      "AssistiveMML.js",
+      "a11y/accessibility-menu.js"
+    ],
+    jax: ["input/TeX", "output/CommonHTML"],
+    TeX: {
+      extensions: [
+        "AMSmath.js",
+        "AMSsymbols.js",
+        "noErrors.js",
+        "noUndefined.js",
+      ]
+    }
+  });
+</script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-122144402-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-122144402-1');
+    </script>
+
+ <!--   <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+  
+
+  <link rel="stylesheet" type="text/css" href="/css/tufte.css">
+  <!-- <link rel="stylesheet" type="text/css" href="/css/print.css" media="print"> -->
+
+  <link rel="canonical" href="http://sgfin.github.io/2020/01/31/Comments-ML-Statistics/">
+
+  <link rel="alternate" type="application/rss+xml" title="Machine Learning and Medicine" href="http://sgfin.github.io/feed.xml" />
+</head>
+
+  <body class="full-width">
+    <!--- Header and nav template site-wide -->
+<header>
+    <nav class="group" style="padding-bottom: 15px;">
+	<!-- <a href="/"><img class="badge" src="/assets/img/badge_1.png" alt="SGF"></a> -->
+	
+		
+  	
+		
+		    
+		      <a href="/">About</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/css/print.css"></a>
+		    
+	    
+  	
+		
+  	
+		
+		    
+		      <a href="/posts/">posts</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/learning-resources/">ML Resources</a>
+		    
+	    
+  	
+	</nav>
+</header>
+    <article>
+      <p><strong>Why am I writing this?</strong></p>
+
+<p>Over the last few years, I’ve observed many vigorous debates about “machine learning versus statistics.” Often, these are sparked by some paper/blog post/press release that either (a) involves some use of logistic regression (or some other type of GLM) being described as machine learning, or (b) performs a meta-analysis attempting to pit the fields against each other.</p>
+
+<p>I have allowed myself to get pulled down this rabbit hole far too many times, wasting hours of my time in fruitless debate. As such, I have decided to write this post as a way to inoculate myself against the urge to enter future discussions. The first two sections explain why I consider most ML “versus” Stats debates to be fundamentally flawed, even in their very premise. The following two sections explain why I <em>do</em> validate where people are coming from in having these debates, but still think they (the debates!) are a colossal waste of time.</p>
+
+<p>As time goes on, I might even write a bot to post this on relevant twitter threads. If I do, I will <em>intentionally</em> code this bot using logistic regression and call it machine learning, just to maximize peskiness.</p>
+
+<p><strong>Outline</strong></p>
+
+<div style="padding-top: 10px; font-size:large">
+
+<a href="#Sect1">-Neglected historical context: The term "machine learning" was not coined to contrast with statistics, but to contrast the field with competing paradigms for building intelligent computer systems.</a><br /><br />
+
+<a href="#Sect2">-Arguments about who "owns" regression miss the point.</a><br /><br />
+
+<a href="#Sect3">-Distinctions in goals have yielded a divergence in methods and cultures, which explains shifting connotations of the term "machine learning."</a><br /><br />
+
+<a href="#Sect4">-Isn't this whole "debate" a massive waste of time?</a>
+
+</div>
+
+<h3 id="-neglected-historical-context-the-term-machine-learning-was-not-coined-to-contrast-with-statistics-but-to-contrast-the-field-with-competing-paradigms-for-building-intelligent-computer-systems"><a name="Sect1"></a> Neglected historical context: The term “machine learning” was <em>not</em> coined to contrast with statistics, but to contrast the field with competing paradigms for building intelligent computer systems.</h3>
+
+<p>Before getting to Machine Learning (ML), a couple paragraphs on Artificial Intelligence (AI). These days, many people – including me – reflexively wince when they hear the term “AI,” because it is (a) used by slimey buzzword peddlers to such an extent that it is now nearly synonymous with “snakeoil,” (b) overloaded with connotations of sentient killer robots, and (c) almost exclusively used to refer to machine learning, anyway. This is all quite unfortunate. However, try to set that aside for just <em>one</em> paragraph.</p>
+
+<p>Engineers have dreamed of building something “smart” for thousands of years, but the term “artificial intelligence” itself was coined by John McCarthy in preparation for the famous “Dartmouth Conference” of 1956. McCarthy defined artificial intelligence as “the science and engineering of making intelligent machines,” and that’s not too bad for a pithy one-liner. Importantly for this discussion, McCarthy was able to convince his colleagues to adopt this term at Dartmouth in large part because it was <em>vague</em>.  At that point in time, computer scientists who were trying to crack intelligence were focused <em>not</em> on data-driven methods, but on things like automata theory, formal logic, and cybernetics. McCarthy wanted to create a term that would capture all of these paradigms (and other ones yet to come) rather than favoring any specific approach.</p>
+
+<p>It was with this context that Arthur Samuel (one of the attendees at the Dartmouth Conference) coined the term “Machine Learning” in 1959, which he defined as:</p>
+
+<blockquote>
+  <p>Field of study that gives computers the ability to learn without being explicitly programmed.</p>
+</blockquote>
+
+<p>Samuels and his colleagues wanted to help computers becomes “smart” by equipping them with the capacity to recognize patterns and iteratively improve over time. While this may seem like an obvious approach today, it took decades before this became the dominant mode of AI research (as opposed to, say, building systems that exhibit “intelligence” by applying propositional logic over curated knowledge graphs).</p>
+
+<p>In other words, machine learning was coined to describe a design process for computers that <em>leverages</em> statistical methods to improve performance over time. The term was created by computer scientists, for computer scientists, and designed as a contrast with <em>non-data-driven approaches</em> to building smart machines. It was <em>not</em> designed to be a contrast with <em>statistics</em>, which is focused on using (often overlapping) data-driven methods to inform humans.</p>
+
+<p>Another extremely widely-referenced definition of ML comes from Tom M. Mitchell’s 1997 textbook, which said:</p>
+
+<blockquote>
+  <p>The field of machine learning is concerned with the question of how to construct computer programs that automatically improve with experience,</p>
+</blockquote>
+
+<p>and offered the accompanying semi-formal definition:</p>
+
+<blockquote>
+  <p>A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P if its performance at tasks in T, as measured by P, improves with experience E.</p>
+</blockquote>
+
+<p>This is all very much in accordance with Arthur Samuel’s definition, and I could pull other more recent definitions with similar verbiage. Another passage from Mitchell that I think gets less circulation than it deserves, however, is the following (taken with a little reformatting from a 2006 article called <a href="http://www.cs.cmu.edu/~tom/pubs/MachineLearning.pdf">“The Discipline of Machine Learning</a>”):</p>
+
+<blockquote>
+  <p>Machine Learning is a natural outgrowth of the intersection of Computer Science and Statistics. We might say the defining question of Computer Science is “How can we build machines that solve problems, and which problems are inherently tractable/intractable?” The question that largely defines Statistics is “What can be inferred from data plus a set of modeling assumptions, with what reliability?”</p>
+
+  <p>The defining question for Machine Learning builds on both, but it is a distinct question. Whereas Computer Science has focused primarily on how to manually program computers, Machine Learning focuses on the question of how to get computers to program themselves (from experience plus some initial structure). Whereas Statistics has focused primarily on what conclusions can be inferred from data, Machine Learning incorporates additional questions about what computational architectures and algorithms can be used to most effectively capture, store, index, retrieve and merge these data, how multiple learning subtasks can be orchestrated in a larger system, and questions of computational tractability.</p>
+</blockquote>
+
+<h3 id="-arguments-about-who-owns-regression-miss-the-point"><a name="Sect2"></a> Arguments about who “owns” regression miss the point</h3>
+
+<p>Given the history just described, I must admit that I’ve been frustrated at times by the authoritarian tone with which many have tried to enforce a false dichotomization between statistics and ML methods. In particular, there appears to be a strange fixation by specific online personalities on insisting that regression-powered applications must <em>not</em> be described as ML. In reading some of these discussions, one might even come away thinking that there is a conspiracy at play to annex regression away from statistics.</p>
+
+<p>To me, this is only slightly less silly than trying to stir up a turf war to target anyone who uses logistic regression and calls it “econometrics.” For at least 60 years, “machine learning” has been about building the best learning computers that we can, not some weird methods competition with statistics. This is why, when it comes to teaching “ML methods,” almost every introductory machine learning textbook or course that I’ve ever seen – Mitchell, Murphy, Bishop, Ng, etc. –  spends much of its efforts on teaching GLMs and their variants. It’s also why it’s <em>perfectly sensible</em> for specialized textbooks to include plots like <a href="https://images.app.goo.gl/WxjjxjUXSxQw75To7">this one</a>, which routinely makes the rounds to much pearl-clutching. Would I expect such a plot to be useful to statisticians? Or course not!  But they make sense in context of the ML/AI fields, which are concerned with different ways to make programs act “smart”.  And to put it bluntly for any [c]rank-y colleagues in statistics: <em>You don’t get to decide</em> which taxonomies another field finds useful in framing its own problems and history.</p>
+
+<p>The great irony with the whole recurring snafoo around who “owns” regression – and all of its variants – is that it simultaneously undersells <em>both</em> machine learning <em>and</em> statistics, for many reasons that include the following four:</p>
+
+<ul>
+  <li>First, it minimizes – or even defines away – the core role that classic statistical methods <em>continue</em> to play in efforts to build computer programs that learn.</li>
+  <li>Second, it ignores the impact that ML has had on statistics, when in reality AI and CS have been a <em>massive</em> boon to statistics research. This includes the generation of new statistical paradigms (e.g. Judea Pearl and others’ work on causality, now one of many booming subareas of stats that came from ML) and a wide array of algorithmic and computational tools that have enabled the rise of statistical computing.</li>
+  <li>Third, a false dichotomy between ML and stats minimizes the wide – and critical to modeling decisions – variation <em>within</em> each purported class. It’s also silly. For example, take a simple logistic regression model implemented in pytorch. Now consider (a) adding 1000 polynomial interaction terms between all the features and a ridge penalty, and (b) adding a second fully connected layer. The dichotomous approach to ML vs stats would say that (b) fundamentally alters the entire class of model from stats to ML, and minimizes the arguably larger impact on modeling induced by (a). By the same token, I’m always shocked when I see meta-analyses that claim they’re going to compare the accuracy of ML “versus” statistics, and then use embarrassingly horrible and out-of-date ML models (like a single decision tree) or bad statistical practices. In short, the spectrum is so broad (and the execution so essential) within each of these purportedly distinct methodological camps that most statements about the whole collections are minimally helpful. It’s all about picking the right tool for a specific job, and then taking the time and effort to use that tool properly!</li>
+  <li>Fourth, the above dispute also ignores the fact that many top researchers, publication venues, and papers in stats or ML are fully-fledged citizens of both communities.</li>
+</ul>
+
+<p>In my opinion, the careers of Trevor Hastie and Rob Tibshirani highlight the best of what happens when statisticians interact richly with machine learning researchers. Rather than getting caught up in drawing methodological border lines, they have taken tools developed first by machine learning researchers and helped formally situate them <em>within</em> the world of statistics proper. In this light, I enjoy their frequent use of the term “statistical learning” (as in the title of their textbook), which I think nicely emphasizes the fact that their <em>goals</em> are those of statistics, even if many of the <em>methods</em> in the book have been developed by and for people in ML. (I’ll also point out, a bit immaturely, that I’ve never heard a machine learning researcher complain that Hastie and Tibshirani are trying to annex their methods by not using the phrase “machine learning” when describing neural networks, tree-based methods, etc.) Of course, all of the above is to say nothing of the new methods Hastie and Tibs have generated themselves, which have impacted the daily work of both statisticians and machine learning researchers.</p>
+
+<p>All the above being said, I do appreciate that perfectly reasonable people have come to think of ML as a disjoint set of <em>methods</em> from statistics. The following sections elaborate on why I think this has happened, and what I think this means as a takeaway for the overall discussion.</p>
+
+<h3 id="-distinctions-in-goals-have-yielded-a-divergence-in-methods-and-cultures-which-explains-shifting-connotations-of-the-term-machine-learning--disconnects-in-language-doom-many-debates-to-futility-before-they-begin"><a name="Sect3"></a> Distinctions in goals have yielded a divergence in methods and cultures, which explains shifting connotations of the term “machine learning.”  Disconnects in language doom many “debates” to futility before they begin.</h3>
+
+<p>As stated above, the field of machine learning research was founded as computer scientists sought to build and understand intelligent computer systems, and this continues to be the case today. Major ML applications include things like speech recognition, computer vision, robotics/autonomous systems, computational advertising (sigh…), surveillance (sigh…), chat-bots (sigh…), etc. In seeking to solve these problems, machine learning researchers will almost <em>always</em> start by first trying classical statistical methods, including the relevant simple GLM (in fact, this is often considered a mandatory baseline for publication in many applied ML areas). Hence my whole discussion about ML not being predicated on a specific method. <em>However</em>, computer scientists have, of course, also significantly added to this toolkit over the years through the development of additional methods.</p>
+
+<p>As with evolution in any other context, the growing phylogeny of statistical methods used for machine learning have been shaped by selective pressures. Compared to statisticians, machine learning researchers typically care much less about <em>understanding</em> any specific action taken by their algorithms (though it is certainly important, and increasingly a bigger priority). Rather, they usually care most about minimizing <em>model errors</em> on held-out data. As such, it makes sense that methods developed by ML researchers are typically more flexible even at the expense of interpretability, for example. <a href="https://projecteuclid.org/euclid.ss/1009213726">Leo Breiman</a> and others have written about how these cultures have informed methods development, such as random forests. This often-divergent evolution has made it easy to draw (fuzzy) boundaries between ML and statistics research based entirely on <em>methods</em>. To boot, many statisticians are unaware of the history of ML, and have thus, for years, only ever been exposed to the field by means of the methods it periodically emits. It is thus unsurprising that they would be interested in defining the field in any other terms, even if it is dissapointing.</p>
+
+<p>By the same token, a sharp division based on <em>use</em> (like I advocated for above) is now complicated by the fact that many ML people say they’re doing machine learning even when they’re applying their methods for pure data analysis rather than to drive a computer program. While arguably incorrect in a strict historical sense, I don’t fault people for doing this – probably out of a mixture of habit, cultural affiliation, and/or because it sounds cool.</p>
+
+<p>Taken together, people now use “machine learning” to mean very different things. Sometimes, people use it to mean: “I’m using a statistical method to make my program learn” or “I’m developing a data analysis that I hope to deploy in an automated system.” Other times, they mean: “I’m using a method – perhaps for a statistical data analysis – that was originally developed by the machine learning community, like random forests.”  Still other times (maybe most of the time…?), they mean: “I consider myself a machine learning researcher, I’m working with data, and I can call this work whatever I darn well please.”</p>
+
+<p>These different uses of the term aren’t really surprising or problematic, because this is simply how language evolves. But it does make it extremely frustrating when a hoard of data scientists (oh no, another hypey term! I use it here as union of ML and statistics) collectively try to debate whether or not a specific project can be branded as ML or must be branded “just statistics.” Usually, when this happens, people enter the discussion with wildly different assumptions – poorly defined, and seldom articulated – about what the words mean in the first place. And then they rarely take the time to understand where others are coming from or what they are actually trying to say. Instead, they typically just talk past each other, louder instead of clearer.</p>
+
+<h3 id="-isnt-this-whole-debate-a-massive-waste-of-time"><a name="Sect4"></a> Isn’t this whole “debate” a massive waste of time?</h3>
+
+<p>Finally, let’s lay our cards out on the table w.r.t. a few real problems: There are many machine learning researchers (or at the very least, machine learning hobbyists), who exhibit an inadequate understanding of statistics for people who work with data for a living. At times, I <em>am</em> such a machine learning researcher! (Though I’d wager that many professional statisticians sometimes feel the same way, too.) Relatedly, but more seriously, ML research moves so fast, and is sometimes so culturally disconnected from the field of statistics, that I think that it is all-too-common for even prominent ML researchers to re-discover or re-invent parts of statistics. That’s a problem and a waste. Finally, there is a massive brand dilution in ML, because a large third-party population of applied researchers have essentially co-opted the term “machine learning,” applying it to papers just to make them sound fancy, even when in reality they are doing machine learning <em>neither</em> in the sense of automated system building <em>nor</em> in the sense of using new methods that came from ML.</p>
+
+<p>I feel that the solution to all of these problems is to increase recognition that most of ML’s data methods actually live <em>within</em> statistics. Rather than doubling down on a false partition between the two fields, our priority needs to be the cultivation of a robust understanding of statistical principles, whether they are being used for data analysis or for programming intelligent systems. Endless debates about what to <em>call</em> a lot of this work end up distracting people from essential conversations about how to <em>carry out</em> good work by matching the right <strong>specific</strong> tool to the right problem. If anything, a fixation on a false dichotomy between stats and ML methods probably drives many people <em>further</em> into the habit of using unnecessarily complex methods, just to feel (whether for pride or for money) like they are doing “real ML” (whatever on earth that means). It also directly feeds the issue that causes people to call their work ML just for the sake of sounding methodological fancy.</p>
+
+<p>Finally, this golden age of statistical computing is driving these two fields closer than ever. ML research, of course, lives within computer science, and the modern statistician is increasingly dependent upon the algorithms and software stack that have been pioneered by CS departments for decades. Modern statisticians – especially in fields like computational biology – are also increasingly finding use for methods pioneered by ML researchers for, say, regression in high dimensions or at large scale. On the flip side, the ML community is becoming increasingly concerned with topics like interpretability, fairness, certifiable robustness, etc., which is leading many researchers’ priorities to align more directly with the traditional values of statistics. At the very least, even when a system is deployed using the most convoluted architectures possible, it’s pretty universally recognized that classical statistics is necessary to measure and evaluate performance.</p>
+
+<h3 id="in-summary">In summary:</h3>
+
+<p>The whole debate is misguided, the terms are overloaded, the methodological dichotomy is false, ML people care (and increasingly so) about statistics, stats people are increasingly dependent upon CS and ML, and there is no regression annexation conspiracy. There’s a lot of hype out there right now, but that doesn’t change the fact that, <em>often</em>, when people use different terminology than you, that’s because they come from a different background or have different goals in mind, not because they are stupid or dishonest. Let’s just all be friends and strive to do good work together and learn from each other. Kumbaya.</p>
+
+    </article>
+    <span class="print-footer">Comments on ML "versus" statistics - January 31, 2020 - Sam Finlayson</span>
+    <footer>
+  <hr class="slender">
+  <ul class="footer-links">
+    <li><a href="mailto:samuel_finlayson@hms.harvard.edu"><span class="icon-mail3"></span></a></li>    
+    
+      <li>
+        <a href="//www.twitter.com/IAmSamFin"><span class="icon-twitter"></span></a>
+      </li>
+    
+      <li>
+        <a href="//github.com/sgfin"><span class="icon-github"></span></a>
+      </li>
+    
+      <li>
+        <a href="/feed"><span class="icon-rss2"></span></a>
+      </li>
+      
+  </ul>
+<div class="credits">
+<span>&copy; 2020 &nbsp;&nbsp;SAM FINLAYSON</span></br> <br>
+<span>This site created with the <a href="//github.com/clayh53/tufte-jekyll">Tufte theme for  </a> in <a href="//jekyllrb.com">Jekyll</a>.</span> 
+</div>  
+</footer>
+  </body>
+</html>

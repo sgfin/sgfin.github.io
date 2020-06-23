@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Causal Inference Book Part I -- Glossary and Notes</title>
+  <meta name="description" content="Key concepts from Part 1 of Hernan and Robins Causal Inference Book">
+
+  <!-- Google Fonts loaded here depending on setting in _data/options.yml true loads font, blank does not-->
+  
+    <link href='//fonts.googleapis.com/css?family=Lato:400,400italic' rel='stylesheet' type='text/css'>
+  
+  
+  <!-- Load up MathJax script if needed ... specify in /_data/options.yml file-->
+  
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: [
+      "MathMenu.js",
+      "MathZoom.js",
+      "AssistiveMML.js",
+      "a11y/accessibility-menu.js"
+    ],
+    jax: ["input/TeX", "output/CommonHTML"],
+    TeX: {
+      extensions: [
+        "AMSmath.js",
+        "AMSsymbols.js",
+        "noErrors.js",
+        "noUndefined.js",
+      ]
+    }
+  });
+</script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-122144402-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-122144402-1');
+    </script>
+
+ <!--   <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+  
+
+  <link rel="stylesheet" type="text/css" href="/css/tufte.css">
+  <!-- <link rel="stylesheet" type="text/css" href="/css/print.css" media="print"> -->
+
+  <link rel="canonical" href="http://sgfin.github.io/2019/06/19/Causal-Inference-Book-Glossary-and-Notes/">
+
+  <link rel="alternate" type="application/rss+xml" title="Machine Learning and Medicine" href="http://sgfin.github.io/feed.xml" />
+</head>
+
+  <body>
+    <!--- Header and nav template site-wide -->
+<header>
+    <nav class="group" style="padding-bottom: 15px;">
+	<!-- <a href="/"><img class="badge" src="/assets/img/badge_1.png" alt="SGF"></a> -->
+	
+		
+  	
+		
+		    
+		      <a href="/">About</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/css/print.css"></a>
+		    
+	    
+  	
+		
+  	
+		
+		    
+		      <a href="/posts/">posts</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/learning-resources/">ML Resources</a>
+		    
+	    
+  	
+	</nav>
+</header>
+    <article class="group">
+      <h1>Causal Inference Book Part I -- Glossary and Notes</h1>
+<p class="subtitle">June 19, 2019</p>
+
+<p>This page contains some notes from Miguel Hernan and Jamie Robin’s <a href="https://www.hsph.harvard.edu/miguel-hernan/causal-inference-book/">Causal Inference Book</a>.  So far, I’ve only done Part I.</p>
+
+<p>This page only has key terms and concepts. On <a href="https://sgfin.github.io/2019/06/19/Causal-Inference-Book-All-DAGs/">this page</a>, I’ve tried to systematically present all the DAGs in the same book.  I imagine that one will be more useful going forward, at least for me.</p>
+
+<p><strong>Table of Contents</strong>:</p>
+<ul id="markdown-toc">
+  <li><a href="#a-few-common-variables" id="markdown-toc-a-few-common-variables">A few common variables</a></li>
+  <li><a href="#chapter-1-definition-of-causal-effect" id="markdown-toc-chapter-1-definition-of-causal-effect">Chapter 1: Definition of Causal Effect</a></li>
+  <li><a href="#chapter-2-randomized-experiments" id="markdown-toc-chapter-2-randomized-experiments">Chapter 2: Randomized Experiments</a></li>
+  <li><a href="#chapter-3-observational-studies" id="markdown-toc-chapter-3-observational-studies">Chapter 3: Observational Studies</a></li>
+  <li><a href="#chapter-4-effect-modification" id="markdown-toc-chapter-4-effect-modification">Chapter 4: Effect Modification</a></li>
+  <li><a href="#chapter-5-interaction" id="markdown-toc-chapter-5-interaction">Chapter 5: Interaction</a></li>
+  <li><a href="#chapter-6--causal-diagrams" id="markdown-toc-chapter-6--causal-diagrams">Chapter 6:  Causal Diagrams</a></li>
+  <li><a href="#chapter-7--confounding" id="markdown-toc-chapter-7--confounding">Chapter 7:  Confounding</a></li>
+  <li><a href="#chapter-8--selection-bias" id="markdown-toc-chapter-8--selection-bias">Chapter 8:  Selection Bias</a></li>
+  <li><a href="#chapter-9--measurement-bias" id="markdown-toc-chapter-9--measurement-bias">Chapter 9:  Measurement Bias</a></li>
+  <li><a href="#chapter-10--random-variability" id="markdown-toc-chapter-10--random-variability">Chapter 10:  Random Variability</a></li>
+  <li><a href="#chapter-11-why-model" id="markdown-toc-chapter-11-why-model">Chapter 11: Why Model?</a></li>
+  <li><a href="#chapter-12" id="markdown-toc-chapter-12">Chapter 12:</a></li>
+</ul>
+
+<h3 id="a-few-common-variables">A few common variables</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Variable</th>
+      <th style="text-align: center">Meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><em>A</em>, <em>E</em></td>
+      <td style="text-align: center">Treatment</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><em>Y</em></td>
+      <td style="text-align: center">Outcome</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><em>Y^(A=a)</em></td>
+      <td style="text-align: center">Counterfactual outcome under treatment with \(a\)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><em>Y^(a,e)</em></td>
+      <td style="text-align: center">Joint counterfactual outcome under treatment with \(a\) and \(e\)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><em>L</em></td>
+      <td style="text-align: center">Patient variable (often confounder)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><em>U</em></td>
+      <td style="text-align: center">Patient variable (often unmeasured or background variable)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><em>M</em></td>
+      <td style="text-align: center">Patient variable (often effect modifier)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="chapter-1-definition-of-causal-effect">Chapter 1: Definition of Causal Effect</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Term</th>
+      <th style="text-align: center">Notation or Formula</th>
+      <th>Notes</th>
+      <th>Page</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><strong>Association</strong></td>
+      <td style="text-align: center">Pr[Y=1|A=1] \(\neq\) Pr[Y=1|A=0]</td>
+      <td><em>Example definitions of independence (lack of association)</em>: <br /> Y \(\unicode{x2AEB}\) A <br /> or <br /> Pr[Y=1|A=1] - Pr[Y=1|A=0] = 0 <br /> or <br /> \(\frac{Pr[Y=1|A=1]}{Pr[Y=1|A=0]}\) = 1 <br /> or <br /> \(\frac{Pr[Y=1|A=1]/Pr[Y=0|A=1]}{Pr[Y=1|A=0]/Pr[Y=0|A=0]}\) = 1</td>
+      <td>I.10</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Causation and Causal Effects</strong></td>
+      <td style="text-align: center"><em>Causation</em>:<br />Pr[Y^(a=1)=1] \(\neq\) Pr[Y^(a=0)=1] <br /><br /> <em>Individual Causal Effects</em>:<br />  Y^(a=1) - Y^(a=0) <br /><br /> <em>Population Average Causal Effects</em>:<br /> E[Y^(a=1)] - E[Y^(a=0)] <br /><br /> <em>where</em> <br />Y^(a=1) = Outcome for treatment w/ \(a=1\) <br /> Y^(a=0) = Outcome for treatment w/ \(a=0\)</td>
+      <td><em>Sharp causal null hypothesis</em>: <br />Y^(a=1) = Y^(a=0) for all individuals in the population. <br /><br /> <em>Null hypothesis of no average causal effect</em>: <br /> E[Y^(a=1)] = E[Y^(a=0)] <br /><br /> <em>Mathematical representations of causal null</em>: <br /> Pr[Y^(a=1)=1] - Pr[Y^(a=0)=1] = 0 <br /> or <br /> \(\frac{Pr[Y^{a=1}=1]}{Pr[Y^{a=0}=1]} = 1\) <br /> or <br /> \(\frac{Pr[Y^{a=1}=1]/Pr[Y^{a=1}=0]}{Pr[Y^{a=0}=1]/Pr[Y^{a=1}=0]} = 1\)</td>
+      <td>I.7</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="chapter-2-randomized-experiments">Chapter 2: Randomized Experiments</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Term</th>
+      <th style="text-align: center">Notes</th>
+      <th>Page</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><strong>Marginally randomized experiment</strong></td>
+      <td style="text-align: center">Single unconditional (marginal) randomization probability applied to assign treatments to all individuals in experiment. <br /><br /> Produces exchangeability of treated and untreated. <br /><br /> Values of counterfactual outcomes are <strong>missing completely at random (MCAR)</strong>.</td>
+      <td>I.18</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Conditionally randomized experiment</strong></td>
+      <td style="text-align: center">Randomized trial where study population is stratified by some variable \(L\), with different treatment probabilities for each stratum. <br /><br />  Needn’t produce <em>marginal exchangeability</em>, but produces <em>conditional exchangeability</em>. <br /><br /> Values of counterfactuals are <em>not</em> MCAR, but are <strong>missing at random (MAR)</strong> conditional on \(L\).</td>
+      <td>I.18</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Standardization</strong></td>
+      <td style="text-align: center">Calculate the <em>marginal</em> counterfactual risk from a <em>conditionally randomized experiment</em> by taking a weighted average over the stratum-specific risks.  <br /><br />  Standardized mean:  <br /><br />  \(\sum_l E[Y|L=l,A=a] \times Pr[L=l]\) <br /><br />  Causal risk ratio can be computed via standardization as follows:  <br /><br />  \(\frac{Pr[Y^{a=1}=1]}{Pr[Y^{a=0}=1]} = \frac{\sum_l E[Y=1|L=l,A=1]\times Pr[L=l]}{\sum_l E[Y=1|L=l,A=1]\times Pr[L=l]}\)</td>
+      <td>I.19</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Inverse probability weighting</strong></td>
+      <td style="text-align: center">Given a conditionally randomized study population: <br /><img src="/assets/hernan_dags/2_1.png" width="300" /> <br /> We can invoke an assumption of conditional exchangeability given \(L\) to simulate the counterfactual in which everyone had received (or not received) the treatment:  <br /> <img src="/assets/hernan_dags/2_2.png" width="300" /> <br />. The causal effect ratio can then be directly calculated by comparing <br /> \(Pr[Y^{a=1}=1]/Pr[Y^{a=0}=1]\) (in this example, it’s \(\frac{10/20}{10/20}=1\).) <br /><br /> By the same token, you can effectively double your population and create a hypothetical <em>pseudo-population</em> in which everyone had received both treatments: <br /> <img src="/assets/hernan_dags/2_3.png" width="300" /> <br /><br /> This process amounts to weighting each individual in the population by the inverse of the conditional probability of receiving the treatment she received (see formula on right above). Hence the name <em>inverse probability (IP) weighting</em>.</td>
+      <td>I.20</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="chapter-3-observational-studies">Chapter 3: Observational Studies</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Term</th>
+      <th style="text-align: center">Notation or Formula</th>
+      <th>English Definition</th>
+      <th>Notes</th>
+      <th>Page</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><strong>Identifiability conditions</strong></td>
+      <td style="text-align: center">See below.</td>
+      <td>Sufficient conditions for conceptualizing an observational study as a randomized experiment. <br /><br /> Consist of: <br />  1. Consistency <br /> 2. Exchangeability, and <br /> 3. Positivity.</td>
+      <td> </td>
+      <td>I.25</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Consistency</strong></td>
+      <td style="text-align: center">If \(A_i\) = \(a\), then \(Y_{i}^{a}=Y^{A_i}\) = \(Y_i\)</td>
+      <td>“The values of treatment under comparison correspond to well-defined interventions that, in turn, correspond to the versions of treatment in the data.” <br /><br /> Has two main components: <br /> 1. Precise specification of counterfactual outcomes Y^a, and <br /> 2. Linkage of counterfactual outcomes to observed outcomes.</td>
+      <td>Violated in an ill-defined intervention. <br /><br /> Examples: <br /> - Study looks at “heart transplant” but doesn’t look at protocols (e.g. which immunosuppresant is used). If effect varies between versions of treatment and protocols not equally distributed, could cause problems. <br /> - Study wants to look at “obesity”, but “non-obesity” lumps together non-obesity from exercise vs cachexia vs genes vs diet. Need to subset population or make assumption that specific source of non-obesity doesn’t impact outcome. (Assumption called <em>treatment-variation irrelevance</em> assumption.) <br /><br /> Not a testable assumption, relies on domain expertise.</td>
+      <td>I.31</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Exchangeability</strong> (aka exogeneity)</td>
+      <td style="text-align: center">Y^a \(\unicode{x2AEB}\) A for all \(a\) <br /><br /> or <br /><br /> Pr[Y^a=1 | A=1] = Pr[Y^a=1 | A=0] = Pr[Y^a=1]</td>
+      <td>“The treated, had they remained untreated, would have experienced the same average outcome as the untreated did, and vice versa.” <br /><br /> Essentially, this is the assumption of no unmeasured confounding.</td>
+      <td>Beware formula: Not the same as Y \(\unicode{x2AEB}\) A, which would mean treatment has no effect on outcome.</td>
+      <td>I.27</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Conditional exchangeability</strong></td>
+      <td style="text-align: center">Y^a \(\unicode{x2AEB}\) A | L for all a <br /><br /> or <br /><br /> Pr[Y^a=1 | A=1, L=1] = Pr[Y^a=1 | A=0, L=1] = Pr[Y^a=1] | L=1</td>
+      <td>“The conditional probability of receiving every value of treatment is randomized or depends only on measured covariates”</td>
+      <td>Think conditional RCT where assigment depends only on \(L\). <br /><br /> In observational studies, this is an untestable assumption, thus relies on domain expertise.</td>
+      <td>I.27</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Positivity</strong></td>
+      <td style="text-align: center">Pr[A=a | L=\(l\) ] &gt; 0 for all values \(l\) with Pr[L=\(l\)] \(\neq\) 0 in the population of interest</td>
+      <td>“The conditional probability of receiving every value of treatment is greater than zero, i.e. positive.”</td>
+      <td>Aka “Experimental treatment assumption” <br /><br /> Example of positivity not holding: doctors always give heart transplants to patients in critical condition, eliminitating positivity from that stratum of an observational study. <br /><br /> Unlike exchangeability, positivity, <em>can</em> be empricially verified.</td>
+      <td>I.30</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="chapter-4-effect-modification">Chapter 4: Effect Modification</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Term</th>
+      <th style="text-align: center">Notation or Formula</th>
+      <th>English Definition</th>
+      <th>Notes</th>
+      <th>Page</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><strong>Effect modification</strong> <br /> aka effect-measure modification</td>
+      <td style="text-align: center"><em>Additive effect modification</em>: <br /> E[Y^(a=1)-Y^(a=0) | M = 1] \(\neq\) E[Y^(a=1)-Y^(a=0) | M = 0] <br /><br /> <em>Multiplicative effect modification</em>: <br />  \(\frac{E[Y^{a=1} | M = 1]}{E[Y^{a=0} | M = 1]}\) \(\neq\) \(\frac{E[Y^{a=1}| M = 0]}{E[Y^{a=0}| M = 0]}\)</td>
+      <td>\(M\) is a modifier of the effect of \(A\) on \(Y\) when the average causal effect of \(A\) on \(Y\) varies across levels of \(M\).</td>
+      <td>The <em>null hypothesis of no average causal effect</em> does <em>not</em> necessarily imply the absence of effect modification (e.g. equal and oppositive effect modifications in men and women could cancel at the population level), but the <em>sharp null hypothesis of no causal effect</em> does imply no effect modicifaction. <br /><br />  We only count variables <em>unaffected by treatment</em> as effect modifiers. Similar variables that are effected by treatment are termed <strong>mediators</strong>.</td>
+      <td>I.41</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Qualitative effect modification</strong></td>
+      <td style="text-align: center"> </td>
+      <td>Average causal effects in different subsets of the population go in opposite directions.</td>
+      <td>In presence of qualitative effect modification, additive effect modification implies multiplicative effect modification, and vice versa.  In absence of qualitative effect modification, it’s possible to have only additive or only multiplicative effect modification. <br /><br /> Effect modifiers are not necessarily assumed to play a causal role. To make this explicit, sometimes the terms <em>surrogate effect modifier</em> vs <em>causal effect modifier</em> are used, or you can play it even safer and refer to “effect heterogeneity across strata of \(M\).” <br /><br /> Effect modification is helpful, among other things, for (i) assessing transportability to new populations where \(M\) may have different prevalences, (ii) choosing subpopulations that may most benefit from treatment, and (iii) identifying mechanisms leading to outcome if modifiers are mechanistically meaningful (e.g. circumscision for HIV transmission).</td>
+      <td>I.42</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Stratification</strong></td>
+      <td style="text-align: center"><em>Statified causal risk differences</em>: <br /> E[Y^(a=1) | M = 1] - <br /> E[Y^(a=0) | M = 1] <br />and<br /> E[Y^(a=1) | M = 0] - <br /> E[Y^(a=0) | M = 0]</td>
+      <td>To <em>identify</em> effect modification by variable \(M\), separately compute the causal effect of \(A\) on \(Y\) for each statum of the variable \(M\).</td>
+      <td>If study design assumes conditional rather than marginal exchangeability, analysis to estimate effect modification must account for all other variables \(L\) required to give exchangeability. This could involve standardization (IP weighting, etc.) by \(L\) within each stratum \(M\), or just using finer-grained stratification over all pairwise combinations of \(M\) and \(L\) (see page I.49). <br /><br /> By the same token, stratification can be an alternative to standardization techinques such as IP weighting in analysis of any conditional randomized experiment : instead of estimating an average causal effect over the population while standardizing for \(L\), just stratify on \(L\) and report separate causal effect estimates for each stratum.</td>
+      <td>I.43-49</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Collapsibility</strong></td>
+      <td style="text-align: center"> </td>
+      <td>A characteristic of a population <em>effect measure</em>. Means that the effect measure can be expressed as a weighted average of stratum-specific measures.</td>
+      <td>Examples of collapsible effect measures: risk ratio and risk difference <br /><br /> Example of non-collapsible effect measure: odds ratio. <br /><br /> Noncollapsibility can produce counter-intuitive findings like a causal odds ratio that’s smaller in the average population than in any stratum of the population.</td>
+      <td>I.53</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Matching</strong></td>
+      <td style="text-align: center"> </td>
+      <td>Construct a subset of the population in which all variables \(L\) have the same distribution in both the treated and the untreated.</td>
+      <td>Under assumption of conditional exchangeability given \(L\) in the source population, a matched population will have unconditional exchangeability. <br /><br />  Usually, constructed by including all of the smaller group (e.g. the treated) and selecting one member of the larger group (e.g. the untreated) with matching \(L\) for each member in the smaller group. Often requires approximate matching.</td>
+      <td>I.49</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Interference</strong></td>
+      <td style="text-align: center"> </td>
+      <td>Treatment of one individual effects treatment status of other individuals in the population.</td>
+      <td>Example: A socially active individual convinces friends to join him while exercising.</td>
+      <td>I.48</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Transportability</strong></td>
+      <td style="text-align: center"> </td>
+      <td>Ability to use causal effect estimation from one population in order to inform decisions in another (“target”) population.  <br /><br /></td>
+      <td>Requires that the target population is characterized by comparable patterns of: <br /> - Effect modification <br /> - Interference, and <br /> - Versions of treatment</td>
+      <td>I.48</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="chapter-5-interaction">Chapter 5: Interaction</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Term</th>
+      <th style="text-align: center">Notation or Formula</th>
+      <th>English Definition</th>
+      <th>Notes</th>
+      <th>Page</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><strong>Joint counterfactual</strong></td>
+      <td style="text-align: center">Y^(a,e)</td>
+      <td>Counterfactual outcome that would have been observed if we had intervented to set the individual’s values of \(A\) (treatment component 1) to \(a\) and \(E\) (treatment component 2) to \(e\).</td>
+      <td> </td>
+      <td>I.55</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Interaction</strong></td>
+      <td style="text-align: center"><em>Interaction on the additive scale</em>: <br /> Pr[Y^(a=1,e=1)=1] - Pr[Y^(a=0,e=1)=1] \(\neq\) Pr[Y^(a=1,e=0)=1] - Pr[Y^(a=0,e=0)=1] <br /> <br /> or <br /> <br /> Pr[Y^(a=1) = 1 | E=1 ] - Pr[Y^(a=0) = 1 | E=1 ] \(\neq\) Pr[Y^(a=1) = 1 | E=0 ] - Pr[Y^(a=0) = 1 | E=0]</td>
+      <td>The causal effect of \(A\) on \(Y\) after a joint intervention that set \(E\) to 1 differs from the causal effect of \(A\) on \(Y\) after a joint intervention that set \(E\) to 0. (Definition also holds if you swap \(A\) and \(E\).)</td>
+      <td>Different from effect modification because an effect modifier \(M\) is not considered a treatment or otherwise a variable on which we can intervene.  In interaction, interventions \(A\) and \(E\) have equal status. <br /><br /> Note from definition 2 on the left, however, that the mathematical definitions of effect modification and interaction line up. This means that if you <em>randomize</em> an interactor, it becomes equivalent to an effect modifier. <br /><br /> Inference over joint counterfactuals require that the identifying conditions of exchangeability, positivity, and consistency hold for <em>both</em> treatments.</td>
+      <td>I.55</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Counterfactual response type</strong></td>
+      <td style="text-align: center"> </td>
+      <td>A characteristic of an <em>individual</em> that refers to how she will respond to a treatment.</td>
+      <td>For example, an individual may have the same counterfactual outcome regardless of treatment, be helped by the treatment, or be hurt by the treatment. <br /><br />  The presence of an interaction between \(A\) and \(E\) implies that some individuals exist such that their counterfactual outcomes under \(A=a\) cannot be determined without knowledge of \(E\).</td>
+      <td>I.58</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Sufficient-component causes</strong></td>
+      <td style="text-align: center"> </td>
+      <td>A set of variables that are sufficient to determine the outcome for a specific individual.</td>
+      <td>The minimal set of sufficient causes can be different for distinct ndividuals in the same study. For example, a patient with background factor \(U_1\) might have the same outcome regardless of treatment, whereas another patient’s outcome might be driven by both a treatment \(A\) and interactor \(E\). <br /><br /> Minimal sufficient-component causes are sometimes visualized with pie charts. <br /><br /> <em>Contrast between counterfactual outcomes framework and sufficient-component-cause framework:</em> <br /> <em>Sufficient outcomes framework</em> focuses on questions like: “given a particular effect, what are the various events which might have been its cause?” and <em>counterfactual outcomes framework</em> focuses on questions like: “what would have occurred if a particular factor were intervened upon and set to a different level than it was?”.  Sufficient-component-causes requires more detailed mechanistic knoweldge and is generally more a pedagological tool than a data analysis tool.</td>
+      <td>I.61</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Sufficient cause interaction</strong></td>
+      <td style="text-align: center"> </td>
+      <td>A sufficient cause interaction between \(A\) and \(E\) exists in a population if \(A\) and \(E\) occur together in a sufficient cause.</td>
+      <td>Can be <em>synergistic</em> (A = 1 and E = 1 present in sufficient cause)  or <em>antagonistic</em> (e.g. A = 1 and E = 0 is present in sufficient cause) .</td>
+      <td>I.64</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="chapter-6--causal-diagrams">Chapter 6:  Causal Diagrams</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Term</th>
+      <th style="text-align: center">Definition</th>
+      <th>Page</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><strong>Path</strong></td>
+      <td style="text-align: center">A path on a DAG is a sequence of edges connecting two variables on the graph, with each edge occurring only once.</td>
+      <td>I.76</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Collider</strong></td>
+      <td style="text-align: center">A collider is a variable in which two arrowheads on a path collide.  <br /> <br /> For example, \(Y\) is a collider in the path \(A \rightarrow Y \leftarrow L\) in the following DAG: <br /> <img src="/assets/hernan_dags/6_1.png" width="150" /></td>
+      <td>I.76</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Blocked path</strong></td>
+      <td style="text-align: center">A path on a DAG is blocked if and only if: <br />1. it contains a noncollider that has been conditioned, or <br /> 2. it contains a collider that has not been conditioned on and has no descendants that have been conditioned on.</td>
+      <td>I.76</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>d-separation</strong></td>
+      <td style="text-align: center">Two variables are d-separated if all paths between them are blocked</td>
+      <td>I.76</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>d-connectedness</strong></td>
+      <td style="text-align: center">Two variables are d-connected if they are not d-separated</td>
+      <td>I.76</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Faithfulness</strong></td>
+      <td style="text-align: center">Faithulness is when all non-null associations implied by a causal diagram exist in the true causal DAG. Unfaithfulness can arise, for example, in certain settings of effect modification, by design as in matching experiments, or in the presence of certain deterministic relations between variables in the graph.</td>
+      <td>I.77</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Positivity</strong> (on graphs)</td>
+      <td style="text-align: center">The arrows from the nodes \(L\) to the treatment node \(A\) are not deterministic. (Concerned with nodes <em>into</em> treatment nodes)</td>
+      <td>I.75</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Consistency</strong> (on graphs)</td>
+      <td style="text-align: center">Well-defined intervention criteria:  the arrow from treatment \(A\) to outcome \(Y\) corresponds to a potentially hypothetical but relatively unambiguous intervention. (Concerned with nodes <em>leaving</em> the treatment nodes.)</td>
+      <td>I.75</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Systematic bias</strong></td>
+      <td style="text-align: center">The data are insuffient to identify the causal effect even withan infinite sample size. This occurs when any sturctural association between treatment and outcome does not arise from the causal effect of treatment on outcome in the population of interest.</td>
+      <td>I.79</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Conditional bias</strong></td>
+      <td style="text-align: center"><em>For average causal effects within levels of \(L\)</em>: <br /> Conditional bias exists whenever the effect measure (e.g. causal risk ratio) and the corresponding association measure (e.g. associational risk ratio) are not equal.<br /> Mathematically, this is when: <br /> \(Pr[Y^{a=1} | L = l] - Pr[Y^{a=0} | L = l]\) differs from \(Pr[Y|L=l, A = 1] - Pr[Y|L-l, A=0]\) for at least one stratum \(l\).<br /><br /> <em>For average causal effects in the entire population</em>: <br /> Conditional bias exists whenever <br /> \(Pr[Y^{a=1} ] - Pr[Y^{a=0}]\) \(\neq\) \(Pr[Y = 1| A = 1] - Pr[Y = 1 | A = 0]\).</td>
+      <td>I.79</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Bias under the null</strong></td>
+      <td style="text-align: center">When the null hypothesis of no causal effect of treatment on the outcome holds, but treatment and outcome are associated in the data. <br /><br />Can be from either confounding, selection bias, or measurement error..</td>
+      <td>I.79</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Confounding</strong></td>
+      <td style="text-align: center">The treatment and outcome share a common cause.</td>
+      <td>I.79</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Selection bias</strong></td>
+      <td style="text-align: center">Conditioning on common effects.</td>
+      <td>I.79</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Surrogate effect modifier</strong></td>
+      <td style="text-align: center">An effect modifier that does not dirrectly influence that outcome but might stand in for a <strong>causal effect modifier</strong> that does.</td>
+      <td>I.81</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="chapter-7--confounding">Chapter 7:  Confounding</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Concept</th>
+      <th style="text-align: center">Definition or Notes</th>
+      <th>Page</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><strong>Backdoor Path</strong></td>
+      <td style="text-align: center">A noncausal path between treatment and outcome that remains even if all arrows pointing from treatment to other variables (the descendants of treatment) are removed. That is, the path has an arrow pointing into treatment.</td>
+      <td>I.83</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Confounding by indication</strong> (or <strong>Channeling</strong>)</td>
+      <td style="text-align: center">A drug is more likely to be prescribed to individuals with a certain condition that is both an indication for treatment and a risk factor for the disease.</td>
+      <td>I.84</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Channeling</strong></td>
+      <td style="text-align: center">Confounding by indication in which patient-specific risk factors \(L\) encourage doctors to use certain drug \(A\) within a class of drugs.</td>
+      <td>I.84</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Backdoor Criterion</strong></td>
+      <td style="text-align: center">Assuming consistency and positivity, the <em>backdoor criterion</em> sets the circumstances under which (a) confounding can be eliminated from the analysis, and (b) a causal effect of treatment on outcome can be identified.  <br /><br />  Criterion is that identifiability exists if all backdoor paths can be blocked by conditioning on variables that are not affected by the treatment.  <br /><br /> The two settings in which this is possible are: <br /><br />  1. No common causes of treatment and outcome. <br /><br /> 2. Common causes but enough measured variables to block all colliders.</td>
+      <td>I.85</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Single-world intervention graphs (SWIG)</strong></td>
+      <td style="text-align: center">A causal diagram that unifies counterfactual and graphical approaches by explicitly including the counterfactual variables on the graph. <br /><br />  Depicts variables and causal relations that would be observed in a hypothetical world in which all individuals received treatment level \(a\). In other words, is a <em>graph</em> that represents the counterfactual <em>world</em> created by a <em>single intervention</em>, unlike normal DAGs that represent variables and causal relations from the actual world.</td>
+      <td>I.91</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Two categories of methods for confounding adjustment</strong></td>
+      <td style="text-align: center"><strong>G-Methods</strong>:<br /> G-formula, IP weighting, G-estimation. Exploit conditional exchangeability in subsets defined by \(L\) to estimate the causal effect of \(A\) on \(Y\) in the entire population or in any subset of the population. <br /><br /> <strong>Stratification-based Methods</strong>: Stratification, Restriction, Matching.  Methods that exploit conditional exchangeability in subsets defined by \(L\) to estimate the association between \(A\) and \(Y\) in those subsets only.</td>
+      <td>I.93</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Difference-in-differences</strong> and <strong>negative outcome controls</strong></td>
+      <td style="text-align: center">A technique to account for unmeasured confounders under specific conditions. <br /><br />  The idea is to measure a “negative outcome control”, which is the same as the main outcome but <em>right before treatment</em>.  Then, instead of just reporting the effect of the treatment on the <em>outcome</em> (treatment effect + confounding effect), you substract out the effect of treatment on the <em>negative outcome</em> (only confounding effect). What’s left is is the <em>difference-in-differences</em>. <br /><br /> This requires the assumption of <em>additive equi-confounding</em>: <br /> \(E[Y^{0}|A=1] - E[Y^{0}|A=0]\) = \(E[C|A=1] - E[C|A=0]\). <br /><br /> Negative outcome controls are also sometimes used to try to <em>detect</em> confounding. <br /><br /> Note: The DAG demonstration (Figure 7.11) is really useful for this one.</td>
+      <td>I.95</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Frontdoor criterion</strong> and <strong>Frontdoor adjustment</strong></td>
+      <td style="text-align: center">A two-step standardization process to estimate a causal effect in the presence of a confounded causal effect <em>that is mediated by an unconfounded mediator variable</em>. <br /><br />  Given a DAG such as: <br /> <img src="/assets/hernan_dags/7_12.png" width="150" /> <br /> \(Pr[Y^{a}=1] = \sum_{m}Pr[M^{a}=m]Pr[Y^{m}=1]\). <br /><br />  Thus, standardization can be applied in two steps: <br /><br /> 1. Compute \(Pr[M^{a}=m]\) as \(Pr[M=m| A=a]\), and <br /><br /> 2. Compute \(Pr[Y^{a}=1]\) as \(\sum_{a'}Pr[Y=1|M=m,A=a']Pr[A=a']\) <br /><br /> These are then combined with the formula <br />  \(\sum_{m}Pr[M=m| A=a]\sum_{a'}Pr[Y=1|M=m,A=a']Pr[A=a']\) <br /><br /> The name <em>frontdoor adjustment</em> comes because it relies on the path from \(A\) and \(Y\) moving through a descendent \(M\) of \(A\) that causes \(Y\).</td>
+      <td>I.96</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="chapter-8--selection-bias">Chapter 8:  Selection Bias</h3>
+
+<p><strong>Note</strong>:  I have almost no notes in here, because the DAG section contains pretty much all the content I’m interested in noting here.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Concept</th>
+      <th style="text-align: center">Definition or Notes</th>
+      <th>Page</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><strong>Competing Event</strong></td>
+      <td style="text-align: center">An event that prevents the outcome of interest from happening. For example, death is a competing event, because once it occurs, no other outcome is possible.</td>
+      <td>I.108</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Multiplicative survival model</strong></td>
+      <td style="text-align: center">A multiplicative survival model is of the form: <br /><br /> \(Pr[Y=0|E=e,A=a]=g(e)h(a)\) <br /><br /> . The data forllow such a model when there is no interaction between \(A\) and \(E\) on a multiplicative scale.  This allows, for example, \(A\) and \(E\) to be conditionally independent given \(Y=0\) but not conditionally dependent when \(Y=1\). See Technical Point 8.2 and the example in Figure 8.13.</td>
+      <td>I.109</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Healthy worker bias</strong></td>
+      <td style="text-align: center">Example of selection bias where people are only included in the study if they are healthy enough, say, to come into work and be tested.</td>
+      <td>I.99</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Self-selection bias</strong></td>
+      <td style="text-align: center">Example of selection bias where people volunteer for enrollment.</td>
+      <td>I.100</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="chapter-9--measurement-bias">Chapter 9:  Measurement Bias</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Concept</th>
+      <th style="text-align: center">Definition or Notes</th>
+      <th>Page</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><strong>Measurement bias</strong> or <strong>Information bias</strong></td>
+      <td style="text-align: center">Systematic difference in associational risk and causal risk that arises due to measurement error. Eliminates causal inference even under identifiability conditions of exchangeability, positivity, and consistency.</td>
+      <td>I.112</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">__ Independent measurement error __</td>
+      <td style="text-align: center">Independent measurement error takes place when the measurement error of the treatment (\(U_{A}\)) and the measurement error of the response (\(U_{Y}\)) are d-separated.  Dependent measurement error is when they are d-connected.</td>
+      <td>I.11</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">__ Nondifferential measurement error __</td>
+      <td style="text-align: center">Measurement error is <em>nondifferential</em> with respect to the outcome if \(U_{A}\) and \(Y\) are d-separated.  Measurement error is nondifferential with respect to the treatment if \(U_{Y}\) and \(A\) are d-separated.</td>
+      <td>I.11</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Intention-to-treat effect</strong></td>
+      <td style="text-align: center">The causal effect of randomized treatment assigment \(Z\) in an intention-to-treat trial on the outcome \(Y\). Depends on the strength of the effect of assignment treatment on outcome (\(Z \rightarrow Y\)), the assignment treatment on actual treatment received (\(Z \rightarrow A\)), and the effect of the actual treatment received on outcome (\(A \rightarrow Y\)). In theory, this does not require adjustment for confounding, has null preservation, and is conservative. See below for comments on latter two.</td>
+      <td>I.116</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>The exclusion restriction</strong></td>
+      <td style="text-align: center">(The goal of double-blinding). The assumption that there is no direct arrow from assigned treatment \(Z\) to outcome \(Y\) in an intention-to-treat design.</td>
+      <td>I.117</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Null Preservation</strong> in an IIT</td>
+      <td style="text-align: center">If treatment \(A\) has a null effect on \(Y\), then assigned treatment \(Z\) also has a null effect on \(Y\).  Ensure, in theory, that a null effect will be declared when none exists. However, it requires that the exclusion restriction holds, which breaks down unless their is perfect double-blinding.</td>
+      <td>I.119</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Conservatism of the IIT vs Per-protocol</strong></td>
+      <td style="text-align: center">The IIT effect is supposed to be closer to the null than the value of the per-protocol effect, because imperfect adherence results in attenuation rather than exaggeration of effect. Thus IIT appears to be a lower bound for per-protocol effect (and is thus conservative). <br /><br /> However, there are three issues with this: <br /> 1. Argument assumes monotonicity of effects (treatment same direction for all patients). If, say, there is inconsistent adherence and thus inconsistent effects, then this could become anti-conservative.  <br /> 2. Even given monotonicity, IIT would only be conservative compared to <em>placebos</em>, not necessarily head-to-head trials, where adherence in the second drug might be different. <br /> 3. Even if IIT is conservative, this makes it dangerous when goal is evaluating safety, where you arguably want to be more <em>aggresive</em> in finding signal.</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Per-protocol effect</strong></td>
+      <td style="text-align: center">The causal effect of randomized treatment that would have been observed if all individuals had adhered to their assigned treatment as specified in the protocol of the experiment.  <em>Requires adjustment for confounding</em>.</td>
+      <td>I.116</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>As-treated analysis</strong></td>
+      <td style="text-align: center">An analysis to assess for per-protocol effect. Includes <em>all patients</em> and compares those treated (\(A=1\)) vs not treated (\(A=0\)), independent of their assignment \(Z\). Confounded.</td>
+      <td>I.118</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Conventional per-protocol analysis</strong></td>
+      <td style="text-align: center">An analysis to assess for per-protocol effect. Limits the population to those who adhered to the study protocol, subsetting to those for whom \(A=Z\). Induces a <em>selection bias</em> on \(A=Z\), and thus still requires adjustment on \(L\).</td>
+      <td>I.118</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Tradeoff between ITT and Per-protocol</strong></td>
+      <td style="text-align: center">Summary: Estimating the per-protocol effect adds unmeasured confounding, which needs to be (imperfectly) adjusted for. Intention-to-treat adds a misclassification bias, and does not necessarily deliver on purported guarantees of conservatism. As such, there is a real tradeoff, here.</td>
+      <td>I.117-I.120</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="chapter-10--random-variability">Chapter 10:  Random Variability</h3>
+
+<p>Sorry, I’m skipping this section, because the key terms are all stats concepts and its mostly a pump-up chapter for the rest of the book.</p>
+
+<h3 id="chapter-11-why-model">Chapter 11: Why Model?</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Concept</th>
+      <th style="text-align: center">Definition or Notes</th>
+      <th>Page</th>
+      <th> </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><strong>Saturated Models</strong></td>
+      <td style="text-align: center">Models that do not impose restrctions on the data distribution. Generally, these are models whose number of parameters in a conditional mean model is equal to the number of means. For example, a linear model E[ y</td>
+      <td>x] ~ b0 + b1*x when the population is stratified into only two groups. These are <em>non-parametric models</em>.</td>
+      <td>II.143</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Non-parametric estimator</strong></td>
+      <td style="text-align: center">Estimators that produce estimates from the data without any a priori restrictions on the true function. When using the entire population rather than a sample, these yield the true value of the population parameter.</td>
+      <td>II.143</td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="chapter-12">Chapter 12:</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Concept</th>
+      <th style="text-align: center">Definition or Notes</th>
+      <th>Page</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><strong>Stabilized Weights</strong></td>
+      <td style="text-align: center"> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><strong>Marginal Structure Model</strong></td>
+      <td style="text-align: center"> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>To-do:
+| Concept | Formula | Code | Notes |
+| :———–: |:————-:|
+| <strong>IP Weighting</strong> |   |  |
+| <strong>Standardized IP Weighting</strong> |   |  |
+| <strong>Marginal Structure model</strong> |   |  |</p>
+
+<p>DONT MISS THE DOUBLY ROBUST ESTIMATOR in TECHNICAL POINT 13.2</p>
+
+
+
+
+    </article>
+    <span class="print-footer">Causal Inference Book Part I -- Glossary and Notes - June 19, 2019 - Sam Finlayson</span>
+    <footer>
+  <hr class="slender">
+  <ul class="footer-links">
+    <li><a href="mailto:samuel_finlayson@hms.harvard.edu"><span class="icon-mail3"></span></a></li>    
+    
+      <li>
+        <a href="//www.twitter.com/IAmSamFin"><span class="icon-twitter"></span></a>
+      </li>
+    
+      <li>
+        <a href="//github.com/sgfin"><span class="icon-github"></span></a>
+      </li>
+    
+      <li>
+        <a href="/feed"><span class="icon-rss2"></span></a>
+      </li>
+      
+  </ul>
+<div class="credits">
+<span>&copy; 2020 &nbsp;&nbsp;SAM FINLAYSON</span></br> <br>
+<span>This site created with the <a href="//github.com/clayh53/tufte-jekyll">Tufte theme for  </a> in <a href="//jekyllrb.com">Jekyll</a>.</span> 
+</div>  
+</footer>
+  </body>
+</html>

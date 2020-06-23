@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>ML Resources</title>
+  <meta name="description" content="Outline:-Where Should I Start?-Computer Science-Real Analysis-Linear Algebra-Probability-Statistics-Causal Inference-Optimization-Information Theory-Classic ...">
+
+  <!-- Google Fonts loaded here depending on setting in _data/options.yml true loads font, blank does not-->
+  
+    <link href='//fonts.googleapis.com/css?family=Lato:400,400italic' rel='stylesheet' type='text/css'>
+  
+  
+  <!-- Load up MathJax script if needed ... specify in /_data/options.yml file-->
+  
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: [
+      "MathMenu.js",
+      "MathZoom.js",
+      "AssistiveMML.js",
+      "a11y/accessibility-menu.js"
+    ],
+    jax: ["input/TeX", "output/CommonHTML"],
+    TeX: {
+      extensions: [
+        "AMSmath.js",
+        "AMSsymbols.js",
+        "noErrors.js",
+        "noUndefined.js",
+      ]
+    }
+  });
+</script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-122144402-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-122144402-1');
+    </script>
+
+ <!--   <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+  
+
+  <link rel="stylesheet" type="text/css" href="/css/tufte.css">
+  <!-- <link rel="stylesheet" type="text/css" href="/css/print.css" media="print"> -->
+
+  <link rel="canonical" href="http://sgfin.github.io/learning-resources/">
+
+  <link rel="alternate" type="application/rss+xml" title="Machine Learning and Medicine" href="http://sgfin.github.io/feed.xml" />
+</head>
+
+  <body>
+    <!--- Header and nav template site-wide -->
+<header>
+    <nav class="group" style="padding-bottom: 15px;">
+	<!-- <a href="/"><img class="badge" src="/assets/img/badge_1.png" alt="SGF"></a> -->
+	
+		
+  	
+		
+		    
+		      <a href="/">About</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/css/print.css"></a>
+		    
+	    
+  	
+		
+  	
+		
+		    
+		      <a href="/posts/">posts</a>
+		    
+	    
+  	
+		
+		    
+		      <a class="active" href="/learning-resources/" class="active">ML Resources</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/css/print.css.map"></a>
+		    
+	    
+  	
+		
+  	
+	</nav>
+</header>
+    <article class="group">
+      <h1>ML Resources</h1>
+<p class="subtitle"></p>
+
+<style>
+table {
+  border-collapse: collapse;
+}
+th, td {
+    border: 1px solid #999;
+}
+
+</style>
+
+<h3>Outline:</h3>
+
+<div style="padding-top: 10px; font-size:large">
+
+<a href="#Start">-Where Should I Start?</a><br />
+
+<a href="#CS">-Computer Science</a><br />
+
+<a href="#realA">-Real Analysis</a><br />
+
+<a href="#LA">-Linear Algebra</a><br />
+
+<a href="#prob">-Probability</a><br />
+
+<a href="#stat">-Statistics</a><br />
+
+<a href="#causal">-Causal Inference</a><br />
+
+<a href="#opt">-Optimization</a><br />
+
+<a href="#info">-Information Theory</a><br />
+
+<a href="#ml">-Classic Machine Learning</a><br />
+
+<a href="#bayesML">-Bayesian Machine Learning</a><br />
+
+<a href="#DL">-Deep Learning</a><br />
+
+<a href="#NLP">-Natural Language Processing</a><br />
+
+<a href="#RL">-Reinforcement Learning</a><br />
+
+<a href="#bio">-Applications in Biology and Medicine</a><br />
+
+<a href="#misc">-Favorite Websites</a>
+
+</div>
+
+<h3 id="-where-should-i-start-in-ml"><a name="Start"></a> Where should I start (in ML)?</h3>
+
+<p>If you’re here looking for a general introduction to machine learning, I would proceed in the following order:</p>
+
+<ul>
+  <li>
+    <p><a href="http://faculty.marshall.usc.edu/gareth-james/ISL/">Introduction to Statistical Learning</a> by James, Witten, Hastie, and Tibshirani. This textbook is a fantastic introduction to the field, written by some of its leading experts. It is short and well-written enough to be read cover-to-cover, high-level enough to be accessible to people from various backgrounds, yet rigorous in the sense that it teaches you to think about the problems rather than just giving you a cookbook.  The textbook is free as a PDF at the book website, and the authors have also provided a collection of excellent videos that accompany the text on Youtube (the videos are nicely organized into a collection <a href="https://www.r-bloggers.com/in-depth-introduction-to-machine-learning-in-15-hours-of-expert-videos/">here</a>). Note that this textbook also has a “big sister”, the classic <a href="https://web.stanford.edu/~hastie/ElemStatLearn/">Elements of Statistical Learning</a>, which covers the same content at much more mathematical depth. However, I would start with ISL and then move to ESL from there as your interest directs.  Note that the code in this book and class is in R and covers most of the classical ML toolkit but doesn’t cover deep learning.</p>
+  </li>
+  <li>
+    <p><a href="https://course.fast.ai/">Fast.ai</a> by Jeremy Howard and Rachel Thomas. This course provides an accessible but extremely effective introduction to deep learning, the most popular branch of modern machine learning. The course is hands-on and immensely practical, but each lesson will equip you with the tools to build a very effective model for some new branch of ML (computer vision, NLP, etc.). The course is taught in Python using Pytorch and their own library.</p>
+  </li>
+</ul>
+
+<p>Once you make your way through ISL and fast.ai, you will have a solid handle on all the most commonly used techniques in ML (classic and cutting edge). You will have a decent intuition for which methods can work when, and an ability to at least understand and modify code for ML analysis in both R and Python. From there, you should be prepared to jump at greater depth into any subarea of the field that you fancy.</p>
+
+<p>Depending on background and bandwidth, a motivated student could probably work through the above material in 1-4 months. Go get ‘em! :)</p>
+
+<h3 id="-computer-science"><a name="CS"></a> Computer Science</h3>
+
+<h4 id="theory">Theory</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">File</th>
+      <th style="text-align: center">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="/files/cheatsheets/CS_theory_cheat_sheet.pdf">CS Theory Cheatsheet</a></td>
+      <td style="text-align: center">CS theory cheat sheet, originally accessed <a href="https://www.tug.org/texshowcase/cheat.pdf">here</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Tim Roughgarden’s <a href="https://theory.stanford.edu/~tim/notes.html">Lectures on Algorithms</a> and <a href="http://www.algorithmsilluminated.org/">Algorithms Illuminated</a></td>
+      <td style="text-align: center">Tim Roughgarden is one of most natural teachers I’ve ever seen. The first link is to lecture notes in PDF form from many classes. Videos for his Algorithms 2 class (CS 261) are <a href="https://www.youtube.com/playlist?list=PLEGCF-WLh2RJh2yDxlJJjnKswWdoO8gAc">here</a>. The second is a link to his page for his new textbook, but that page also has links out to all the youtube videos from his coursera version of CS 161 (Algorithms 1).</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="programming-cheatsheets">Programming cheatsheets</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">File</th>
+      <th style="text-align: center">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="/files/cheatsheets/R_cheatsheet_dplyr.pdf">R dplyr cheatsheet</a></td>
+      <td style="text-align: center">Cheatsheet for Hadley’s amazing data wrangling package, dplyr. One of many from <a href="https://www.rstudio.com/resources/cheatsheets/">RStudio</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="https://atrebas.github.io/post/2019-03-03-datatable-dplyr/">R dplyr and data.table side by side</a></td>
+      <td style="text-align: center">Nice side-by-side comparison of dplyr and data.table by Atrebas.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="/files/cheatsheets/R_cheatsheet_ggplot2.pdf">R ggplot2 cheatsheet</a></td>
+      <td style="text-align: center">Cheatsheet for Hadley’s amazing plotting package, ggplot2. One of many from <a href="https://www.rstudio.com/resources/cheatsheets/">RStudio</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="/files/cheatsheets/SQL_joins.png">SQL Joins cheatsheet</a></td>
+      <td style="text-align: center">Graphical description of classic SQL joins w/ toy code</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="/files/cheatsheets/Python_cheatsheet_pandas.pdf">Python pandas cheatsheet</a></td>
+      <td style="text-align: center">Cheatsheet for python’s data wrangling package, pandas. Downloaded from <a href="https://pandas.pydata.org/Pandas_Cheat_Sheet.pdf">here</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="/files/cheatsheets/Python_cheatsheet_numpy.pdf">Python numpy cheatsheet</a></td>
+      <td style="text-align: center">Cheatsheet for python’s numerical package, numpy. Downloaded from <a href="https://www.datacamp.com">Datacamp</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="/files/cheatsheets/Python_Keras_Cheat_Sheet.pdf">Python keras cheatsheet</a></td>
+      <td style="text-align: center">Cheatsheet for python’s NN package, keras. Downloaded from <a href="https://www.datacamp.com">Datacamp</a>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="/files/cheatsheets/Python_cheatsheet_scikit.pdf">Python scikit-learn cheatsheet</a></td>
+      <td style="text-align: center">Cheatsheet for python’s ML package, scikit-learn. Downloaded from <a href="https://www.datacamp.com">Datacamp</a>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="https://seaborn.pydata.org/tutorial.html">Python seaborn tutorial</a></td>
+      <td style="text-align: center">Tutorial for python’s plotting system, seaborn. Haven’t found a great one yet for matplotlib.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="/files/cheatsheets/graphic_design.pdf">Graphic Design cheatsheet</a></td>
+      <td style="text-align: center">Cute little graphic design cheatsheet downloaded from <a href="https://www.psiweb.org/docs/default-source/2018-psi-conference-posters/48-julie-jones.pdf">here</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Pytorch <a href="https://pytorch.org/tutorials/beginner/ptcheat.html">cheat sheet</a> and <a href="https://pytorch.org/tutorials/">tutorials</a> and <a href="https://pytorch.org/docs/stable/index.html">docs</a></td>
+      <td style="text-align: center">The pytorch team has some world class docs and tutorials.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="-real-analysis"><a name="realA"></a> Real Analysis</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">File</th>
+      <th style="text-align: center">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="http://measure.axler.net/MIRA.pdf">Measure, Integration, and Real Analysis</a></td>
+      <td style="text-align: center">Sheldon Axler’s textbook-under-development on measure theory and real analysis. (<a href="http://measure.axler.net">Website</a>).</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="-linear-algebra"><a name="LA"></a> Linear Algebra</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">File</th>
+      <th style="text-align: center">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="http://vmls-book.stanford.edu/vmls.pdf">Boyd Applied Linear Algebra</a></td>
+      <td style="text-align: center">Freely available book from Boyd and Vandenberghe on Applied LA (<a href="http://vmls-book.stanford.edu/">website</a>).</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="https://github.com/fastai/numerical-linear-algebra/blob/master/README.md">Fast.ai Computational Linear Algebra</a></td>
+      <td style="text-align: center">Rachel Thomas has put together this great online textbook for computational linear algebra with accompanying <a href="https://www.youtube.com/playlist?list=PLtmWHNX-gukIc92m1K0P6bIOnZb-mg0hY">youtube videos</a>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="/files/notes/CS229_Linear_Algebra.pdf">CS 229 Linear Algebra Notes</a></td>
+      <td style="text-align: center">Linear algebra reference from Stanford’s Machine Learning <a href="http://cs229.stanford.edu/materials.html">Course</a>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="https://explained.ai/matrix-calculus/index.html">Matrix Calc for DL</a> <a href="/files/notes/Matrix_Calc_for_DL.pdf">(pdf here)</a></td>
+      <td style="text-align: center">Really nice overview of matrix calculus for deep learning from Parr/Howard.  Citable on on <a href="https://arxiv.org/abs/1802.01528">arxiv</a>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="https://ocw.mit.edu/courses/mathematics/18-065-matrix-methods-in-data-analysis-signal-processing-and-machine-learning-spring-2018/">Strang: Matrix methods for Data, Signals, and ML</a></td>
+      <td style="text-align: center">Gil Strang’s newer linear algebra course, focusing on the linear algebra relevant to data and ML.  Youtube videos <a href="https://www.youtube.com/playlist?list=PLUl4u3cNGP63oMNUHXqIUcrkS2PivhN3k">here</a>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="http://linear.axler.net/LinearAbridged.pdf">Linear Algebra Done Right, Abridged</a></td>
+      <td style="text-align: center">This is a free version of Sheldon Axler’s texbook Linear Algebra Done Right, which is a nice intro treatment of the subject that is accessible but more pure-mathy in flavor than the above.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="--probability"><a name="prob"></a>  Probability</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">File</th>
+      <th style="text-align: center">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="/files/cheatsheets/probability_cheatsheet_blackwhite.pdf">Probability Cheatsheet</a></td>
+      <td style="text-align: center">Probability cheat sheet, from William Chen’s <a href="https://github.com/wzchen/probability_cheatsheet">github</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-041-probabilistic-systems-analysis-and-applied-probability-fall-2010/">MIT 6.041 Intro Probability</a></td>
+      <td style="text-align: center">John Tsitsiklis et al have put together some great resources. Their classic MIT intro to probability has been archived on <a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-041-probabilistic-systems-analysis-and-applied-probability-fall-2010/">OCW</a> and also offered on Edx (<a href="https://www.edx.org/course/introduction-probability-part-1-mitx-6-041-1x">Part 1</a>, <a href="https://www.edx.org/course/introduction-to-probability-part-2-inference-processes">Part 2</a>). The <a href="https://www.amazon.com/Introduction-Probability-2nd-Dimitri-Bertsekas/dp/188652923X">textbook</a> is also excellent.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="https://projects.iq.harvard.edu/stat110/about">Joe Blitzstein’s Stat110</a></td>
+      <td style="text-align: center">Joe Blitzstein’s undergrad probability course has a high overlap in content with 6.041. Like 6.041, it also has a great <a href="https://drive.google.com/file/d/1VmkAAGOYCTORq1wxSQqy255qLJjTNvBI/view">textbook</a>, <a href="https://projects.iq.harvard.edu/stat110/youtube">youtube</a> videos, and an <a href="https://www.edx.org/course/introduction-to-probability-0">edx</a> offering. It’s a bit more playful, as well.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="https://www.youtube.com/user/mathematicalmonk">MathematicalMonk</a></td>
+      <td style="text-align: center">This guy is amazing. Some 250 youtube tutorials on ML, Probability, and Information Theory.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="https://dibyaghosh.com/blog/probability/highdimensionalgeometry.html">Trouble in high-dimensional Land</a></td>
+      <td style="text-align: center">Fun little blog post going through intro high-dimensional geometry and its relevance to probability.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="--statistics"><a name="stat"></a>  Statistics</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">File</th>
+      <th style="text-align: center">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="https://lindeloev.github.io/tests-as-linear/">Common statistical tests are linear models (or: how to teach stats)</a> and <a href="/files/cheatsheets/linear_tests_cheat_sheet.pdf">Statistical Test Cheatsheet</a></td>
+      <td style="text-align: center">This little blog post does an incredible job explaining how a whole bunch of common statistical tests can be intuitively unified under a single framework (linear models)</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Russell Poldracks’ <a href="http://statsthinking21.org/index.html">Statistical Thinking for the 21st Century</a></td>
+      <td style="text-align: center">This appears to be a pretty fantastic (albeit rather elementary) textbook for a one-quarter intro to statistics class (stat 60 at stanford). Despite assuming little, it touches upon a lot of great topics.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="/files/notes/Stat200_2014_Merged_Sparks.pdf">Doug Sparks’ Stats 200</a></td>
+      <td style="text-align: center">Nice course notes on Statistical Inference from Doug Sparks 2014 offering of <a href="http://stats200.stanford.edu/">stats 200</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="https://www-huber.embl.de/msmb/">Modern Statistics for Modern Biology</a></td>
+      <td style="text-align: center">This online textbook is from Susan Holmes and Wolfgang Huber, and provides a nice and accessible intro to the parts of modern data science revelant to computational biologists.  It also happens to be a piece of typographic <em>art</em>, created with <a href="https://bookdown.org/yihui/bookdown/">bookdown</a>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="https://xcelab.net/rm/statistical-rethinking/">Statistical Rethinking</a></td>
+      <td style="text-align: center">Lecture Videos on <a href="https://www.youtube.com/playlist?list=PLDcUM9US4XdM9_N6XUUFrhghGJ4K25bFc">youtube</a> accompany this fantastic introductory textbook.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="https://seeing-theory.brown.edu/frequentist-inference/index.html">Seeing Theory Frequentist Inference</a></td>
+      <td style="text-align: center">This is a really beautiful visual presentation of the basic ideas of frequentist inference, from the Seeing Theory textbook.  I love it.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="https://est-mult.netlify.com">Estadística Multivariada</a></td>
+      <td style="text-align: center">Beautiful note set on multivariate stats from María Teresa Ortiz and Felipe González. Covers bayesian networks, gaussian models, missing data, latent variable models, and baysian methods.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="https://tereom.github.io/est-computacional-2019/">Estadística Computacional</a></td>
+      <td style="text-align: center">Beautiful note set on computational stats from María Teresa Ortiz. Covers basic probability, simulation, visualization, inference, and some basic bayesian methods.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="-causal-inference"><a name="causal"></a> Causal Inference</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">File</th>
+      <th style="text-align: center">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="https://www.hsph.harvard.edu/miguel-hernan/causal-inference-book/">Hernan and Robbins Causal Inference Book</a></td>
+      <td style="text-align: center">Long-upcoming textbook on causal inference (from the epidemiology perspective), with drafts fairly frequently updated on the web page.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="https://sgfin.github.io/2019/06/19/Causal-Inference-Book-All-DAGs/">All the DAGs from the Causal Inference Book</a> and <a href="https://sgfin.github.io/2019/06/19/Causal-Inference-Book-Glossary-and-Notes/">Glossary and Notes</a></td>
+      <td style="text-align: center">In the first post, I’m compiling all the DAGs from Hernan and Robbins book into one place for easier use. In the second, I have some additional notes to accompany part one of the book.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="https://github.com/robertness/causalML">Robert Osazuwa Causal Modeling in ML Book</a></td>
+      <td style="text-align: center">Looks to be a nice course in development on causal and generative modeling. Lecture notes are being produced in a bookdown <a href="https://bookdown.org/connect/#/apps/2584/access">here</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="https://github.com/logangraham/arXausality">Causal Inference Papers</a></td>
+      <td style="text-align: center">Nice Github repo that compiles a bunch of Arxiv papers on Causal Machine Learning</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="/files/notes/structured_approach_selection_bias_Hernan.pdf">Hernan Selection Bias</a></td>
+      <td style="text-align: center">Nice summary of selection bias via DAGs by Hernan et al.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="--optimization"><a name="opt"></a>  Optimization</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">File</th>
+      <th style="text-align: center">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="http://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf">Boyd Convex Optimization Book</a></td>
+      <td style="text-align: center">Famous and freely available textbook from Boyd and Vandenberghe, accompanied by <a href="https://web.stanford.edu/class/ee364a/lectures.html">slides</a> and Youtube videos. More advanced follow-up class <a href="https://web.stanford.edu/class/ee364b/lectures.html">here</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: center">NYU Optimization-based Data Analysis <a href="/files/notes/NYU_Optimization_2016.pdf">2016</a> and <a href="/files/notes/NYU_Optimization_2017.pdf">2017</a></td>
+      <td style="text-align: center">Fantastic course notes on Optimization-based data analysis from NYU <a href="https://cims.nyu.edu/~cfgranda/pages/OBDA_spring16/notes.html">2016 website</a> and <a href="https://cims.nyu.edu/~cfgranda/pages/OBDA_fall17/schedule.html">2017 website</a>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="http://ruder.io/optimizing-gradient-descent/index.html">Ruder Gradient Descent Overview</a> <a href="/files/notes/ruder_gradient.pdf">(PDF here)</a></td>
+      <td style="text-align: center">Great overview of gradient descent algorithms.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="/files/notes/bottou_optimization.pdf">Bottou Large-Scale Optimization</a></td>
+      <td style="text-align: center">Notes on Optimization from Bottou, Curtis, and Nocedal. Downloaded from <a href="https://arxiv.org/abs/1606.04838">arxiv</a>.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="--information-theory"><a name="info"></a>  Information Theory</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">File</th>
+      <th style="text-align: center">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="http://colah.github.io/posts/2015-09-Visual-Information/">Chris Olah Visual Information Theory</a></td>
+      <td style="text-align: center">As always, Chris Olah creates an amazing presentation both in words and images.  Goal is to visualize key information theory concepts.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="/files/notes/Cover_and_Thomas_ch2_entropy.pdf">Cover and Thomas Ch2 - Entropy and Information</a></td>
+      <td style="text-align: center">The extremely well-written introductory chapter from the classic information theory textbook.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="/files/notes/Cover_and_Thomas_ch11_info_and_stats.pdf">Cover and Thomas Ch11 - Info Theory and Statistics</a></td>
+      <td style="text-align: center">The information theory and statistics chapter from the classic information theory textbook.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="https://sgfin.github.io/2017/03/16/Deriving-probability-distributions-using-the-Principle-of-Maximum-Entropy/">Deriving Probability Distributions from Maximum Entropy Principle</a></td>
+      <td style="text-align: center">It feels slimey and self-serving to include this, but I wrote this post to better understand how information theory can be used to understand/derive common probability distributions from first principles.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="https://sgfin.github.io/2017/03/11/Deriving-the-information-entropy-of-the-multivariate-gaussian/">Deriving the information entropy of the multivariate gaussian</a></td>
+      <td style="text-align: center">Another blog post I wrote to try to understand information theory + statistics.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="--classic-machine-learning"><a name="ml"></a>  Classic Machine Learning</h3>
+
+<h4 id="textbooks-lectures-and-course-notes">Textbooks, Lectures, and Course Notes</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">File</th>
+      <th style="text-align: center">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="/files/notes/mml-book.pdf">Math for ML Book</a></td>
+      <td style="text-align: center">Math-first but highly accessible intro textbook for machine learning by Faisal and Ong, available on <a href="https://mml-book.github.io/">github</a>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="https://work.caltech.edu/telecourse.html">Learning from Data</a> by Abu Mostafa</td>
+      <td style="text-align: center">“A short course. Not a hurried course.” on machine learning. A nice first treatment that is concise but fairly rigorous.  Also has <a href="https://work.caltech.edu/library/">videos organized by topic</a>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Bishop’s <a href="https://www.microsoft.com/en-us/research/uploads/prod/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf">Pattern Recognition and Machine Learning</a></td>
+      <td style="text-align: center">This is a classic ML text, and has now been finally released (legally) for free online.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="/files/notes/CS229_Lecture_Notes.pdf">CS 229 Lecture Notes</a></td>
+      <td style="text-align: center">Classic note set from Andrew Ng’s amazing grad-level intro to ML: <a href="http://cs229.stanford.edu/syllabus.html">CS229</a>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="/files/cheatsheets/cs229_2018_cheatsheet.pdf">CS 229 TA Cheatsheet 2018</a></td>
+      <td style="text-align: center">TA cheatsheet from the 2018 offering of Stanford’s Machine Learning <a href="http://cs229.stanford.edu/materials.html">Course</a>, Github repo <a href="https://github.com/afshinea/stanford-cs-229-machine-learning">here</a>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="https://web.stanford.edu/~hastie/ElemStatLearn/printings/ESLII_print12.pdf">ESL</a> and <a href="http://www-bcf.usc.edu/~gareth/ISL/ISLR%20Seventh%20Printing.pdf">ISL</a> from Hastie et al</td>
+      <td style="text-align: center">Beginner (ISL) and Advanced (ESL) presentation to classic machine learning from world-class stats professors. Slides and video for a MOOC on ISL is available <a href="https://www.dataschool.io/15-hours-of-expert-machine-learning-videos/">here</a>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Foundations of Data Science <a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2017/11/book-June-14-2017pdf.pdf">textbook</a> and <a href="https://www.youtube.com/playlist?list=PLD7HFcN7LXRcvobbHq_8zMyWq_tKwtebc">videos</a></td>
+      <td style="text-align: center">This mini-course appears to have developed out of CMU’s “CS Theory for the Information Age” <a href="https://www.cs.cmu.edu/~venkatg/teaching/CStheory-infoage/">2012 site</a>, which I think is a better name for this.  It’s a strong upper-undergrad or intro-grad student math class covering foundations for high-dimensional data algorithms. Another class using the textbook is <a href="http://grigory.us/data-science-class.html">here</a>. High-dimensional probability section is cool.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Tim Roughgarden’s <a href="https://theory.stanford.edu/~tim/notes.html">Modern Algorithmic Toolbox</a></td>
+      <td style="text-align: center">CS 168: Modern Algorithmic Toolbox has fantastic coverage of PCA, SVD, Compressive Sensing, Tensors, and other core ML tools.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="special-topics-and-blog-posts">Special Topics and Blog Posts</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">File</th>
+      <th style="text-align: center">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="/files/notes/CS168_Roughgarden_SVD.pdf">Roughgarden SVD Notes</a></td>
+      <td style="text-align: center">Really great presentation of SVD from <a href="https://web.stanford.edu/class/cs168/index.html">Tim Rougharden’s CS168</a> at Stanford.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="/files/notes/CS168_Roughgarden_PCA.pdf">Roughgarden PCA Notes</a></td>
+      <td style="text-align: center">Really great presentaiton of PCA from <a href="https://web.stanford.edu/class/cs168/index.html">Tim Rougharden’s CS168</a> at Stanford.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="--bayesian-machine-learning"><a name="bayesML"></a>  Bayesian Machine Learning</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">File</th>
+      <th style="text-align: center">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="https://ermongroup.github.io/cs228-notes/">CS 228 PGM Notes</a></td>
+      <td style="text-align: center">Really great course notes on Probabilistic Graphical Models from at Stanford. PDF export wasn’t ideal so linking only to website.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">CMU PGM Course <a href="https://sailinglab.github.io/pgm-spring-2019/lectures/">2019</a> and <a href="http://www.cs.cmu.edu/~epxing/Class/10708/lecture.html">2014</a></td>
+      <td style="text-align: center">Nice course from CMU (10-708) that covers PGMs and – in newer offerings – relevant parts of DL, too.  Has videos, scribe notes, and slides.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="http://www.cs.columbia.edu/~blei/fogm/2016F/index.html">Blei Foundations of Graphical Models Course</a></td>
+      <td style="text-align: center">2016 course notes on Foundations of Graphical Models from David Blei 2016 website</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="/files/notes/blei_exponFam_varInf.pdf">Blei Exponential Familes/Variational Inference</a></td>
+      <td style="text-align: center">A couple of the course notes I particularly like from Blei’s <a href="https://www.cs.princeton.edu/courses/archive/fall11/cos597C/">2011 Probabilistic Modeling Course</a> )</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="/files/notes/blei_variational_review.pdf">Blei Variational Inference Review</a></td>
+      <td style="text-align: center">Overview on Variational Inference from David Blei available on <a href="https://arxiv.org/abs/1601.00670">arxiv</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="https://www.google.com/search?q=distill+gaussian+processes&amp;rlz=1C5CHFA_enUS735US735&amp;oq=distill+gaussian+processes&amp;aqs=chrome..69i57j69i60l2j69i61j69i60l2.3173j0j1&amp;sourceid=chrome&amp;ie=UTF-8">Visual Exploration of Gaussian Processes</a></td>
+      <td style="text-align: center">Masterclass exposition on Gaussian Processes from the always-amazing Distill.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="--deep-learning"><a name="DL"></a>  Deep Learning</h3>
+
+<h4 id="textbooks-lectures-and-course-notes-1">Textbooks, Lectures, and Course Notes</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">File</th>
+      <th style="text-align: center">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="/files/notes/CS321_Grosse_Lecture_Notes.pdf">Roger Grosse’s CSC321 Notes</a></td>
+      <td style="text-align: center">Notes from Roger Grosse’s CSC 321 <a href="http://www.cs.toronto.edu/~rgrosse/courses/csc321_2018/">full website here</a>. Probably the single best intro to DL course I’ve found from any university. Notes and slides are gorgeous.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="https://www.fast.ai/">Fast.Ai</a></td>
+      <td style="text-align: center">Wonderful set of intro lectures + notebooks from Jeremy Howard and Rachel Thomas. In addition, Hiromi Suenaga has released excellent and self-contained notes of the whole series with timestamp links back to videos: <a href="https://www.kdnuggets.com/2018/07/fast-ai-deep-learning-part-1-notes.html">FastAI DL Part 1</a>, <a href="https://www.kdnuggets.com/2018/07/fast-ai-deep-learning-part-2-notes.html">FastAI DL Part 2</a>, and <a href="https://www.kdnuggets.com/2018/07/suenaga-fast-ai-machine-learning-notes.html">FastAI ML</a>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="http://cs231n.github.io/">CS231N DL for Vision</a></td>
+      <td style="text-align: center">Amazing notes from Andrej Karapthy, with lectures on Youtube as well.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="https://www.deeplearningbook.org">Deep Learning Book</a></td>
+      <td style="text-align: center">This textbook by Ian Goodfellow, Yoshua Bengio, and Aaron Courville is probably the closest we have to a de facto standard textbook for DL.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="https://sites.google.com/view/berkeley-cs294-158-sp19/home">CS294-158 Deep Unsupervised Learning</a></td>
+      <td style="text-align: center">Open course on deep unsupervised learning from Berkeley.  Looks fantastic.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="special-topics-and-blog-posts-1">Special Topics and Blog Posts</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">File</th>
+      <th style="text-align: center">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Karpathy’s <a href="https://karpathy.github.io/2019/04/25/recipe/">Recipe for Training NNs</a></td>
+      <td style="text-align: center">A great blog post that contains a bunch of little tricks for training deep neural networks</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Troubleshooting Deep Neural Networks <a href="https://www.youtube.com/watch?v=XtCNNwDi9xg">video</a> and <a href="http://josh-tobin.com/assets/pdf/troubleshooting-deep-neural-networks-01-19.pdf?utm_campaign=NLP%20News&amp;utm_medium=email&amp;utm_source=Revue%20newsletter">slides</a> by Josh Tobin</td>
+      <td style="text-align: center">“A field gudie to fixing your model,” which has some nice tips.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="https://towardsdatascience.com/a-comprehensive-introduction-to-different-types-of-convolutions-in-deep-learning-669281e58215">Different types of convolutions</a> by Kunlun Bai</td>
+      <td style="text-align: center">Nice blg post providing an overview of many different types of convolutions used in deep learning.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Adversarial Examples/Robust ML <a href="http://people.csail.mit.edu/madry/lab/blog/adversarial/2018/07/06/adversarial_intro/">Part 1</a>, <a href="http://people.csail.mit.edu/madry/lab/blog/adversarial/2018/07/11/robust_optimization_part1/">Part 2</a>, and <a href="http://people.csail.mit.edu/madry/lab/blog/adversarial/2018/08/10/robust_optimization_part2/">Part 3</a></td>
+      <td style="text-align: center">The <a href="https://people.csail.mit.edu/madry/lab/">Madry lab</a> is one of the top research groups in robust deep learning research. They put together a fantastic intro to these topics on their blog. I hope they keep making posts…</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="https://distill.pub/2016/augmented-rnns/">Distill Attention</a></td>
+      <td style="text-align: center">Amazingly clear presentation of the attention mechanism and its (early) variants</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="https://lilianweng.github.io/lil-log/2018/06/24/attention-attention.html">Lilian Weng Attention post</a></td>
+      <td style="text-align: center">Nice blog post on attention, self-attention, trasnformers, etc</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="https://distill.pub/2018/building-blocks/">Distill Building Interpretability</a></td>
+      <td style="text-align: center">Coolest visualizations of NN internals I’ve ever seen</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="https://distill.pub/2017/feature-visualization/">Distill Feature Visualization</a></td>
+      <td style="text-align: center">Running theme: If it’s only distill.pub, read it.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs/">Chris Olah Understanding LSTMs</a></td>
+      <td style="text-align: center">Chris Olah is a master of his craft, and here offers a fantastic overview of LSTMs and GRUs.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="https://github.com/OpenMined/PySyft/tree/master/examples/tutorials">Intro to Federated Learning</a></td>
+      <td style="text-align: center">Intro to federated learning and PySyft from Andrew Trask and others using PyTorch.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="https://omoindrot.github.io/triplet-loss">Triplet Loss and Online triplet mining blog post</a></td>
+      <td style="text-align: center">Nice exposition on Olivier Moindrot’s blog</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="https://tkipf.github.io/graph-convolutional-networks/">Graph Convolutional Neural Networks</a></td>
+      <td style="text-align: center">Blog post on GCNNs by Thomas Kipf</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="instructive-codebases">Instructive Codebases</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">File</th>
+      <th style="text-align: center">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Sebastian Raschka’s <a href="https://github.com/rasbt/deeplearning-models">Deep Learning Models Github</a></td>
+      <td style="text-align: center">An impressively comprehensive set of TensorFlow and Pytorch models, annotated and perusable in 80+ Jupyter Notebooks.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="https://pytorch.org/tutorials/">Pytorch Tutorials</a></td>
+      <td style="text-align: center">The tutorials put out by the pytorch developers are really fantastic. Easy to see why the community is growing so fast.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Wiseodd’s <a href="https://wiseodd.github.io/">Website</a> and <a href="https://github.com/wiseodd/generative-models">Deep Generative Models Github</a> and</td>
+      <td style="text-align: center">An amazing collection of deep learning implementations.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="--natural-language-processing"><a name="NLP"></a>  Natural Language Processing</h3>
+
+<h4 id="textbooks-lectures-and-course-notes-2">Textbooks, Lectures, and Course Notes</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">File</th>
+      <th style="text-align: center">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="https://www.fast.ai/2019/07/08/fastai-nlp/">Fast.ai Intro to NLP</a></td>
+      <td style="text-align: center">Code-first intro to NLP from the excellent folks at fast.ai.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="/files/notes/cs224n-2017-merged.pdf">CS224W Deep Learning for NLP 2017</a></td>
+      <td style="text-align: center">Fantastic course notes on Deep Learning for NLP from Stanford’s <a href="http://web.stanford.edu/class/cs224n/">CS224</a>. Updated noteset appears to live <a href="https://web.stanford.edu/class/cs224n/readings/">here</a>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="http://www.phontron.com/class/nn4nlp2018/schedule.html">CMU CS 11-747 Deep Learning for NLP</a></td>
+      <td style="text-align: center">Fantastic course on Deep Learning for NLP from CMU’s Graham Neubig. Really great lecture videos on Youtube <a href="https://www.youtube.com/playlist?list=PLbdKUKMAnh9Qqs5uwEBDfRb_L3YaLbRKq">here</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="/http://web.stanford.edu/class/cs224u/">CS224U Natural Language Understanding 2019</a></td>
+      <td style="text-align: center">Another DL+NLP course at Stanford.  Also has accompanying <a href="https://www.youtube.com/watch?v=tZ_Jrc_nRJY&amp;list=PLoROMvodv4rObpMCir6rNNUlFAn56Js20">Youtube videos</a> and a <a href="https://github.com/cgpotts/cs224u/">Github repo</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="special-topics-and-blog-posts-2">Special Topics and Blog Posts</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">File</th>
+      <th style="text-align: center">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="http://colah.github.io/posts/2014-07-NLP-RNNs-Representations/">Chris Olah on Word Embeddings</a></td>
+      <td style="text-align: center">Chris Olah explaining world embeddings and the like.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="http://www.peterbloem.nl/blog/transformers">Transformers from Scratch by Peter Bloem</a></td>
+      <td style="text-align: center">Nice overview of transformer architecures with some great diagrams and code.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="http://jalammar.github.io/illustrated-transformer/">The Illustrated Transformer</a></td>
+      <td style="text-align: center">Nice visualization of how transformer networks work by Jay Alammar.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="http://nlp.seas.harvard.edu/2018/04/03/attention.html">The Annotated Transformer</a></td>
+      <td style="text-align: center">Harvard’s Sasha Rush created a line-by-line annotation of “Attention is All You Need” that also serves as a working notebook. Pedagogical brilliance, and it would be awesome to do this for a couple papers per year.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="/files/notes/Goldber_Primer_Neural_Nets_NLP.pdf">Goldberg’s Primer on NNs for NLP</a></td>
+      <td style="text-align: center">Overview of Deep Learning for NLP from Yoav Goldberg <a href="http://u.cs.biu.ac.il/~yogo/nnlp.pdf">downloaded from here</a>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="/files/notes/neubig_nmt_seq2seq.pdf">Neubig’s Tutorial on NNs for NLP</a></td>
+      <td style="text-align: center">Overview of Deep Learning for NLP from Graham Neubig. Downloaded from <a href="https://arxiv.org/pdf/1703.01619.pdf">arxiv</a> and pairs nicely with his course and videos.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="-reinforcement-learning"><a name="RL"></a> Reinforcement Learning</h3>
+
+<h4 id="textbooks-lectures-and-course-notes-3">Textbooks, Lectures, and Course Notes</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">File</th>
+      <th style="text-align: center">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="http://incompleteideas.net/book/the-book-2nd.html">Sutton and Barto Open RL Book</a></td>
+      <td style="text-align: center">De-facto standard intro to RL, even though the textbook is only now about to be published!</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="http://web.stanford.edu/class/cs234/index.html">Stanford Reinforcement Learning Course </a> by Emma Brunskill</td>
+      <td style="text-align: center">A really great RL class from Stanford. The website has a really nice note set. Also, lecture videos are on <a href="https://www.youtube.com/watch?v=FgzM3zpZ55o&amp;list=PLoROMvodv4rOSOPzutgyCTapiGlY2Nd8u">Youtube</a>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="http://rll.berkeley.edu/deeprlcourse/">Berkeley Deep Reinforcement Learning</a></td>
+      <td style="text-align: center">RL class from Berkeley taught by top dogs in the field, lectures posted to Youtube.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="special-topics-and-blog-posts-3">Special Topics and Blog Posts</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">File</th>
+      <th style="text-align: center">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="http://karpathy.github.io/2016/05/31/rl/">Karpathy’s Pong From Pixels</a></td>
+      <td style="text-align: center">Andrej Karpathy has a real gift for didactics. This is a self-contained explanation of deep reinforcement learning sufficient to understand a basic atari agent.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="https://lilianweng.github.io/lil-log/2018/02/19/a-long-peek-into-reinforcement-learning.html">Weng’s A (Long) Peek into RL</a></td>
+      <td style="text-align: center">A nice blog post covering the foundations of reinforcement learning</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="https://spinningup.openai.com/en/latest/spinningup/rl_intro.html">OpenAI’s Intro to RL</a></td>
+      <td style="text-align: center">The introductory tutorial for OpenAIs new <a href="https://blog.openai.com/spinning-up-in-deep-rl/">“Spinning Up in Deep RL” website</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="-applications-in-biology-and-medicine"><a name="bio"></a> Applications in Biology and Medicine</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">File</th>
+      <th style="text-align: center">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="https://github.com/beamandrew/medical-data">Medical ML Datasets github</a></td>
+      <td style="text-align: center">Github repo of a bunch of medical ML datasets, compiled by Andrew Beam.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="https://github.com/yangkky/Machine-learning-for-proteins">ML for protein design github</a></td>
+      <td style="text-align: center">Nice github repo put together by Kevin Yang, covering a bunch of ground in the ML for proteins space.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="https://www.embopress.org/doi/10.15252/msb.20188746">Best Practices in Single-Cell RNA-Seq Tutorial</a></td>
+      <td style="text-align: center">Excelllent tutorial on single-cell RNA-seq, walking through current best practices at every stage of scRNA-seq analysis.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="-miscellaneous-websites"><a name="misc"></a> Miscellaneous websites</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">File</th>
+      <th style="text-align: center">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><a href="http://colah.github.io/">Chris Olah’s Blog</a></td>
+      <td style="text-align: center">Essentially everything on here is gold. I am so grateful for the hours he must put into these posts.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="https://distill.pub">distill.pub</a></td>
+      <td style="text-align: center">Distill navigates a really interesting gap between super-blog and research journal. I wish that we had more publications like this.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="http://ruder.io/">Sebastian Ruder’s blog</a></td>
+      <td style="text-align: center">Sebastian has produced a lot of really great explanations, like the one on gradient descent methods I linked to above. He also maintains a <a href="https://nlpprogress.com/">website tracking progress on NLP benchmarks</a></td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="https://lilianweng.github.io/lil-log/">Lillian Weng’s Blog</a></td>
+      <td style="text-align: center">Great blog on RL, meta-learning, and other topics</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="http://www.shortscience.org/">ShortScience</a></td>
+      <td style="text-align: center">This website contains public summaries/discussions of machine learning, CS, and biology papers.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="https://bair.berkeley.edu/blog/">Berkeley AI Research (BAIR) Blog</a></td>
+      <td style="text-align: center">BAIR produces a lot of great research, and uses this blog to release more accessible presentations of their papers.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="https://www.offconvex.org/">Off the Convex Path</a></td>
+      <td style="text-align: center">Nice blog on machine learning and optimization.</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="https://www.inference.vc/">Ferenc Huszár’s blog</a></td>
+      <td style="text-align: center">Pretty popular blog that has a lot of explorations/musings on ML from an author with a rigorous mathematical perspective</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"><a href="https://tlienart.github.io/pub/csml.html">Thibaut Lienart’s Blog</a></td>
+      <td style="text-align: center">This website has some notes on math and optimization that seem interesting.</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+    </article>
+    <span class="print-footer">ML Resources - Sam Finlayson</span>
+    <footer>
+  <hr class="slender">
+  <ul class="footer-links">
+    <li><a href="mailto:samuel_finlayson@hms.harvard.edu"><span class="icon-mail3"></span></a></li>    
+    
+      <li>
+        <a href="//www.twitter.com/IAmSamFin"><span class="icon-twitter"></span></a>
+      </li>
+    
+      <li>
+        <a href="//github.com/sgfin"><span class="icon-github"></span></a>
+      </li>
+    
+      <li>
+        <a href="/feed"><span class="icon-rss2"></span></a>
+      </li>
+      
+  </ul>
+<div class="credits">
+<span>&copy; 2020 &nbsp;&nbsp;SAM FINLAYSON</span></br> <br>
+<span>This site created with the <a href="//github.com/clayh53/tufte-jekyll">Tufte theme for  </a> in <a href="//jekyllrb.com">Jekyll</a>.</span> 
+</div>  
+</footer>
+  </body>
+</html>

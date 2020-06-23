@@ -1,0 +1,350 @@
+@charset "UTF-8";
+/* Nicola Potts Global Styles */
+
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol,
+ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  /*font: bistream vera sans;*/
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+
+/* Fonts */
+/*@font-face {
+    font-family: 'bitstream_vera_sansroman';
+    src: url('fonts/bitstreamverasans_roman_macroman/Vera-webfont.eot');
+    src: url('fonts/bitstreamverasans_roman_macroman/Vera-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/bitstreamverasans_roman_macroman/Vera-webfont.woff') format('woff'),
+         url('fonts/bitstreamverasans_roman_macroman/Vera-webfont.ttf') format('truetype'),
+         url('fonts/bitstreamverasans_roman_macroman/Vera-webfont.svg#bitstream_vera_sansroman') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto', sans-serif;
+    font-weight: normal;
+    font-style: normal;
+}*/
+
+
+/* general classes */
+
+body {
+  min-height:100%;
+  /*max-width: 900px;*/
+  width: 100%;
+}
+
+
+
+p.align-right {
+  width:100%;
+  text-align:right;
+}
+
+/* text general */
+
+body {
+  /*font-family: 'Roboto', sans-serif;*/
+  color:#000000;
+  font-size:12px;
+  line-height:18px;
+  margin: 0 auto;
+}
+
+h1 { 
+  /*font-family: 'Roboto', sans-serif;*/
+  font-size: 70px;
+  font-weight: normal;
+  line-height: 74px;
+  letter-spacing:-3px;
+  margin-left:-0px;
+  margin-top: 5px;
+  margin-bottom:-0px;
+  -webkit-font-smoothing: antialiased;
+}
+
+h2 { 
+  font-size: 32px;
+  line-height: 30px;
+  margin-bottom:0.4em;
+  -webkit-font-smoothing: antialiased;
+  font-weight:normal;
+}
+
+h3 { 
+  font-size: 36px;
+  line-height: 36px;
+  margin-bottom:0.6em;
+  -webkit-font-smoothing: antialiased;
+  font-weight:normal;
+  width:80%;
+}
+
+p em {
+  /*font-family: 'Roboto', sans-serif;;*/
+  font-style:normal;
+}
+
+p, ul {
+  margin-bottom:1em;
+}
+
+.icon {
+  display: inline-block;
+}
+
+.standfirst {
+  font-size: 21px;
+  line-height: 26px;
+  -webkit-font-smoothing: antialiased;
+  margin-bottom: 0px;
+  display:table-cell;
+  vertical-align:middle;
+  padding-left:10px;
+}
+
+
+.headshot {
+  display:table-cell;
+  vertical-align:top;
+  width: 175px;
+  padding: 10px;
+  margin-right:10px;
+}
+
+/* Layout */
+
+#container {
+  position:relative;
+  /*width:980px;*/
+/*  margin:80px auto 80px auto;
+  padding:0 40px 0 40px;*/
+  z-index:100;
+}
+
+
+
+/* publication list */
+.pub {
+  font-size:medium;
+}
+.pub h3 {
+  font-size:large;
+  width: 100%;
+  text-transform:none;
+  line-height: 120%;
+  font-weight: bold;
+}
+.pub ul {
+  list-style-type: none;
+}
+
+.pub li img {
+  float: left;
+  margin: 0 15px 0 0;
+}
+ 
+.pub li p {
+  text-align: left;
+}
+ 
+.pub li {
+  padding: 5px;
+  overflow: auto;
+}
+ 
+.pub li:hover {
+  background: #eee;
+  cursor: pointer;
+}
+
+.pub blockquote {
+  font-size:14px;
+  font-style:none;
+}
+
+/* image to the left of pub info */
+.pub .pub-image {
+  float: left;
+  width: 100px;
+}
+
+div .pub-info {
+  float:left;
+  width: 78%;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 0px;
+  line-height: 1.2;
+  /*
+  overflow: hidden;
+  max-height: 120px;
+  -webkit-transition: max-height .6s linear;
+  -moz-transition: max-height .6s linear;
+  transition: max-height .6s linear;
+  */
+}
+
+.pub-info p {
+  line-height: 1.2;
+}
+
+.pub-info blockquote {
+  text-align: justify;
+}
+
+.pub-info h3 {
+  margin-bottom: 5px;
+}
+
+/* hidden div for abstract */
+.abstract {
+  text-align: justify;
+  display: none;
+  width: auto;
+  height: auto;
+  padding-bottom: 20px;
+}
+
+
+.intro {
+  font-size: large;
+}
+
+
+
+#timeline {
+  font-size: large;
+  font-weight: 300;
+}
+@media (min-width: 768px) {
+  .timelineitem:nth-child(odd) {
+    left: 12.5px;
+    margin-left: 50%;
+    border-left: 5px solid #333;
+    text-align: left;
+  }
+  .timelineitem:nth-child(even) {
+    left: -12.5px;
+    margin-right: 50%;
+    margin-left: 5px;
+    border-right: 5px solid #333;
+    text-align: right;
+  }
+  .timelineitem {
+    width: 50%;
+    position: relative;
+    padding: 0px 10px 0px 10px;
+  }
+  .timelineitem:nth-child(odd):before {
+   left: -8px;
+  }
+  .timelineitem:nth-child(even):before {
+    right: -8px;
+  }
+}
+
+.timelineitem:before {
+  width: 11px;
+  height: 11px;
+  background: #333;
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  border-radius: 5px;
+}
+
+@media (max-width: 767px) {
+  .timelineitem {
+    border-left: 5px solid #333;
+    text-align: left;
+    margin-left: 10px;
+    padding: 5px;
+    position: relative;
+  }
+  .timelineitem:before {
+    left: -8px;
+  }
+}
+
+.tdate {
+  font-size: large;
+  font-weight: 400;
+  margin-bottom: 0px;
+  color: rgb(132,0,0);
+}
+.ttitle {
+  font-size: large;
+  font-weight: 400;
+}
+.tdesc {
+  font-size: medium;
+  font-weight: 300;
+}
+@media (max-width: 768px) {
+  .tdate {
+    font-size: 16px;
+  }
+  .ttitle {
+    font-size: 16px;
+  }
+  .tdesc {
+    font-size: 16px;
+  }
+}
+.thigh {
+  color: #070;
+}
+.quote {
+  color: #777;
+  text-align: center;
+  font-style: italic;
+  font-weight: 300;
+  padding: 90px 0 50px;
+}
+
