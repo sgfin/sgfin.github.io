@@ -1,10 +1,13 @@
-require 'rubygems'
-require 'rake'
-require 'rdoc'
-require 'date'
-require 'yaml'
-require 'tmpdir'
-require 'jekyll'
+require "rubygems"
+require "tmpdir"
+
+require "bundler/setup"
+require "jekyll"
+
+
+# Change your GitHub reponame
+GITHUB_REPONAME = "sgfin/sgfin.github.io"
+
 
 desc "Generate blog files"
 task :generate do
@@ -16,19 +19,20 @@ end
 
 
 desc "Generate and publish blog to gh-pages"
-task :publish => [:generate] do
+task :publish do
   Dir.mktmpdir do |tmp|
-    system "mv _site/* #{tmp}"
-    system "git checkout -B gh-pages"
-    system "rm -rf *"
-    system "mv #{tmp}/* ."
-    message = "Site updated at #{Time.now.utc}"
+    cp_r "_site/.", tmp
+
+    pwd = Dir.pwd
+    Dir.chdir tmp
+
+    system "git init"
     system "git add ."
-    system "git commit -am #{message.shellescape}"
-    system "git push origin gh-pages --force"
-    system "git checkout master"
-    system "echo yolo"
+    message = "Site updated at #{Time.now.utc}"
+    system "git commit -m #{message.inspect}"
+    system "git remote add origin git@github.com:#{GITHUB_REPONAME}.git"
+    system "git push origin master --force"
+
+    Dir.chdir pwd
   end
 end
-
-task :default => :publish

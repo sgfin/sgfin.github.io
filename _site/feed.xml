@@ -5,20 +5,38 @@
     <description>By Sam Finlayson, MD-PhD student at Harvard-MIT</description>
     <link>http://sgfin.github.io/</link>
     <atom:link href="http://sgfin.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 23 Jun 2020 03:10:58 -0400</pubDate>
-    <lastBuildDate>Tue, 23 Jun 2020 03:10:58 -0400</lastBuildDate>
+    <pubDate>Tue, 23 Jun 2020 04:32:23 -0400</pubDate>
+    <lastBuildDate>Tue, 23 Jun 2020 04:32:23 -0400</lastBuildDate>
     <generator>Jekyll v4.1.0</generator>
     
       <item>
-        <title>Induction Generalization, Inductive Biases, and Infusing Knowledge into Learned Representations</title>
-        <description>&lt;p&gt;&lt;sub&gt;&lt;sup&gt;Note: This post is a modified excerpt from the introduction to my PhD thesis.&lt;sub&gt;&lt;sup&gt;&lt;/sup&gt;&lt;/sub&gt;&lt;/sup&gt;&lt;/sub&gt;&lt;/p&gt;
+        <title>Induction, Inductive Biases, and Infusing Knowledge into Learned Representations</title>
+        <description>&lt;p&gt;&lt;sub&gt;&lt;sup&gt;Note: This post is a modified excerpt from the introduction to my PhD thesis.&lt;sub&gt;&lt;sup&gt;&lt;br /&gt;&lt;/sup&gt;&lt;/sub&gt;&lt;/sup&gt;&lt;/sub&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;inductive-generalization-and-inductive-biases&quot;&gt;Inductive Generalization and Inductive Biases&lt;/h2&gt;
+&lt;h4&gt;Outline:&lt;/h4&gt;
+
+&lt;div style=&quot;padding-top: 10px; font-size:large&quot;&gt;
+
+&lt;a href=&quot;#Induc&quot;&gt;Inductive Generalization and Inductive Biases&lt;/a&gt;&lt;br /&gt;
+
+&lt;a href=&quot;#Phil&quot;&gt;-Philosophical Foundations for the Problem of Induction&lt;/a&gt;&lt;br /&gt;
+
+&lt;a href=&quot;#InduBias&quot;&gt;-Inductive Biases in Machine Learning&lt;/a&gt;&lt;br /&gt;
+
+&lt;a href=&quot;#LearnRep&quot;&gt;Learned Representations of Data and Knowledge&lt;/a&gt;&lt;br /&gt;
+
+&lt;a href=&quot;#LearnBack&quot;&gt;-Background on Representation Learning&lt;/a&gt;&lt;br /&gt;
+
+&lt;a href=&quot;#Knowledge&quot;&gt;-Infusing Domain Knowledge into Neural Representations&lt;/a&gt;&lt;br /&gt;
+
+&lt;/div&gt;
+
+&lt;h2 id=&quot;-inductive-generalization-and-inductive-biases&quot;&gt;&lt;a name=&quot;Induc&quot;&gt;&lt;/a&gt; Inductive Generalization and Inductive Biases&lt;/h2&gt;
 
 &lt;p&gt;Our goal in building machine learning systems is, with rare exceptions, to create algorithms whose utility extends beyond the dataset in which they are trained. In other words, we desire intelligent systems that are capable of generalizing to future data. The process of leveraging observations to draw inferences about the unobserved is the principle of &lt;em&gt;induction&lt;/em&gt;&lt;label for=&quot;induct_term&quot; class=&quot;margin-toggle sidenote-number&quot;&gt;&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;induct_term&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;sidenote&quot;&gt;Terminological note: In a non-technical setting, the term &lt;em&gt;inductive&lt;/em&gt; – denoting the inference of general laws from particular instances – is typically contrasted with the adjective &lt;em&gt;deductive&lt;/em&gt;, which denotes the inference of particular instances from general laws. This broad definition of induction may be used in machine learning to describe, for example, the model fitting process as the &lt;em&gt;inductive step&lt;/em&gt; and the deployment on new data as the &lt;em&gt;deductive step&lt;/em&gt;. By the same token, some AI methods such as automated theorem provers are described as deductive. In the setting of current ML research, however, it is much more common for the term ‘inductive’ to refer specifically to methods that are structurally capable of operating on new data points without retraining. In contrast, &lt;em&gt;transductive&lt;/em&gt; methods require a fixed or pre-specified dataset, and are used to make internal predictions about missing features or labels. While many ML methods are assumed to be inductive in both senses of the term, this section concerns itself primarily with the broader notion of induction as it relates to learning from observed data. In contrast, Chapters 1 and 2 involve the second use of this term, as I propose new methods that are inductive but whose predecessors were transductive &lt;a class=&quot;citation&quot; href=&quot;#chami2020machine&quot;&gt;&lt;span style=&quot;vertical-align: super&quot;&gt;1&lt;/span&gt;&lt;/a&gt;.&lt;/span&gt;.
 &lt;!--. --&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;philosophical-foundations-for-the-problem-of-induction&quot;&gt;Philosophical Foundations for the Problem of Induction&lt;/h3&gt;
+&lt;h3 id=&quot;-philosophical-foundations-for-the-problem-of-induction&quot;&gt;&lt;a name=&quot;Phil&quot;&gt;&lt;/a&gt; Philosophical Foundations for the Problem of Induction&lt;/h3&gt;
 
 &lt;p&gt;Even ancient philosophers appreciated the tenuity of inductive generalization. As early as the second century, the Greek philosopher Sextus Empiricus argued that the very notion of induction was invalid, a conclusion independently argued by the Charvaka school of philosophy in ancient India &lt;a class=&quot;citation&quot; href=&quot;#empiricus1933outlines&quot;&gt;&lt;span style=&quot;vertical-align: super&quot;&gt;2,3&lt;/span&gt;&lt;/a&gt;. The so-called “problem of induction,” as it is best known today, was formulated by 18th-century philosopher David Hume in his twin works &lt;em&gt;A Treatise of Human Nature&lt;/em&gt; and &lt;em&gt;An Enquiry Concerning Human Understanding&lt;/em&gt; &lt;a class=&quot;citation&quot; href=&quot;#humeTreatise&quot;&gt;&lt;span style=&quot;vertical-align: super&quot;&gt;4,5&lt;/span&gt;&lt;/a&gt;. In these works, Hume argues that all inductive inference hinges upon the premise that the future will follow the past. This premise has since become known as his “Principle of Uniformity of Nature” (or simply, the “Uniformity Principle”), the “Resemblance Principle,” or his “Principle of Extrapolation” &lt;a class=&quot;citation&quot; href=&quot;#garrett2011reason&quot;&gt;&lt;span style=&quot;vertical-align: super&quot;&gt;6&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;
 
@@ -32,7 +50,7 @@
 
 &lt;p&gt;Each of these questions will be repeatedly considered throughout the course of this thesis.&lt;/p&gt;
 
-&lt;h3 id=&quot;inductive-biases-in-machine-learning&quot;&gt;Inductive Biases in Machine Learning&lt;/h3&gt;
+&lt;h3 id=&quot;-inductive-biases-in-machine-learning&quot;&gt;&lt;a name=&quot;InduBias&quot;&gt;&lt;/a&gt; Inductive Biases in Machine Learning&lt;/h3&gt;
 
 &lt;p&gt;As outlined above, the paradigm of machine learning presupposes the identification – a la Hume – of some set of tasks and environments for which we expect the future to resemble the past. At this point, we are thus forced to determine guiding principles – a la Goodman – that give our models strong &lt;em&gt;a priori&lt;/em&gt; preferences for generalizations that we expect to extrapolate well into the future. When such guiding principles are instantiated as design decisions in our models, they are known as &lt;em&gt;inductive biases&lt;/em&gt;.&lt;/p&gt;
 
@@ -46,15 +64,15 @@
 
 &lt;p&gt;A key challenge of machine learning, therefore, is to design systems whose inductive biases align with the structure of the problem at hand. The effect of such efforts is not merely to endow the model with the capacity to learn key patterns, but also – somewhat paradoxically – to deliberately hamper the capacity of the model to learn other (presumably less useful) patterns, or at least to drive the model away from learning them. In other words, inductive biases stipulate the properties that we believe our model should have in order to generalize to future data; they thus encode our key assumptions about the problem itself.&lt;/p&gt;
 
-&lt;p&gt;The machine learning toolkit has a wide array of methods to induce inductive biases in learning systems. For example, regularization methods such as L1-/L2-penalties &lt;a class=&quot;citation&quot; href=&quot;#tibshirani1996regression&quot;&gt;&lt;span style=&quot;vertical-align: super&quot;&gt;13&lt;/span&gt;&lt;/a&gt;, dropout &lt;a class=&quot;citation&quot; href=&quot;#srivastava2014dropout&quot;&gt;&lt;span style=&quot;vertical-align: super&quot;&gt;14&lt;/span&gt;&lt;/a&gt;, or early stopping &lt;a class=&quot;citation&quot; href=&quot;#prechelt1998early&quot;&gt;&lt;span style=&quot;vertical-align: super&quot;&gt;15&lt;/span&gt;&lt;/a&gt; are a simple yet powerful means to impose Occam’s razor onto the training process. By the same token, the maximum margin loss of support vector machines &lt;a class=&quot;citation&quot; href=&quot;#cortes1995support&quot;&gt;&lt;span style=&quot;vertical-align: super&quot;&gt;16&lt;/span&gt;&lt;/a&gt;, or model selection based on cross-validation can be described as inductive biases &lt;a class=&quot;citation&quot; href=&quot;#girosi1995regularization&quot;&gt;&lt;span style=&quot;vertical-align: super&quot;&gt;17,18&lt;/span&gt;&lt;/a&gt;. Bayesian methods of almost any form induce inductive biases by placing explicit prior probabilities over model parameters. Machine learning systems that build on symbolic logic, such as inductive logic programming &lt;a class=&quot;citation&quot; href=&quot;#muggleton1991inductive&quot;&gt;&lt;span style=&quot;vertical-align: super&quot;&gt;19&lt;/span&gt;&lt;/a&gt;, encode established knowledge into very strict inductive biases, by forcing algorithms to reason about training examples explicitly in terms of hypotheses derived from pre-specified databases of facts. As nicely synthesized in Battaglia et al, the standard layer types of modern neural networks each have distinct invariances that induce corresponding &lt;em&gt;relational inductive biases&lt;/em&gt;; for example, convolutional layers have spatial translational invariance and induce a relational inductive bias of locality, whereas recurrent layers have a temporal invariance that induces the inductive bias of sequentiality &lt;a class=&quot;citation&quot; href=&quot;#battaglia2018relational&quot;&gt;&lt;span style=&quot;vertical-align: super&quot;&gt;20&lt;/span&gt;&lt;/a&gt;. Such relational inductive biases are extremely powerful when well-matched to the data on which they are applied.&lt;/p&gt;
+&lt;p&gt;The machine learning toolkit has a wide array of methods to induce inductive biases in learning systems &lt;label for=&quot;inductive_biases&quot; class=&quot;margin-toggle&quot;&gt;⊕&lt;/label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;inductive_biases&quot; class=&quot;margin-toggle&quot; /&gt;&lt;span class=&quot;marginnote&quot;&gt;&lt;img class=&quot;fullwidth&quot; src=&quot;/../assets/thesis_images/inductive_biases.png&quot; /&gt;&lt;br /&gt;&lt;/span&gt;. For example, regularization methods such as L1-/L2-penalties &lt;a class=&quot;citation&quot; href=&quot;#tibshirani1996regression&quot;&gt;&lt;span style=&quot;vertical-align: super&quot;&gt;13&lt;/span&gt;&lt;/a&gt;, dropout &lt;a class=&quot;citation&quot; href=&quot;#srivastava2014dropout&quot;&gt;&lt;span style=&quot;vertical-align: super&quot;&gt;14&lt;/span&gt;&lt;/a&gt;, or early stopping &lt;a class=&quot;citation&quot; href=&quot;#prechelt1998early&quot;&gt;&lt;span style=&quot;vertical-align: super&quot;&gt;15&lt;/span&gt;&lt;/a&gt; are a simple yet powerful means to impose Occam’s razor onto the training process. By the same token, the maximum margin loss of support vector machines &lt;a class=&quot;citation&quot; href=&quot;#cortes1995support&quot;&gt;&lt;span style=&quot;vertical-align: super&quot;&gt;16&lt;/span&gt;&lt;/a&gt;, or model selection based on cross-validation can be described as inductive biases &lt;a class=&quot;citation&quot; href=&quot;#girosi1995regularization&quot;&gt;&lt;span style=&quot;vertical-align: super&quot;&gt;17,18&lt;/span&gt;&lt;/a&gt;. Bayesian methods of almost any form induce inductive biases by placing explicit prior probabilities over model parameters. Machine learning systems that build on symbolic logic, such as inductive logic programming &lt;a class=&quot;citation&quot; href=&quot;#muggleton1991inductive&quot;&gt;&lt;span style=&quot;vertical-align: super&quot;&gt;19&lt;/span&gt;&lt;/a&gt;, encode established knowledge into very strict inductive biases, by forcing algorithms to reason about training examples explicitly in terms of hypotheses derived from pre-specified databases of facts. As nicely synthesized in Battaglia et al, the standard layer types of modern neural networks each have distinct invariances that induce corresponding &lt;em&gt;relational inductive biases&lt;/em&gt;; for example, convolutional layers have spatial translational invariance and induce a relational inductive bias of locality, whereas recurrent layers have a temporal invariance that induces the inductive bias of sequentiality &lt;a class=&quot;citation&quot; href=&quot;#battaglia2018relational&quot;&gt;&lt;span style=&quot;vertical-align: super&quot;&gt;20&lt;/span&gt;&lt;/a&gt;. Such relational inductive biases are extremely powerful when well-matched to the data on which they are applied.&lt;/p&gt;
 
 &lt;p&gt;In the next section, I will introduce the neural representation learning framework – the dominant paradigm of machine learning today – and discuss inductive biases in this setting, with a special emphasis on recent tools for infusing external knowledge into the inductive biases of our models.&lt;/p&gt;
 
-&lt;h2 id=&quot;learned-representations-of-data-and-knowledge&quot;&gt;Learned Representations of Data and Knowledge&lt;/h2&gt;
+&lt;h2 id=&quot;learned-representations-of-data-and-knowledge&quot;&gt;&lt;a name=&quot;LearnRep&quot;&gt;&lt;/a&gt;Learned Representations of Data and Knowledge&lt;/h2&gt;
 
 &lt;p&gt;The performance of most information processing systems, including machine learning systems, typically depends heavily upon the data representations (or features) they employ. Historically, this meant the devotion of significant labor and expertise to &lt;em&gt;feature engineering&lt;/em&gt;, the design of data transformations and preprocessing techniques to extract and organize discriminative features from data prior to the application of ML. &lt;em&gt;Representation learning&lt;/em&gt;&lt;a class=&quot;citation&quot; href=&quot;#bengio2013representation&quot;&gt;&lt;span style=&quot;vertical-align: super&quot;&gt;21,22&lt;/span&gt;&lt;/a&gt; is an alternative to feature engineering, and refers to the training of learned representations of data (or knowledge graphs &lt;a class=&quot;citation&quot; href=&quot;#bordes2013translating&quot;&gt;&lt;span style=&quot;vertical-align: super&quot;&gt;23&lt;/span&gt;&lt;/a&gt;) that are optimized for utility in downstream tasks such as prediction or information retrieval.&lt;/p&gt;
 
-&lt;h3 id=&quot;background-on-representation-learning&quot;&gt;Background on Representation Learning&lt;/h3&gt;
+&lt;h3 id=&quot;--background-on-representation-learning&quot;&gt;&lt;a name=&quot;LearnBack&quot;&gt;&lt;/a&gt;  Background on Representation Learning&lt;/h3&gt;
 
 &lt;p&gt;Many canonical methods in statistical learning can be considered representation learning methods. For example, low-dimensional data representations with desirable properties are learned by unsupervised methods such as principal components analysis &lt;a class=&quot;citation&quot; href=&quot;#pearson1901liii&quot;&gt;&lt;span style=&quot;vertical-align: super&quot;&gt;24&lt;/span&gt;&lt;/a&gt;, k-means clustering &lt;a class=&quot;citation&quot; href=&quot;#forgy1965cluster&quot;&gt;&lt;span style=&quot;vertical-align: super&quot;&gt;25&lt;/span&gt;&lt;/a&gt;, independent components analysis &lt;a class=&quot;citation&quot; href=&quot;#jutten1991blind&quot;&gt;&lt;span style=&quot;vertical-align: super&quot;&gt;26&lt;/span&gt;&lt;/a&gt;, and manifold learning methods such as Isomap &lt;a class=&quot;citation&quot; href=&quot;#tenenbaum2000global&quot;&gt;&lt;span style=&quot;vertical-align: super&quot;&gt;27&lt;/span&gt;&lt;/a&gt; and locally-linear embeddings &lt;a class=&quot;citation&quot; href=&quot;#roweis2000nonlinear&quot;&gt;&lt;span style=&quot;vertical-align: super&quot;&gt;28&lt;/span&gt;&lt;/a&gt;. Within the field of machine learning, the most popular paradigm for representation learning are neural networks&lt;a class=&quot;citation&quot; href=&quot;#bengio2013representation&quot;&gt;&lt;span style=&quot;vertical-align: super&quot;&gt;21,22&lt;/span&gt;&lt;/a&gt;, which provide an extremely flexible framework that can in theory be used to approximate any continuous function &lt;a class=&quot;citation&quot; href=&quot;#cybenko1989approximation&quot;&gt;&lt;span style=&quot;vertical-align: super&quot;&gt;29&lt;/span&gt;&lt;/a&gt;. Over the past two decades, representation learning with neural networks has steadily outperformed traditional feature engineering methods on a large family of tasks, including speech recognition (missing reference), and natural language processing &lt;a class=&quot;citation&quot; href=&quot;#mikolov2011empirical&quot;&gt;&lt;span style=&quot;vertical-align: super&quot;&gt;30&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;
 
@@ -70,7 +88,7 @@
 
 &lt;p&gt;Taken together, neural architectures can be designed to expressively implement a broad array of inductive biases, while still allowing the network parameters to search over millions of compatible functions.&lt;/p&gt;
 
-&lt;h3 id=&quot;infusing-domain-knowledge-into-neural-representations&quot;&gt;Infusing Domain Knowledge into Neural Representations&lt;/h3&gt;
+&lt;h3 id=&quot;-infusing-domain-knowledge-into-neural-representations&quot;&gt;&lt;a name=&quot;Knowledge&quot;&gt; Infusing Domain Knowledge into Neural Representations&lt;/a&gt;&lt;/h3&gt;
 
 &lt;p&gt;Neural networks have largely absolved the contemporary researcher of the need to hand-engineer features, but this reality has not eliminated the role of external knowledge in ML design. In this section, I compare and contrast the various methods for explicitly and implicitly infusing domain knowledge into neural representations.&lt;/p&gt;
 
@@ -93,7 +111,7 @@
 
 &lt;p&gt;The current draft of my full PhD thesis can be found &lt;a href=&quot;https://www.dropbox.com/s/slw2vkxajgwgp6i/PhD_Thesis.pdf?dl=0&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
 
-&lt;h2 id=&quot;bibliography&quot;&gt;Bibliography&lt;/h2&gt;
+&lt;h3 id=&quot;bibliography&quot;&gt;Bibliography&lt;/h3&gt;
 
 &lt;ol class=&quot;bibliography&quot;&gt;&lt;li&gt;&lt;span id=&quot;chami2020machine&quot;&gt;1.Chami, I., Abu-El-Haija, S., Perozzi, B., Ré, C., and Murphy, K. (2020). Machine Learning on Graphs: A Model and Comprehensive Taxonomy.&lt;/span&gt;&lt;/li&gt;
 &lt;li&gt;&lt;span id=&quot;empiricus1933outlines&quot;&gt;2.Empiricus, S., and Bury, R.G. (1933). Outlines of pyrrhonism. Eng. trans, by RG Bury (Cambridge Mass.: Harvard UP, 1976), II &lt;i&gt;20&lt;/i&gt;, 90–1.&lt;/span&gt;&lt;/li&gt;
@@ -156,6 +174,17 @@
 &lt;li&gt;&lt;span id=&quot;devlin2018bert&quot;&gt;59.Devlin, J., Chang, M.-W., Lee, K., and Toutanova, K. (2018). Bert: Pre-training of deep bidirectional transformers for language understanding. arXiv preprint arXiv:1810.04805.&lt;/span&gt;&lt;/li&gt;
 &lt;li&gt;&lt;span id=&quot;musgrave2020metric&quot;&gt;60.Musgrave, K., Belongie, S., and Lim, S.-N. (2020). A Metric Learning Reality Check. arXiv preprint arXiv:2003.08505.&lt;/span&gt;&lt;/li&gt;
 &lt;li&gt;&lt;span id=&quot;chen2020simple&quot;&gt;61.Chen, T., Kornblith, S., Norouzi, M., and Hinton, G. (2020). A simple framework for contrastive learning of visual representations. arXiv preprint arXiv:2002.05709.&lt;/span&gt;&lt;/li&gt;&lt;/ol&gt;
+
+&lt;style&gt;
+.bibliography {
+font-size: small;
+width: 50%;
+}
+.bibliography li{
+  margin: 0px;
+}
+&lt;/style&gt;
+
 </description>
         <pubDate>Mon, 22 Jun 2020 06:00:00 -0400</pubDate>
         <link>http://sgfin.github.io/2020/06/22/Induction-Intro/</link>
