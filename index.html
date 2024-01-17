@@ -70,16 +70,17 @@ jQuery(function(){
 
       <div class="standfirst">
         <span style="font-size: xx-large ;">Sam Finlayson</span> <br><br>
-        MD-PhD Candidate<br>
+        Pediatrics-Genetics Resident<br>
 
         <div style="font-size:18px">
-        Harvard Medical School, MIT
+        Seattle Children's Hospital
         </div>
 
         </div>
       </div>
         <p class="intro" style="padding-top: 10px;">
-           I am medical student in the <a href="https://hst.mit.edu/">Harvard-MIT HST program</a>.  Recently, I also completed my PhD under the direction of <a href="http://dbmi.hms.harvard.edu/person/faculty/zak-kohane"> Isaac Kohane (Harvard DBMI)</a> and <a href = "https://mit-medg.github.io/index.html"> Peter Szolovits (MIT CSAIL)</a>.  My research centers on biomedical applications of machine learning, which has allowed me to participate in a range of really fun projects leveraging medical images, medical text, EHR and claims data, and various 'omics.
+           I am resident physician in Pediatrics and Clinical Genetics (combined program) at Seattle Children's Hospital and the University of Washington. Previously, I completed my medical degree in the <a href="https://hst.mit.edu/">Harvard-MIT HST program</a>, and my PhD under the direction of <a href="http://dbmi.hms.harvard.edu/person/faculty/zak-kohane"> Isaac Kohane (Harvard DBMI)</a> and <a href = "https://mit-medg.github.io/index.html"> Peter Szolovits (MIT CSAIL)</a>.
+           <br><br> My clinical interests are in the diagnosis and treatment of rare pediatric diseases. My research background is primarily in biomedical applications of machine learning. Recurring technical themes include designing systems that integrate different types of data ('omics, chemical structures, imaging, clinical text, insurance claims, etc.), and trying to rigorously determine the circumstances under which machine learning systems can be clinically trusted.
            <br><br>
            In addition to my research, I am involved in the Hydrocephalus community by way of <a href="http://teamhydro.org">Team Hydro</a>, a non-profit organization that my family and I started to raise money and awareness for the condition in honor of my sister, <a href="http://teamhydro.org/kate-finlayson/">Kate</a>. I also do consulting work as a data scientist and deep learning engineer, with clients including tech, biotech, and pharmaceutical companies.
            <br><br>
@@ -96,18 +97,24 @@ jQuery(function(){
 <div class="container" style="padding-top: 20px; padding-bottom: 60px">
   <div id="timeline">
     <div class="timelineitem">
-      <div class="tdate">2022 (Anticipated)</div>
+      <div class="tdate">2026 (Anticipated)</div>
+      <div class="ttitle">Seattle Children's Hospital</div>
+      <div class="ttitle">University of Washington</div>
+      <div class="tdesc">Medical Resident: <span class="thigh">Pediatrics</span> and <span class="thigh">Clinical Genetics</span></div>
+      <div class="tdesc">Combined Training Program</div>
+      </div>
+    <div class="timelineitem">
+      <div class="tdate">2022</div>
       <div class="ttitle">Harvard Medical School, MIT</div>
       <div class="tdesc">MD, <span class="thigh">HST Program</span></div>
       <div class="tdesc">MSTP Fellowship</div>
       </div>
-    </div>
     <div class="timelineitem">
       <div class="tdate">2020</div>
       <div class="ttitle">Harvard, MIT</div>
       <div class="tdesc">PhD, <span class="thigh">Quantitative Biology</span></div>
       <div class="tdesc">Advisors: Isaac Kohane (HMS DBMI) and Peter Szolovits (MIT CSAIL)</div>
-      <div class="tdesc">Thesis: <a href="https://www.dropbox.com/s/slw2vkxajgwgp6i/PhD_Thesis.pdf?dl=0"> Learning Inductive Representations of Biomedical Data</a> </div>
+      <div class="tdesc">Thesis: <a href="https://www.dropbox.com/s/slw2vkxajgwgp6i/PhD_Thesis.pdf?dl=0"> Learning Inductive Representations of Biomedical Data</a> <a href="https://www.dropbox.com/scl/fi/ellt1jb1x7lnxnqrgamf9/Finlayson_Thesis_w_DAC.pdf?rlkey=b9u5f3raahkkfaiaosp7f4asm&dl=0"> (link)</a> </div>
     </div>
     <div class="timelineitem">
       <div class="tdate">2014</div>
@@ -130,19 +137,122 @@ jQuery(function(){
 <br>
 <!-- <div id="container" class="container" style="margin-top:50px; ">
  -->    <!-- PUBLICATIONS ROW -->
+    
     <div class="pub">
     <ul>
+      <li>
+          <img src="../assets/misc_paper_figures/patient_sim.png" class="pub-image">
+          <div class="pub-info">
+            <h3>Simulation of undiagnosed patients with novel genetic conditions</h3>
+            Emily Alsentzer*, <u>Samuel Finlayson*</u>, Michelle M. Li, Undiagnosed Diseases Network, Shilpa N. Kobren & Isaac S. Kohane<br>
+              <i>Nature Communications</i>, 2023<br>
+              [<a class="showSingle", target="30">Abstract</a>]
+              [<a href="https://www.nature.com/articles/s41467-023-41980-6">Paper</a>]
+              [<a href="../assets/misc_papers/simulation_2023.pdf">PDF</a>]
+            </p>
+            <div id="div30" class="abstract">
+              Rare Mendelian disorders pose a major diagnostic challenge and collectively affect 300–400 million patients worldwide. Many automated tools aim to uncover causal genes in patients with suspected genetic disorders, but evaluation of these tools is limited due to the lack of comprehensive benchmark datasets that include previously unpublished conditions. Here, we present a computational pipeline that simulates realistic clinical datasets to address this deficit. Our framework jointly simulates complex phenotypes and challenging candidate genes and produces patients with novel genetic conditions. We demonstrate the similarity of our simulated patients to real patients from the Undiagnosed Diseases Network and evaluate common gene prioritization methods on the simulated cohort. These prioritization methods recover known gene-disease associations but perform poorly on diagnosing patients with novel genetic disorders. Our publicly-available dataset and codebase can be utilized by medical genetics researchers to evaluate, compare, and improve tools that aid in the diagnostic process.
+            </div>
+          </div>
+        </li>
+      <li>
+      <li>
+          <img src="../assets/misc_paper_figures/false_dichot.png" class="pub-image">
+          <div class="pub-info">
+            <h3>Machine Learning and Statistics in Clinical Research Articles—Moving Past the False Dichotomy</h3>
+            <u>Samuel Finlayson</u>, Andrew L Beam, Maarten van Smeden<br>
+              <i>JAMA Pediatrics</i>, 2023<br>
+              [<a href="https://jamanetwork.com/journals/jamapediatrics/article-abstract/2802298">Paper</a>]
+              [<a href="../assets/misc_papers/jamapediatrics_finlayson_2023.pdf">PDF</a>]
+            </p>
+          </div>
+        </li>
+      <li>
+          <img src="../assets/misc_paper_figures/gpt_triage.png" class="pub-image">
+          <div class="pub-info">
+            <h3>The Diagnostic and Triage Accuracy of the GPT-3 Artificial Intelligence Model </h3>
+            David M Levine, Rudraksh Tuwani, Benjamin Kompa, Amita Varma, <u>Samuel Finlayson</u>, Ateev Mehrotra, Andrew Beam<br>
+            Preprint Under Review, 2022<br>
+              [<a class="showSingle", target="29">Abstract</a>]
+              [<a href="https://www.medrxiv.org/content/10.1101/2023.01.30.23285067v1">Paper</a>]
+            </p>
+            <div id="div29" class="abstract">
+              Importance: Artificial intelligence (AI) applications in health care have been effective in many areas of medicine, but they are often trained for a single task using labeled data, making deployment and generalizability challenging. Whether a general-purpose AI language model can perform diagnosis and triage is unknown.
+              Objective: Compare the general-purpose Generative Pre-trained Transformer 3 (GPT-3) AI model’s diagnostic and triage performance to attending physicians and lay adults who use the Internet.
+              Design: We compared the accuracy of GPT-3’s diagnostic and triage ability for 48 validated case vignettes of both common (e.g., viral illness) and severe (e.g., heart attack) conditions to lay people and practicing physicians. Finally, we examined how well calibrated GPT-3’s confidence was for diagnosis and triage.
+              Setting and Participants: The GPT-3 model, a nationally representative sample of lay people, and practicing physicians.
+              Exposure: Validated case vignettes (<60 words; <6th grade reading level).
+              Main Outcomes and Measures: Correct diagnosis, correct triage.
+              Results: Among all cases, GPT-3 replied with the correct diagnosis in its top 3 for 88% (95% CI, 75% to 94%) of cases, compared to 54% (95% CI, 53% to 55%) for lay individuals (p<0.001) and 96% (95% CI, 94% to 97%) for physicians (p=0.0354). GPT-3 triaged (71% correct; 95% CI, 57% to 82%) similarly to lay individuals (74%; 95% CI, 73% to 75%; p=0.73); both were significantly worse than physicians (91%; 95% CI, 89% to 93%; p<0.001). As measured by the Brier score, GPT-3 confidence in its top prediction was reasonably well-calibrated for diagnosis (Brier score = 0.18) and triage (Brier score = 0.22).
+              Conclusions and Relevance:  A general-purpose AI language model without any content-specific training could perform diagnosis at levels close to, but below physicians and better than lay individuals. The model was performed less well on triage, where its performance was closer to that of lay individuals.
+            </div>
+          </div>
+        </li>
+      <li>
+          <img src="../assets/misc_paper_figures/patient_sim.png" class="pub-image">
+          <div class="pub-info">
+            <h3>Simulation of undiagnosed patients with novel genetic conditions </h3>
+            Emily Alsentzer*, <u>Samuel Finlayson*</u>, Michelle M Li, Undiagnosed Diseases Network, Shilpa N Kobren, Isaac S Kohane<br>
+            Preprint Under Review, 2022<br>
+              *Co-first, listed alphabetically</i><br>
+              [<a class="showSingle", target="28">Abstract</a>]
+              [<a href="https://www.medrxiv.org/content/10.1101/2022.08.22.22279073">Paper</a>]
+            </p>
+            <div id="div28" class="abstract">
+              Rare Mendelian disorders pose a major diagnostic challenge and collectively affect 300-400 million patients worldwide. Many automated tools aim to uncover causal genes in patients with suspected genetic disorders, but evaluation of these tools is limited due to the lack of comprehensive benchmark datasets that include previously unpublished conditions. Here, we present a computational pipeline that simulates realistic clinical datasets to address this deficit. Our framework jointly simulates complex phenotypes and challenging candidate genes and produces patients with novel genetic conditions. We demonstrate the similarity of our simulated patients to real patients from the Undiagnosed Diseases Network and evaluate common gene prioritization methods on the simulated cohort. These prioritization methods recover known gene-disease associations but perform poorly on diagnosing patients with novel genetic disorders. Our publicly-available dataset and codebase can be utilized by medical genetics researchers to evaluate, compare, and improve tools that aid in the diagnostic process.
+            </div>
+          </div>
+        </li>
+        <li>
+          <img src="../assets/dataset_shift/ds_table.png" class="pub-image">
+          <div class="pub-info">
+            <h3>The Clinician and Dataset Shift in Artificial Intelligence</h3>
+            <u>Samuel Finlayson</u>, Adarsh Subbaswamy, Karandeep Singh, John Bowers, Annabel Kupke, Jonathan Zittrain, Isaac Kohane, Suchi Saria<br>
+              <i>New England Journal of Medicine</i>, 2021<br>
+              [<a href="http://www.nejm.org/doi/full/10.1056/NEJMc2104626">Paper</a>]
+              [<a href="../assets/dataset_shift/Finlayson_Dataset_Shift_NEJM.pdf">PDF</a>]
+              [<a href="../assets/dataset_shift/NEJM_DS_Supplement.pdf">Supplement -- Expanded Version of Table w/ Citations</a>]
+            </p>
+          </div>
+        </li>
+        <li>
+          <img src="../assets/misc_paper_figures/code_free.png" class="pub-image">
+          <div class="pub-info">
+            <h3>Code-free deep learning for multi-modality medical image classification</h3>
+            Edward Korot, Zeyu Guan, ... <u>Samuel Finlayson</u>, ... Pearse A. Keane<br>
+              <i>Nature Machine Intelligence</i>, 2021<br>
+              [<a class="showSingle", target="27">Abstract</a>]
+              [<a href="https://www.nature.com/articles/s42256-021-00305-2">Paper</a>]
+            </p>
+            <div id="div27" class="abstract">
+              A number of large technology companies have created code-free cloud-based platforms that allow researchers and clinicians without coding experience to create deep learning algorithms. In this study, we comprehensively analyse the performance and featureset of six platforms, using four representative cross-sectional and en-face medical imaging datasets to create image classification models. The mean (s.d.) F1 scores across platforms for all model–dataset pairs were as follows: Amazon, 93.9 (5.4); Apple, 72.0 (13.6); Clarifai, 74.2 (7.1); Google, 92.0 (5.4); MedicMind, 90.7 (9.6); Microsoft, 88.6 (5.3). The platforms demonstrated uniformly higher classification performance with the optical coherence tomography modality. Potential use cases given proper validation include research dataset curation, mobile ‘edge models’ for regions without internet access, and baseline models against which to compare and iterate bespoke deep learning approaches.
+            </div>
+          </div>
+        </li>
         <li>
           <img src="../assets/small_mol_ge_coord/figure1.png" class="pub-image">
           <div class="pub-info">
             <h3>Cross-Modal Representation Alignment of Transcriptional Profiles and Small Molecule Therapeutics</h3>
             <u>Samuel Finlayson</u>, Matthew McDermott, Alex Pickering, Scott Lipnick, Isaac Kohane <br>
-              <i>Pacific Symposium on Biocomputing, 2021<br>
+              <i>Pacific Symposium on Biocomputing</i>, 2021<br>
               [<a class="showSingle", target="26">Abstract</a>]
-              [<a href="">Paper</a>]
+              [<a href="https://arxiv.org/abs/1911.10241">Paper</a>]
             </p>
             <div id="div26" class="abstract">
-              Modeling the relationship between chemical structure and molecular activity is a key goal in drug development and precision medicine. Many benchmark tasks have been proposed for molecular property prediction of specific biophysical/structural properties, but few efforts have sought to measure chemical representations' ability to simultaneously encode functional information of broad physiological relevance. In this work, we propose a new chemical modeling task inspired by connectivity mapping, a framework for modern drug development that leverages transcriptomics. More specifically, we seek chemical representations that can encode the full space of transcriptional changes induced by perturbation with a small molecule. We develop this task formally as multi-view alignment problem, and present a coordinated deep learning approach that jointly optimizes representations of both chemical structure and gene expression. We probe the changes in chemical representations that are induced by this training task, and benchmark our results against oracle models and principled baselines.
+              Modeling the relationship between chemical structure and molecular activity
+              is a key goal in drug development. Many benchmark tasks have been proposed for
+              molecular property prediction, but these tasks are generally aimed at specific,
+              isolated biomedical properties. In this work, we propose a new cross-modal
+              small molecule retrieval task, designed to force a model to learn to associate
+              the structure of a small molecule with the transcriptional change it induces.
+              We develop this task formally as multi-view alignment problem, and present a
+              coordinated deep learning approach that jointly optimizes representations of
+              both chemical structure and perturbational gene expression profiles. We
+              benchmark our results against oracle models and principled baselines, and find
+              that cell line variability markedly influences performance in this domain. Our
+              work establishes the feasibility of this new task, elucidates the limitations
+              of current data and systems, and may serve to catalyze future research in small
+              molecule representation learning.
             </div>
           </div>
         </li>
@@ -151,10 +261,10 @@ jQuery(function(){
           <div class="pub-info">
             <h3>Subgraph Neural Networks</h3>
             Emily Alsentzer*, <u>Samuel Finlayson*</u>, Michelle Li, Marinka Zitnik <br>
-              <i>Neural Information Processing Systems, 2020<br>
+              <i>Neural Information Processing Systems</i>, 2020<br>
               <i>*Co-first, listed alphabetically<br>
               [<a class="showSingle", target="27">Abstract</a>]
-              [<a href="">Paper</a>]
+              [<a href="https://arxiv.org/abs/2006.10538">Paper</a>]
             </p>
             <div id="div27" class="abstract">
               Deep learning methods for graphs achieve remarkable performance on many node-level and graph-level prediction tasks. However, despite the proliferation of the methods and their success, prevailing Graph Neural Networks (GNNs) neglect subgraphs, rendering subgraph prediction tasks challenging to tackle in many impactful applications. Further, subgraph prediction tasks present several unique challenges: subgraphs can have non-trivial internal topology, but also carry a notion of position and external connectivity information relative to the underlying graph in which they exist.
@@ -168,7 +278,7 @@ jQuery(function(){
         <div class="pub-info">
           <h3>Examining the Use of Real-World Evidence in the Regulatory Process</h3>
           <p>Brett Beaulieu-Jones, <u>Samuel Finlayson</u>, William Yuan, Russ Altman, Isaac Kohane, Vinay Prasad, Kun-Hsing Yu<br>
-            <i>Clinical Pharmacology and Therapeutics, 2019<br>
+            <i>Clinical Pharmacology and Therapeutics</i>, 2019<br>
             [<a class="showSingle", target="25">Abstract</a>]
             [<a href="https://ascpt.onlinelibrary.wiley.com/doi/pdf/10.1002/cpt.1658">Paper</a>]
           </p>
@@ -182,7 +292,7 @@ jQuery(function(){
         <div class="pub-info">
           <h3>Adversarial attacks on medical machine learning</h3>
           <p><u>Samuel Finlayson</u>, John Bowers, Joi Ito, Jonathan Zittrain, Andrew Beam, Isaac Kohane<br>
-            <i>Science, 2019<br>
+            <i>Science</i>, 2019<br>
             [<a class="showSingle", target="23">Abstract</a>]
             [<a href="http://science.sciencemag.org/cgi/content/full/363/6433/1287?ijkey=OXnSsEp.Iagl6">Paper</a>]
             [<a href="https://github.com/sgfin/adversarial-medicine">GitHub</a>]
@@ -202,7 +312,7 @@ jQuery(function(){
         <div class="pub-info">
           <h3>Systemic nature of spinal muscular atrophy revealed by studying insurance claims</h3>
           <p>Scott Lipnick, Denis Agniel, Rahul Aggarwal, Nina Makhortova, <u>Samuel Finlayson</u>... Isaac Kohane , Lee Rubin<br>
-            <i>Plos One, 2019<br>
+            <i>Plos One</i>, 2019<br>
             [<a class="showSingle", target="24">Abstract</a>]
             [<a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0213680">Paper</a>]
           </p>
@@ -221,7 +331,7 @@ jQuery(function(){
         <img src="../assets/fracgan/fracgan.png" class="pub-image">
         <div class="pub-info">
           <h3>Towards generative adversarial networks as a new paradigm for radiology education</h3>
-          <u>Samuel Finlayson</u>, Hyunkwang Lee, Isaac Kohane, Luke Oakden-Rayner
+          <u>Samuel Finlayson</u>, Hyunkwang Lee, Isaac Kohane, Luke Oakden-Rayner<br>
             <i>Machine Learning for Health (NeurIPS Workshop)</i>, 2018 <br>
             [<a class="showSingle", target="22">Abstract</a>]
             [<a href="https://arxiv.org/abs/1812.01547">Paper</a>]
@@ -242,7 +352,7 @@ jQuery(function(){
         <img src="../assets/diffp.png" class="pub-image">
         <div class="pub-info">
           <h3>Privacy-Preserving Distributed Deep Learning for Clinical Data</h3>
-          Brett Beaulieu-Jones, William Yuan, <u>Samuel Finlayson</u>, Zhiwei Steven Wu
+          Brett Beaulieu-Jones, William Yuan, <u>Samuel Finlayson</u>, Zhiwei Steven Wu <br>
             <i>Machine Learning for Health (NeurIPS Workshop)</i>, 2018 <br>
             [<a class="showSingle", target="20">Abstract</a>]
             [<a href="https://arxiv.org/abs/1812.01484">Paper</a>]
@@ -255,7 +365,7 @@ jQuery(function(){
         <img src="../assets/microbiome/gurry_fig2.png" class="pub-image">
         <div class="pub-info">
           <h3>Predictability and persistence of prebiotic dietary supplementation in a healthy human cohort</h3>
-          Thomas Gurry, <u>HST Microbiome Consortium</u>, ... Eric Alm<
+          Thomas Gurry, <u>HST Microbiome Consortium</u>, ... Eric Alm<br>
             <i>Scientific Reports</i>, 2018 <br>
             [<a class="showSingle", target="18">Abstract</a>]
             [<a href="https://www.nature.com/articles/s41598-018-30783-1">Paper</a>]

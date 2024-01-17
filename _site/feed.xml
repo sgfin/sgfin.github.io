@@ -3,11 +3,11 @@
   <channel>
     <title>Machine Learning and Medicine</title>
     <description>By Sam Finlayson, MD-PhD student at Harvard-MIT</description>
-    <link>http://sgfin.github.io/</link>
-    <atom:link href="http://sgfin.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 23 Jun 2020 09:44:18 -0400</pubDate>
-    <lastBuildDate>Tue, 23 Jun 2020 09:44:18 -0400</lastBuildDate>
-    <generator>Jekyll v4.1.0</generator>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Wed, 17 Jan 2024 00:27:34 -0500</pubDate>
+    <lastBuildDate>Wed, 17 Jan 2024 00:27:34 -0500</lastBuildDate>
+    <generator>Jekyll v4.3.3</generator>
     
       <item>
         <title>Induction, Inductive Biases, and Infusing Knowledge into Learned Representations</title>
@@ -199,8 +199,8 @@ width: 50%;
 
 </description>
         <pubDate>Mon, 22 Jun 2020 06:00:00 -0400</pubDate>
-        <link>http://sgfin.github.io/2020/06/22/Induction-Intro/</link>
-        <guid isPermaLink="true">http://sgfin.github.io/2020/06/22/Induction-Intro/</guid>
+        <link>http://localhost:4000/2020/06/22/Induction-Intro/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/06/22/Induction-Intro/</guid>
         
         
       </item>
@@ -225,7 +225,7 @@ width: 50%;
 
 &lt;a href=&quot;#Sect3&quot;&gt;-Distinctions in goals have yielded a divergence in methods and cultures, which explains shifting connotations of the term &quot;machine learning.&quot;&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;
 
-&lt;a href=&quot;#Sect4&quot;&gt;-Isn't this whole &quot;debate&quot; a massive waste of time?&lt;/a&gt;
+&lt;a href=&quot;#Sect4&quot;&gt;-Isn&apos;t this whole &quot;debate&quot; a massive waste of time?&lt;/a&gt;
 
 &lt;/div&gt;
 
@@ -309,23 +309,31 @@ width: 50%;
 &lt;p&gt;The whole debate is misguided, the terms are overloaded, the methodological dichotomy is false, ML people care (and increasingly so) about statistics, stats people are increasingly dependent upon CS and ML, and there is no regression annexation conspiracy. There’s a lot of hype out there right now, but that doesn’t change the fact that, &lt;em&gt;often&lt;/em&gt;, when people use different terminology than you, that’s because they come from a different background or have different goals in mind, not because they are stupid or dishonest. Let’s just all be friends and strive to do good work together and learn from each other. Kumbaya.&lt;/p&gt;
 </description>
         <pubDate>Fri, 31 Jan 2020 05:00:00 -0500</pubDate>
-        <link>http://sgfin.github.io/2020/01/31/Comments-ML-Statistics/</link>
-        <guid isPermaLink="true">http://sgfin.github.io/2020/01/31/Comments-ML-Statistics/</guid>
+        <link>http://localhost:4000/2020/01/31/Comments-ML-Statistics/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/01/31/Comments-ML-Statistics/</guid>
         
         
       </item>
     
       <item>
-        <title>All the DAGs from Hernan and Robins' Causal Inference Book</title>
-        <description>&lt;p&gt;This is my preliminary attempt to organize and present all the DAGs from Miguel Hernan and Jamie Robin’s excellent &lt;a href=&quot;https://www.hsph.harvard.edu/miguel-hernan/causal-inference-book/&quot;&gt;Causal Inference Book&lt;/a&gt;.  So far, I’ve only done Part I.&lt;/p&gt;
+        <title>All the DAGs from Hernan and Robins&apos; Causal Inference Book</title>
+        <description>&lt;style type=&quot;text/css&quot; rel=&quot;stylesheet&quot;&gt;
+p {
+    width: 100%;
+}
 
-&lt;p&gt;Why create this page?&lt;/p&gt;
+th, td, thead, table {
+    border: 1px solid #999;
+}
 
-&lt;ul&gt;
-  &lt;li&gt;First, I love the Causal Inference book, but sometimes I find it easy to lose track of the variables when I read it.  Having the variables right alongside the DAG makes it easier for me to remember what’s going on, especially when the book refers back to a DAG from a previous chapter and I don’t want to dig back through the text.&lt;/li&gt;
-  &lt;li&gt;Second, I hope this will be a really fun way to occasionally review the main concepts from the text in the future.&lt;/li&gt;
-  &lt;li&gt;Finally, making this as I read forced me to read the book more carefully.&lt;/li&gt;
-&lt;/ul&gt;
+tbody tr td:first-child {
+  min-width: 12em;
+}
+&lt;/style&gt;
+
+&lt;p&gt;This is my preliminary attempt to organize and present all the DAGs from Miguel Hernan and Jamie Robin’s excellent &lt;a href=&quot;https://www.hsph.harvard.edu/miguel-hernan/causal-inference-book/&quot;&gt;Causal Inference Book&lt;/a&gt;.  So far, I’ve only done Part I.&lt;/p&gt;
+
+&lt;p&gt;I love the Causal Inference book, but sometimes I find it easy to lose track of the variables when I read it.  Having the variables right alongside the DAG makes it easier for me to remember what’s going on, especially when the book refers back to a DAG from a previous chapter and I don’t want to dig back through the text. Plus, making this was a great exercise!&lt;/p&gt;
 
 &lt;p&gt;Again, this page is meant to be fairly raw and only contain the DAGs. If you use it, you might also find it useful to open up &lt;a href=&quot;https://sgfin.github.io/2019/06/19/Causal-Inference-Book-Glossary-and-Notes/&quot;&gt;this page&lt;/a&gt;, which is where I have more traditional notes covering the main concepts from the book. But of course, the text itself has no substitute.&lt;/p&gt;
 
@@ -850,15 +858,26 @@ width: 50%;
 
 </description>
         <pubDate>Wed, 19 Jun 2019 07:50:00 -0400</pubDate>
-        <link>http://sgfin.github.io/2019/06/19/Causal-Inference-Book-All-DAGs/</link>
-        <guid isPermaLink="true">http://sgfin.github.io/2019/06/19/Causal-Inference-Book-All-DAGs/</guid>
+        <link>http://localhost:4000/2019/06/19/Causal-Inference-Book-All-DAGs/</link>
+        <guid isPermaLink="true">http://localhost:4000/2019/06/19/Causal-Inference-Book-All-DAGs/</guid>
         
         
       </item>
     
       <item>
         <title>Causal Inference Book Part I -- Glossary and Notes</title>
-        <description>&lt;p&gt;This page contains some notes from Miguel Hernan and Jamie Robin’s &lt;a href=&quot;https://www.hsph.harvard.edu/miguel-hernan/causal-inference-book/&quot;&gt;Causal Inference Book&lt;/a&gt;.  So far, I’ve only done Part I.&lt;/p&gt;
+        <description>&lt;style type=&quot;text/css&quot; rel=&quot;stylesheet&quot;&gt;
+p {
+    width: 100%;
+}
+
+th, td, thead, table {
+    border: 1px solid #999;
+}
+
+&lt;/style&gt;
+
+&lt;p&gt;This page contains some notes from Miguel Hernan and Jamie Robin’s &lt;a href=&quot;https://www.hsph.harvard.edu/miguel-hernan/causal-inference-book/&quot;&gt;Causal Inference Book&lt;/a&gt;.  So far, I’ve only done Part I.&lt;/p&gt;
 
 &lt;p&gt;This page only has key terms and concepts. On &lt;a href=&quot;https://sgfin.github.io/2019/06/19/Causal-Inference-Book-All-DAGs/&quot;&gt;this page&lt;/a&gt;, I’ve tried to systematically present all the DAGs in the same book.  I imagine that one will be more useful going forward, at least for me.&lt;/p&gt;
 
@@ -1280,7 +1299,7 @@ width: 50%;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td style=&quot;text-align: center&quot;&gt;&lt;strong&gt;Frontdoor criterion&lt;/strong&gt; and &lt;strong&gt;Frontdoor adjustment&lt;/strong&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;A two-step standardization process to estimate a causal effect in the presence of a confounded causal effect &lt;em&gt;that is mediated by an unconfounded mediator variable&lt;/em&gt;. &lt;br /&gt;&lt;br /&gt;  Given a DAG such as: &lt;br /&gt; &lt;img src=&quot;/assets/hernan_dags/7_12.png&quot; width=&quot;150&quot; /&gt; &lt;br /&gt; \(Pr[Y^{a}=1] = \sum_{m}Pr[M^{a}=m]Pr[Y^{m}=1]\). &lt;br /&gt;&lt;br /&gt;  Thus, standardization can be applied in two steps: &lt;br /&gt;&lt;br /&gt; 1. Compute \(Pr[M^{a}=m]\) as \(Pr[M=m| A=a]\), and &lt;br /&gt;&lt;br /&gt; 2. Compute \(Pr[Y^{a}=1]\) as \(\sum_{a'}Pr[Y=1|M=m,A=a']Pr[A=a']\) &lt;br /&gt;&lt;br /&gt; These are then combined with the formula &lt;br /&gt;  \(\sum_{m}Pr[M=m| A=a]\sum_{a'}Pr[Y=1|M=m,A=a']Pr[A=a']\) &lt;br /&gt;&lt;br /&gt; The name &lt;em&gt;frontdoor adjustment&lt;/em&gt; comes because it relies on the path from \(A\) and \(Y\) moving through a descendent \(M\) of \(A\) that causes \(Y\).&lt;/td&gt;
+      &lt;td style=&quot;text-align: center&quot;&gt;A two-step standardization process to estimate a causal effect in the presence of a confounded causal effect &lt;em&gt;that is mediated by an unconfounded mediator variable&lt;/em&gt;. &lt;br /&gt;&lt;br /&gt;  Given a DAG such as: &lt;br /&gt; &lt;img src=&quot;/assets/hernan_dags/7_12.png&quot; width=&quot;150&quot; /&gt; &lt;br /&gt; \(Pr[Y^{a}=1] = \sum_{m}Pr[M^{a}=m]Pr[Y^{m}=1]\). &lt;br /&gt;&lt;br /&gt;  Thus, standardization can be applied in two steps: &lt;br /&gt;&lt;br /&gt; 1. Compute \(Pr[M^{a}=m]\) as \(Pr[M=m| A=a]\), and &lt;br /&gt;&lt;br /&gt; 2. Compute \(Pr[Y^{a}=1]\) as \(\sum_{a&apos;}Pr[Y=1|M=m,A=a&apos;]Pr[A=a&apos;]\) &lt;br /&gt;&lt;br /&gt; These are then combined with the formula &lt;br /&gt;  \(\sum_{m}Pr[M=m| A=a]\sum_{a&apos;}Pr[Y=1|M=m,A=a&apos;]Pr[A=a&apos;]\) &lt;br /&gt;&lt;br /&gt; The name &lt;em&gt;frontdoor adjustment&lt;/em&gt; comes because it relies on the path from \(A\) and \(Y\) moving through a descendent \(M\) of \(A\) that causes \(Y\).&lt;/td&gt;
       &lt;td&gt;I.96&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
@@ -1457,8 +1476,8 @@ width: 50%;
 
 </description>
         <pubDate>Wed, 19 Jun 2019 07:50:00 -0400</pubDate>
-        <link>http://sgfin.github.io/2019/06/19/Causal-Inference-Book-Glossary-and-Notes/</link>
-        <guid isPermaLink="true">http://sgfin.github.io/2019/06/19/Causal-Inference-Book-Glossary-and-Notes/</guid>
+        <link>http://localhost:4000/2019/06/19/Causal-Inference-Book-Glossary-and-Notes/</link>
+        <guid isPermaLink="true">http://localhost:4000/2019/06/19/Causal-Inference-Book-Glossary-and-Notes/</guid>
         
         
       </item>
@@ -1536,8 +1555,8 @@ width: 50%;
 
 </description>
         <pubDate>Thu, 21 Mar 2019 00:00:00 -0400</pubDate>
-        <link>http://sgfin.github.io/2019/03/21/FAQ-On-Adversarial-Science-Paper/</link>
-        <guid isPermaLink="true">http://sgfin.github.io/2019/03/21/FAQ-On-Adversarial-Science-Paper/</guid>
+        <link>http://localhost:4000/2019/03/21/FAQ-On-Adversarial-Science-Paper/</link>
+        <guid isPermaLink="true">http://localhost:4000/2019/03/21/FAQ-On-Adversarial-Science-Paper/</guid>
         
         
       </item>
@@ -1888,8 +1907,8 @@ domain, which means that no finite and nonzero \(\lambda_{i}\) could be
 chosen to maintain the criteria outlined above.&lt;/p&gt;
 </description>
         <pubDate>Thu, 16 Mar 2017 06:00:00 -0400</pubDate>
-        <link>http://sgfin.github.io/2017/03/16/Deriving-probability-distributions-using-the-Principle-of-Maximum-Entropy/</link>
-        <guid isPermaLink="true">http://sgfin.github.io/2017/03/16/Deriving-probability-distributions-using-the-Principle-of-Maximum-Entropy/</guid>
+        <link>http://localhost:4000/2017/03/16/Deriving-probability-distributions-using-the-Principle-of-Maximum-Entropy/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/03/16/Deriving-probability-distributions-using-the-Principle-of-Maximum-Entropy/</guid>
         
         
       </item>
@@ -2024,8 +2043,8 @@ may cancel, the properties of the trace function allow us to push the
 &lt;p&gt;as desired.&lt;/p&gt;
 </description>
         <pubDate>Sat, 11 Mar 2017 05:00:00 -0500</pubDate>
-        <link>http://sgfin.github.io/2017/03/11/Deriving-the-information-entropy-of-the-multivariate-gaussian/</link>
-        <guid isPermaLink="true">http://sgfin.github.io/2017/03/11/Deriving-the-information-entropy-of-the-multivariate-gaussian/</guid>
+        <link>http://localhost:4000/2017/03/11/Deriving-the-information-entropy-of-the-multivariate-gaussian/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/03/11/Deriving-the-information-entropy-of-the-multivariate-gaussian/</guid>
         
         
       </item>

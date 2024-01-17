@@ -13,6 +13,10 @@ th, td {
     border: 1px solid #999;
 }
 
+p {
+    width: 100%;
+}
+
 </style>
 
 

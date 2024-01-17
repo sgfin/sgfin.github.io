@@ -8,14 +8,24 @@ date:   2019-06-19 11:50:00
 mathjax: true
 ---
 
+<style type="text/css" rel="stylesheet">
+p {
+    width: 100%;
+}
+
+th, td, thead, table {
+    border: 1px solid #999;
+}
+
+tbody tr td:first-child {
+  min-width: 12em;
+}
+</style>
+
 
 This is my preliminary attempt to organize and present all the DAGs from Miguel Hernan and Jamie Robin's excellent [Causal Inference Book](https://www.hsph.harvard.edu/miguel-hernan/causal-inference-book/).  So far, I've only done Part I.
 
-Why create this page?
-
-* First, I love the Causal Inference book, but sometimes I find it easy to lose track of the variables when I read it.  Having the variables right alongside the DAG makes it easier for me to remember what's going on, especially when the book refers back to a DAG from a previous chapter and I don't want to dig back through the text.
-* Second, I hope this will be a really fun way to occasionally review the main concepts from the text in the future.
-* Finally, making this as I read forced me to read the book more carefully.
+I love the Causal Inference book, but sometimes I find it easy to lose track of the variables when I read it.  Having the variables right alongside the DAG makes it easier for me to remember what's going on, especially when the book refers back to a DAG from a previous chapter and I don't want to dig back through the text. Plus, making this was a great exercise!
 
 Again, this page is meant to be fairly raw and only contain the DAGs. If you use it, you might also find it useful to open up [this page](https://sgfin.github.io/2019/06/19/Causal-Inference-Book-Glossary-and-Notes/), which is where I have more traditional notes covering the main concepts from the book. But of course, the text itself has no substitute.
 

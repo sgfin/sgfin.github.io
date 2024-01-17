@@ -8,6 +8,17 @@ date:   2019-06-19 11:50:00
 mathjax: true
 ---
 
+<style type="text/css" rel="stylesheet">
+p {
+    width: 100%;
+}
+
+th, td, thead, table {
+    border: 1px solid #999;
+}
+
+</style>
+
 This page contains some notes from Miguel Hernan and Jamie Robin's [Causal Inference Book](https://www.hsph.harvard.edu/miguel-hernan/causal-inference-book/).  So far, I've only done Part I.
 
 This page only has key terms and concepts. On [this page](https://sgfin.github.io/2019/06/19/Causal-Inference-Book-All-DAGs/), I've tried to systematically present all the DAGs in the same book.  I imagine that one will be more useful going forward, at least for me.
