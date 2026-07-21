@@ -50,23 +50,23 @@
   </div>
 </nav>
 
-<section id="top" style="position:relative; min-height:100vh; display:flex; align-items:center; overflow:hidden; background:#1c1815;">
+<section id="top" style="position:relative; min-height:100vh; display:flex; align-items:center; overflow:hidden; background:#0c1218;">
   <canvas id="cv-contour" style="position:absolute; inset:0; width:100%; height:100%; display:block;"></canvas>
-  <div style="position:absolute; inset:0; background:linear-gradient(90deg, rgba(28,24,21,0.84) 30%, rgba(28,24,21,0.25) 62%, rgba(28,24,21,0.55) 100%); pointer-events:none;"></div>
+  <div style="position:absolute; inset:0; background:linear-gradient(90deg, rgba(12,18,24,0.84) 30%, rgba(12,18,24,0.25) 62%, rgba(12,18,24,0.55) 100%); pointer-events:none;"></div>
   <div style="position:relative; z-index:2; max-width:1200px; margin:0 auto; width:100%; padding:0 40px;">
     <div style="max-width:640px;">
-      <div style="font-family:'JetBrains Mono',monospace; font-size:13px; letter-spacing:0.18em; text-transform:uppercase; color:#d98a5f; margin-bottom:22px;">Physician-scientist · Medical AI · Rare disease</div>
-      <h1 style="font-family:'Spectral',Georgia,serif; font-size:78px; font-weight:400; letter-spacing:-0.02em; line-height:1.0; margin:0 0 10px; color:#f0e9df;">Sam Finlayson</h1>
-      <div style="font-family:'JetBrains Mono',monospace; font-size:14px; letter-spacing:0.24em; color:#c9bdae; margin-bottom:28px;">MD · PhD</div>
-      <p style="font-family:'Space Grotesk',sans-serif; font-size:19px; line-height:1.55; color:#d8ccbd; margin:6px 0 34px; max-width:520px;">SVP of Medical AI at OpenEvidence<br>Clinical Assistant Professor of Medical &amp; Biochemical Genetics, Seattle Children's Hospital &amp; the University of Washington.</p>
+      <div style="font-family:'JetBrains Mono',monospace; font-size:13px; letter-spacing:0.18em; text-transform:uppercase; color:#7fd4d0; margin-bottom:22px;">Physician-scientist · Medical AI · Rare disease</div>
+      <h1 style="font-family:'Spectral',Georgia,serif; font-size:78px; font-weight:400; letter-spacing:-0.02em; line-height:1.0; margin:0 0 10px; color:#eef2f6;">Sam Finlayson</h1>
+      <div style="font-family:'JetBrains Mono',monospace; font-size:14px; letter-spacing:0.24em; color:#a3b5be; margin-bottom:28px;">MD · PhD</div>
+      <p style="font-family:'Space Grotesk',sans-serif; font-size:19px; line-height:1.55; color:#b8c3ce; margin:6px 0 34px; max-width:520px;">SVP of Medical AI at OpenEvidence<br>Clinical Assistant Professor of Medical &amp; Biochemical Genetics, Seattle Children's Hospital &amp; the University of Washington.</p>
       <div style="display:flex; gap:26px; font-family:'JetBrains Mono',monospace; font-size:13px;">
-        <a href="assets/sgf_cv.pdf" style="color:#f0e9df; border-bottom:1px solid #d98a5f; padding-bottom:3px;">Curriculum Vitae →</a>
-        <a href="https://scholar.google.com/citations?user=7__yMlEAAAAJ&hl=en" style="color:#f0e9df; border-bottom:1px solid #d98a5f; padding-bottom:3px;">Google Scholar →</a>
-        <a href="mailto:mail@samfinlayson.com" style="color:#f0e9df; border-bottom:1px solid #d98a5f; padding-bottom:3px;">Email →</a>
+        <a href="assets/sgf_cv.pdf" style="color:#eef2f6; border-bottom:1px solid #7fd4d0; padding-bottom:3px;">Curriculum Vitae →</a>
+        <a href="https://scholar.google.com/citations?user=7__yMlEAAAAJ&hl=en" style="color:#eef2f6; border-bottom:1px solid #7fd4d0; padding-bottom:3px;">Google Scholar →</a>
+        <a href="mailto:mail@samfinlayson.com" style="color:#eef2f6; border-bottom:1px solid #7fd4d0; padding-bottom:3px;">Email →</a>
       </div>
     </div>
   </div>
-  <div style="position:absolute; bottom:26px; left:50%; transform:translateX(-50%); font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:#a99c8c; pointer-events:none;">scroll ↓</div>
+  <div style="position:absolute; bottom:26px; left:50%; transform:translateX(-50%); font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:#8a99a3; pointer-events:none;">scroll ↓</div>
 </section>
 
 <section id="about" style="position:relative; min-height:100vh; display:flex; align-items:center; overflow:hidden; background:#0a0d11; font-family:'Space Grotesk',system-ui,sans-serif;">
@@ -810,7 +810,7 @@ document.addEventListener('DOMContentLoaded', function() {
           const edge = 1 - Math.min(1, Math.abs(band) / 0.34);
           if (edge <= 0) continue;
           const warm = (v + 1) / 2;
-          ctx.fillStyle = 'rgba(' + Math.round(150 + warm * 105) + ',' + Math.round(108 + warm * 46) + ',' + Math.round(66 + warm * 26) + ',' + (edge * 0.5) + ')';
+          ctx.fillStyle = 'rgba(' + Math.round(90 + warm * 65) + ',' + Math.round(125 + warm * 65) + ',' + Math.round(115 + warm * 40) + ',' + (edge * 0.5) + ')';
           ctx.fillRect(x, y, 2, 2);
         }
         if (!opt || opt.done) { opt = { x: Math.random(), y: Math.random() * 0.35, stall: 0, done: false }; trail = []; }
@@ -824,7 +824,7 @@ document.addEventListener('DOMContentLoaded', function() {
         for (let i = 0; i < trail.length; i++) { const p = trail[i]; i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y); }
         ctx.strokeStyle = 'rgba(111,176,166,0.55)'; ctx.stroke();
         const head = trail[trail.length - 1];
-        if (head) { ctx.beginPath(); ctx.fillStyle = 'rgba(217,138,95,0.95)'; ctx.shadowColor = 'rgba(217,138,95,0.9)'; ctx.shadowBlur = 12; ctx.arc(head.x, head.y, 4, 0, 7); ctx.fill(); ctx.shadowBlur = 0; }
+        if (head) { ctx.beginPath(); ctx.fillStyle = 'rgba(127,212,208,0.95)'; ctx.shadowColor = 'rgba(127,212,208,0.9)'; ctx.shadowBlur = 12; ctx.arc(head.x, head.y, 4, 0, 7); ctx.fill(); ctx.shadowBlur = 0; }
         if (Math.hypot(gx, gy) < 0.05) { opt.stall++; if (opt.stall > 70) opt.done = true; }
         self._rafs.contour = requestAnimationFrame(frame);
       };
