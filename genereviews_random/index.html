@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Machine Learning and Medicine</title>
+  <meta name="description" content="By Sam Finlayson, MD-PhD student at Harvard-MIT">
+
+  <!-- Google Fonts loaded here depending on setting in _data/options.yml true loads font, blank does not-->
+  
+    <link href='//fonts.googleapis.com/css?family=Lato:400,400italic' rel='stylesheet' type='text/css'>
+  
+  
+  <!-- Load up MathJax script if needed ... specify in /_data/options.yml file-->
+  
+    <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: [
+      "MathMenu.js",
+      "MathZoom.js",
+      "AssistiveMML.js",
+      "a11y/accessibility-menu.js"
+    ],
+    jax: ["input/TeX", "output/CommonHTML"],
+    TeX: {
+      extensions: [
+        "AMSmath.js",
+        "AMSsymbols.js",
+        "noErrors.js",
+        "noUndefined.js",
+      ]
+    }
+  });
+</script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-122144402-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-122144402-1');
+    </script>
+
+ <!--   <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+  
+
+  <link rel="stylesheet" type="text/css" href="/css/tufte.css">
+  <!-- <link rel="stylesheet" type="text/css" href="/css/print.css" media="print"> -->
+
+  <link rel="canonical" href="http://sgfin.github.io/genereviews_random/">
+
+  <link rel="alternate" type="application/rss+xml" title="Machine Learning and Medicine" href="http://sgfin.github.io/feed.xml" />
+</head>
+
+  <body>
+    <!--- Header and nav template site-wide -->
+<header>
+    <nav class="group" style="padding-bottom: 15px;">
+	<!-- <a href="/"><img class="badge" src="/assets/img/badge_1.png" alt="SGF"></a> -->
+	
+		
+  	
+		
+		    
+		      <a href="/index_old.html">About</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/css/print.css"></a>
+		    
+	    
+  	
+		
+  	
+		
+		    
+		      <a href="/posts/">posts</a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/learning-resources/">ML Resources</a>
+		    
+	    
+  	
+		
+		    
+		      <a class="active" href="/genereviews_random/" class="active"></a>
+		    
+	    
+  	
+		
+		    
+		      <a href="/css/print.css.map"></a>
+		    
+	    
+  	
+		
+  	
+	</nav>
+</header>
+    <article class="group">
+      <h1></h1>
+<p class="subtitle"></p>
+
+<html>
+<head>
+  <title>Random Entry Sampler</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+    
+    h1 {
+      margin-bottom: 20px;
+    }
+    
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+    
+    #selectedEntry {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    
+    #generatedLink {
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Random GeneReviews Article</h1>
+  <button onclick="sampleRandomEntry()">Sample Random Article</button>
+  <p id="selectedEntry"></p>
+  <p id="generatedLink"></p>
+
+  <script>
+    function sampleRandomEntry() {
+      // Hardcoded link to the webpage in the specified format
+      const pageUrl = 'https://ftp.ncbi.nlm.nih.gov/pub/GeneReviews/GRtitle_shortname_NBKid.txt';
+
+      fetch(pageUrl)
+        .then(response => response.text())
+        .then(pageContent => {
+          // Split the page content into an array of lines
+          const lines = pageContent.split('\n');
+
+          // Remove the header line
+          lines.shift();
+
+          // Filter out empty lines
+          const nonEmptyLines = lines.filter(line => line.trim() !== '');
+
+          // Extract the second and third column values
+          const entriesData = nonEmptyLines.map(line => {
+            const columns = line.split('\t');
+            return {
+              title: columns[1],
+              nbkId: columns[2]
+            };
+          });
+
+          // Generate a random index
+          const randomIndex = Math.floor(Math.random() * entriesData.length);
+
+          // Get the randomly selected entry
+          const selectedEntry = entriesData[randomIndex];
+
+          // Display the selected entry
+          document.getElementById('selectedEntry').textContent = 'Selected Entry: ' + selectedEntry.title;
+
+          // Generate the URL including the selected entry's NBK ID
+          const generatedUrl = 'https://www.ncbi.nlm.nih.gov/books/' + selectedEntry.nbkId;
+
+          // Display the generated link
+          document.getElementById('generatedLink').innerHTML = 'Link: <a href="' + generatedUrl + '" target="_blank">' + generatedUrl + '</a>';
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    }
+  </script>
+</body>
+</html>
+
+
+
+    </article>
+    <span class="print-footer"> - Sam Finlayson</span>
+    <footer>
+  <hr class="slender">
+  <ul class="footer-links">
+    <li><a href="mailto:samuel_finlayson@hms.harvard.edu"><span class="icon-mail3"></span></a></li>    
+    
+      <li>
+        <a href="//www.twitter.com/IAmSamFin"><span class="icon-twitter"></span></a>
+      </li>
+    
+      <li>
+        <a href="//github.com/sgfin"><span class="icon-github"></span></a>
+      </li>
+    
+      <li>
+        <a href="/feed"><span class="icon-rss2"></span></a>
+      </li>
+      
+  </ul>
+<div class="credits">
+<span>&copy; 2026 &nbsp;&nbsp;SAM FINLAYSON</span></br> <br>
+<span>This site created with the <a href="//github.com/clayh53/tufte-jekyll">Tufte theme for  </a> in <a href="//jekyllrb.com">Jekyll</a>.</span> 
+</div>  
+</footer>
+  </body>
+</html>
