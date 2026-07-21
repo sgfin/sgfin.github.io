@@ -29,10 +29,10 @@
     [style*="190px 1fr"]{grid-template-columns:1fr !important;}
     [style*="96px 1fr"]{gap:6px 16px !important;}
     footer > div{align-items:flex-start !important;}
-    #about, #clinic, #teamhydro{flex-direction:column !important; justify-content:flex-start !important;}
-    #about > div[style*="z-index:2"], #clinic > div[style*="z-index:2"], #teamhydro > div[style*="z-index:2"]{padding-bottom:2px !important;}
-    #about > canvas, #clinic > canvas, #teamhydro > canvas{position:relative !important; order:2 !important; width:100% !important; height:360px !important; margin-top:0; border-radius:12px;}
-    #about > div[style*="pointer-events:none"], #clinic > div[style*="pointer-events:none"], #teamhydro > div[style*="pointer-events:none"]{display:none !important;}
+    #about, #teamhydro{flex-direction:column !important; justify-content:flex-start !important;}
+    #about > div[style*="z-index:2"], #teamhydro > div[style*="z-index:2"]{padding-bottom:2px !important;}
+    #about > canvas, #teamhydro > canvas{position:relative !important; order:2 !important; width:100% !important; height:360px !important; margin-top:0; border-radius:12px;}
+    #about > div[style*="pointer-events:none"], #teamhydro > div[style*="pointer-events:none"]{display:none !important;}
   }
 </style>
 </head>
@@ -287,10 +287,19 @@ document.addEventListener('DOMContentLoaded', function() {
         get edges() { return self.couples.concat(self.descent); }
       };
       const gly = {
-        name: 'Glycan tree', route: 'bond', color: [127, 212, 176], sig: 'mp', lesion: 8,
-        pos: [[0, .86], [0, .52], [0, .2], [-.34, -.04], [.34, -.04], [-.6, -.4], [-.14, -.4], [.16, -.4], [.6, -.4], [-.72, -.72], [-.44, -.72], [.04, -.72], [.32, -.72], [.7, -.72]],
-        glyph: ['sqB', 'sqB', 'sqB', 'ciG', 'ciG', 'ciG', 'ciG', 'ciG', 'ciG', 'triR', 'sqB', 'triR', 'sqB', 'triR'],
-        edges: [[0, 1], [1, 2], [2, 3], [2, 4], [3, 5], [3, 6], [4, 7], [4, 8], [5, 9], [6, 10], [7, 11], [7, 12], [8, 13]]
+        name: 'Glycan tree', route: 'line', color: [200, 222, 210], sig: 'mp', lesion: -1,
+        // Bi-antennary complex N-glycan with core fucose. y down (positive = bottom).
+        // Node 0 is the reducing-end GlcNAc — the anchor where the protein blob sits.
+        pos: [
+          [ 0.00,  0.60], [ 0.00,  0.36], [ 0.00,  0.12],   // chitobiose + β-Man
+          [-0.30, -0.10], [ 0.30, -0.10],                    // α6, α3 branches
+          [-0.42,  0.52],                                    // core fucose
+          [-0.44, -0.33], [-0.50, -0.55], [-0.55, -0.75],   // left antenna: GlcNAc, Gal, Neu5Ac
+          [ 0.44, -0.33], [ 0.50, -0.55], [ 0.55, -0.75],   // right antenna
+          [ 0.00,  0.60], [ 0.00,  0.60]                     // 12, 13: hidden (overlap anchor)
+        ],
+        glyph: ['sqB','sqB','ciG','ciG','ciG','triR','sqB','ciY','diP','sqB','ciY','diP','hide','hide'],
+        edges: [[0,1],[1,2],[2,3],[2,4],[0,5],[3,6],[6,7],[7,8],[4,9],[9,10],[10,11]]
       };
       const path = {
         name: 'Pathway', route: 'arrow', color: [122, 200, 220], sig: 'flux', broken: [4, 6],
@@ -334,9 +343,73 @@ document.addEventListener('DOMContentLoaded', function() {
         else if (type === 'circle') { ctx.strokeStyle = 'rgba(' + c + ',' + alpha + ')'; ctx.fillStyle = 'rgba(10,13,17,' + alpha + ')'; ctx.beginPath(); ctx.arc(x, y, r, 0, 7); ctx.fill(); ctx.stroke(); }
         else if (type === 'hex') { ctx.strokeStyle = 'rgba(' + c + ',' + alpha + ')'; ctx.fillStyle = 'rgba(10,13,17,' + alpha + ')'; ctx.beginPath(); for (let k = 0; k < 6; k++) { const a = Math.PI / 6 + k * Math.PI / 3; const px = x + Math.cos(a) * r, py = y + Math.sin(a) * r; k ? ctx.lineTo(px, py) : ctx.moveTo(px, py); } ctx.closePath(); ctx.fill(); ctx.stroke(); }
         else if (type === 'pill') { ctx.strokeStyle = 'rgba(' + c + ',' + alpha + ')'; ctx.fillStyle = 'rgba(10,13,17,' + alpha + ')'; const w = r * 1.5, h = r * 0.95; ctx.beginPath(); if (ctx.roundRect) ctx.roundRect(x - w, y - h, w * 2, h * 2, h); else ctx.rect(x - w, y - h, w * 2, h * 2); ctx.fill(); ctx.stroke(); }
-        else if (type === 'sqB') { ctx.fillStyle = 'rgba(70,120,200,' + alpha + ')'; ctx.strokeStyle = 'rgba(230,240,250,' + (alpha * 0.7) + ')'; ctx.beginPath(); ctx.rect(x - r * 0.9, y - r * 0.9, r * 1.8, r * 1.8); ctx.fill(); ctx.stroke(); }
-        else if (type === 'ciG') { ctx.fillStyle = 'rgba(70,180,120,' + alpha + ')'; ctx.strokeStyle = 'rgba(230,250,240,' + (alpha * 0.7) + ')'; ctx.beginPath(); ctx.arc(x, y, r * 0.95, 0, 7); ctx.fill(); ctx.stroke(); }
-        else if (type === 'triR') { ctx.fillStyle = 'rgba(210,90,80,' + alpha + ')'; ctx.strokeStyle = 'rgba(250,235,230,' + (alpha * 0.7) + ')'; ctx.beginPath(); ctx.moveTo(x, y - r); ctx.lineTo(x + r, y + r * 0.8); ctx.lineTo(x - r, y + r * 0.8); ctx.closePath(); ctx.fill(); ctx.stroke(); }
+        else if (type === 'sqB') { ctx.fillStyle = 'rgba(39,119,189,' + alpha + ')'; ctx.strokeStyle = 'rgba(230,240,250,' + (alpha * 0.7) + ')'; ctx.beginPath(); ctx.rect(x - r * 0.9, y - r * 0.9, r * 1.8, r * 1.8); ctx.fill(); ctx.stroke(); }
+        else if (type === 'ciG') { ctx.fillStyle = 'rgba(1,166,81,' + alpha + ')'; ctx.strokeStyle = 'rgba(230,250,240,' + (alpha * 0.7) + ')'; ctx.beginPath(); ctx.arc(x, y, r * 0.95, 0, 7); ctx.fill(); ctx.stroke(); }
+        else if (type === 'triR') { ctx.fillStyle = 'rgba(238,44,47,' + alpha + ')'; ctx.strokeStyle = 'rgba(250,235,230,' + (alpha * 0.7) + ')'; ctx.beginPath(); ctx.moveTo(x, y - r); ctx.lineTo(x + r, y + r * 0.8); ctx.lineTo(x - r, y + r * 0.8); ctx.closePath(); ctx.fill(); ctx.stroke(); }
+        else if (type === 'ciY') { ctx.fillStyle = 'rgba(255,212,0,' + alpha + ')'; ctx.strokeStyle = 'rgba(250,245,220,' + (alpha * 0.7) + ')'; ctx.beginPath(); ctx.arc(x, y, r * 0.95, 0, 7); ctx.fill(); ctx.stroke(); }
+        else if (type === 'diP') { ctx.fillStyle = 'rgba(162,68,148,' + alpha + ')'; ctx.strokeStyle = 'rgba(240,225,235,' + (alpha * 0.7) + ')'; ctx.beginPath(); ctx.moveTo(x, y - r * 1.15); ctx.lineTo(x + r * 1.05, y); ctx.lineTo(x, y + r * 1.15); ctx.lineTo(x - r * 1.05, y); ctx.closePath(); ctx.fill(); ctx.stroke(); }
+        else if (type === 'hide') { return; }
+      };
+
+      // Protein "edge" that fades in beneath the glycan tree's reducing end
+      // whenever the About Me morph is at (or blending to) the glycan scene.
+      const proteinSeed = (() => {
+        const outline = [];
+        for (let i = 0; i < 40; i++) {
+          const a = (i / 40) * Math.PI * 2;
+          const n = Math.sin(a*3 + 1.7)*0.09 + Math.cos(a*5 + 0.3)*0.055 + Math.sin(a*7 + 2.4)*0.03;
+          outline.push(1 + n);
+        }
+        const bumps = [];
+        for (let i = 0; i < 55; i++) {
+          const angle = (i * 2.399) % (Math.PI*2);
+          const rDist = Math.sqrt((i * 0.4137) % 1) * 0.82;
+          bumps.push({
+            angle, rDist,
+            rx: 0.055 + ((i * 0.137) % 1) * 0.10,
+            ry: 0.04  + ((i * 0.219) % 1) * 0.08,
+            alpha: 0.03 + ((i * 0.313) % 1) * 0.06,
+            light: ((i * 0.617) % 1) > 0.55
+          });
+        }
+        return { outline, bumps };
+      })();
+      const drawProtein = (ax, ay, uSize, weight) => {
+        if (weight <= 0.02) return;
+        const scaleX = uSize * 3.6;
+        const scaleY = uSize * 1.6;
+        const cyProt = ay + uSize * 0.55;
+        const pts = proteinSeed.outline.map((n, i) => {
+          const a = (i / proteinSeed.outline.length) * Math.PI * 2;
+          return { x: ax + Math.cos(a)*scaleX*n, y: cyProt + Math.sin(a)*scaleY*n };
+        });
+        const path = new Path2D();
+        path.moveTo(pts[0].x, pts[0].y);
+        for (let i = 0; i < pts.length; i++) {
+          const p1 = pts[i], p2 = pts[(i+1) % pts.length];
+          path.quadraticCurveTo(p1.x, p1.y, (p1.x + p2.x)/2, (p1.y + p2.y)/2);
+        }
+        path.closePath();
+        const grad = ctx.createLinearGradient(ax, cyProt - scaleY, ax, cyProt + scaleY*1.4);
+        grad.addColorStop(0.00, 'rgba(155,168,175,' + (0.28*weight) + ')');
+        grad.addColorStop(0.35, 'rgba(105,118,128,' + (0.24*weight) + ')');
+        grad.addColorStop(0.75, 'rgba(52,64,72,'   + (0.16*weight) + ')');
+        grad.addColorStop(1.00, 'rgba(20,28,34,'   + (0.06*weight) + ')');
+        ctx.fillStyle = grad;
+        ctx.fill(path);
+        ctx.save();
+        ctx.clip(path);
+        for (const b of proteinSeed.bumps) {
+          const bx = ax + Math.cos(b.angle) * scaleX * b.rDist;
+          const by = cyProt + Math.sin(b.angle) * scaleY * b.rDist;
+          const rx = b.rx * scaleX, ry = b.ry * scaleY;
+          const grB = ctx.createRadialGradient(bx - rx*0.3, by - ry*0.3, 0, bx, by, Math.max(rx, ry));
+          if (b.light) { grB.addColorStop(0, 'rgba(220,230,232,' + (b.alpha*1.4*weight) + ')'); grB.addColorStop(1, 'rgba(220,230,232,0)'); }
+          else { grB.addColorStop(0, 'rgba(28,36,42,'   + (b.alpha*1.2*weight) + ')'); grB.addColorStop(1, 'rgba(28,36,42,0)'); }
+          ctx.fillStyle = grB;
+          ctx.beginPath(); ctx.ellipse(bx, by, rx, ry, 0, 0, Math.PI*2); ctx.fill();
+        }
+        ctx.restore();
       };
 
       const drawEdge = (route, ax, ay, bx, by, alpha, colArr, lw, dash) => {
@@ -367,6 +440,15 @@ document.addEventListener('DOMContentLoaded', function() {
         const cur = [];
         for (let i = 0; i < N; i++) cur.push([lerp(A.pos[i][0], B.pos[i][0], m), lerp(A.pos[i][1], B.pos[i][1], m)]);
         const col = A.color.map((v, k) => Math.round(lerp(v, B.color[k], m)));
+
+        // Protein blob renders behind the glycan tree whenever the morph is
+        // holding at, or blending to/from, the glycan scene.
+        let glyWeight = 0;
+        if (A === gly) glyWeight = 1 - m;
+        else if (B === gly) glyWeight = m;
+        if (glyWeight > 0.02) {
+          drawProtein(SX(cur[0][0]), SY(cur[0][1]), R * 0.20, glyWeight);
+        }
 
         // edges: A fading out, B fading in — both anchored to current node positions
         const edgesOf = (sc, alpha) => {
@@ -432,22 +514,9 @@ document.addEventListener('DOMContentLoaded', function() {
               A.edges.forEach((e) => { if (!litEdge(e) || A.layer[e[1]] < wb) return; const a = cur[e[0]], b = cur[e[1]]; drawEdge('line', SX(a[0]), SY(a[1]), SX(b[0]), SY(b[1]), 0.28, [120, 140, 236], 1.2); });
             }
           } else if (A.sig === 'belief') {
-            let idx = 0;
-            for (const fam of A.families) {
-              const a = cur[fam.pa[0]], b = cur[fam.pa[1]], mx = (a[0] + b[0]) / 2, my = (a[1] + b[1]) / 2;
-              const ky = cur[fam.kids[0]][1], sibY = my + (ky - my) * 0.5;
-              for (const k of fam.kids) {
-                const kx = cur[k][0], kY = cur[k][1];
-                let f = (active * 1.2 + idx * 0.13) % 1; idx++;
-                let X, Y;
-                if (f < 0.34) { X = mx; Y = lerp(my, sibY, f / 0.34); }
-                else if (f < 0.67) { X = lerp(mx, kx, (f - 0.34) / 0.33); Y = sibY; }
-                else { X = kx; Y = lerp(sibY, kY, (f - 0.67) / 0.33); }
-                pulse(SX(X), SY(Y), [224, 164, 95]);
-              }
-            }
+            // pulse dots removed — pedigree stays quiet
           } else if (A.sig === 'mp') {
-            A.edges.forEach((e, i) => { const a = cur[e[0]], b = cur[e[1]]; let f = (active * 1.4 + i * 0.11) % 1; pulse(SX(lerp(a[0], b[0], f)), SY(lerp(a[1], b[1], f)), [127, 212, 176]); });
+            // pulse dots removed — glycan tree stays quiet
           } else if (A.sig === 'flux') {
             A.edges.forEach((e, i) => { if (A.broken && A.broken[0] === e[0] && A.broken[1] === e[1]) return; const a = cur[e[0]], b = cur[e[1]]; let f = (active * 1.2 + i * 0.13) % 1; pulse(SX(lerp(a[0], b[0], f)), SY(lerp(a[1], b[1], f)), [122, 200, 220]); });
           } else if (A.sig === 'rescue') {
@@ -480,46 +549,95 @@ document.addEventListener('DOMContentLoaded', function() {
       frame();
     }
 
-    // 3a — glycan tree <-> graph network (message passing)
+    // 3a — glycans drifting past in three biological states (SNFG colors)
     const glycan = document.getElementById('cv-glycan');
     if (glycan) {
       const { ctx, S } = mk(glycan);
-      const nodes = [
-        { x: 0, y: 0, s: 'sq' }, { x: 0, y: 1, s: 'sq' }, { x: 0, y: 2, s: 'ci' },
-        { x: -1, y: 3, s: 'ci' }, { x: 1, y: 3, s: 'ci' },
-        { x: -1.7, y: 4, s: 'sq' }, { x: -0.5, y: 4.2, s: 'tr' },
-        { x: 1.7, y: 4, s: 'sq' }, { x: 0.5, y: 4.2, s: 'tr' }
+      const PAL = { GlcNAc:[39,119,189], Man:[1,166,81], Gal:[255,212,0], Neu5Ac:[162,68,148] };
+      const archetypes = [
+        { // Complex bi-antennary N-glycan
+          name: 'complex', label: 'Complex N-glycan',
+          nodes: [
+            {x: 0.0, y:0.0, s:'sq', r:'GlcNAc'}, {x: 0.0, y:0.9, s:'sq', r:'GlcNAc'},
+            {x: 0.0, y:1.8, s:'ci', r:'Man'},
+            {x:-0.95,y:2.7, s:'ci', r:'Man'}, {x: 0.95,y:2.7, s:'ci', r:'Man'},
+            {x:-1.15,y:3.6, s:'sq', r:'GlcNAc'}, {x:-1.25,y:4.5, s:'ci', r:'Gal'}, {x:-1.30,y:5.4, s:'di', r:'Neu5Ac'},
+            {x: 1.15,y:3.6, s:'sq', r:'GlcNAc'}, {x: 1.25,y:4.5, s:'ci', r:'Gal'}, {x: 1.30,y:5.4, s:'di', r:'Neu5Ac'}
+          ],
+          edges: [[0,1],[1,2],[2,3],[2,4],[3,5],[5,6],[6,7],[4,8],[8,9],[9,10]]
+        },
+        { // CDG-affected variant — truncated antennae
+          name: 'cdg', label: 'CDG-affected variant',
+          nodes: [
+            {x: 0.0, y:0.0, s:'sq', r:'GlcNAc'}, {x: 0.0, y:0.9, s:'sq', r:'GlcNAc'},
+            {x: 0.0, y:1.8, s:'ci', r:'Man'},
+            {x:-0.95,y:2.7, s:'ci', r:'Man'}, {x: 0.95,y:2.7, s:'ci', r:'Man'},
+            {x:-1.15,y:3.6, s:'sq', r:'GlcNAc'}, {x:-1.25,y:4.5, s:'ci', r:'Gal'},
+            {x: 1.15,y:3.6, s:'sq', r:'GlcNAc'}
+          ],
+          edges: [[0,1],[1,2],[2,3],[2,4],[3,5],[5,6],[4,7]]
+        },
+        { // High-mannose Man9 (ER precursor)
+          name: 'high-mannose', label: 'High-mannose Man9',
+          nodes: [
+            {x: 0.0, y:0.0, s:'sq', r:'GlcNAc'}, {x: 0.0, y:0.9, s:'sq', r:'GlcNAc'},
+            {x: 0.0, y:1.8, s:'ci', r:'Man'},
+            {x:-1.05,y:2.7, s:'ci', r:'Man'}, {x: 1.05,y:2.7, s:'ci', r:'Man'},
+            {x:-1.60,y:3.6, s:'ci', r:'Man'}, {x: 1.60,y:3.6, s:'ci', r:'Man'},
+            {x:-2.15,y:4.5, s:'ci', r:'Man'}, {x:-1.05,y:4.5, s:'ci', r:'Man'},
+            {x: 2.15,y:4.5, s:'ci', r:'Man'}, {x: 1.05,y:4.5, s:'ci', r:'Man'}
+          ],
+          edges: [[0,1],[1,2],[2,3],[2,4],[3,5],[4,6],[5,7],[5,8],[6,9],[6,10]]
+        }
       ];
-      const edges = [[0, 1], [1, 2], [2, 3], [2, 4], [3, 5], [3, 6], [4, 7], [4, 8]];
-      const trees = [{ ax: 0.66, ay: 0.8, u: 0.11, ph: 0 }, { ax: 0.86, ay: 0.74, u: 0.085, ph: 2.1 }, { ax: 0.56, ay: 0.78, u: 0.07, ph: 4.0 }];
-      let t = 0;
-      const shape = (x, y, s, r, fill, stroke) => {
-        ctx.lineWidth = 1.4; ctx.strokeStyle = stroke; ctx.fillStyle = fill;
+      const drawShape = (x,y,s,r,resName,alpha) => {
+        const [rr,gg,bb] = PAL[resName];
+        ctx.fillStyle = 'rgba(' + rr + ',' + gg + ',' + bb + ',' + alpha + ')';
+        ctx.strokeStyle = 'rgba(8,14,10,' + (alpha*0.9) + ')';
+        ctx.lineWidth = 1.3;
         if (s === 'ci') { ctx.beginPath(); ctx.arc(x, y, r, 0, 7); ctx.fill(); ctx.stroke(); }
-        else if (s === 'sq') { ctx.beginPath(); ctx.rect(x - r, y - r, r * 2, r * 2); ctx.fill(); ctx.stroke(); }
-        else { ctx.beginPath(); ctx.moveTo(x, y - r * 1.15); ctx.lineTo(x + r, y + r * 0.8); ctx.lineTo(x - r, y + r * 0.8); ctx.closePath(); ctx.fill(); ctx.stroke(); }
+        else if (s === 'sq') { ctx.beginPath(); ctx.rect(x - r, y - r, r*2, r*2); ctx.fill(); ctx.stroke(); }
+        else if (s === 'di') { ctx.beginPath(); ctx.moveTo(x, y - r*1.2); ctx.lineTo(x + r*1.15, y); ctx.lineTo(x, y + r*1.2); ctx.lineTo(x - r*1.15, y); ctx.closePath(); ctx.fill(); ctx.stroke(); }
       };
+      const glycans = [
+        { arch: 2, xOff: -0.48, pOff: 0.02, ph: 0.0, sc: 0.96 },
+        { arch: 0, xOff: -0.28, pOff: 0.36, ph: 1.7, sc: 1.05 },
+        { arch: 1, xOff: -0.10, pOff: 0.71, ph: 3.4, sc: 0.90 },
+        { arch: 0, xOff:  0.10, pOff: 0.19, ph: 5.1, sc: 0.98 },
+        { arch: 2, xOff:  0.30, pOff: 0.55, ph: 2.4, sc: 1.02 },
+        { arch: 1, xOff:  0.48, pOff: 0.88, ph: 0.9, sc: 0.88 }
+      ];
+      const CYCLE = 18;
+      let t = 0;
       const frame = () => {
-        t += 0.01;
+        t += 0.006;
         const { W, H } = S;
         ctx.clearRect(0, 0, W, H);
-        const dir = Math.floor(t / 3) % 2 === 0 ? 1 : -1;
-        for (const tr of trees) {
-          const U = tr.u * Math.min(W, H) * (W < 820 ? 1.7 : 1);
-          const px = (n, i) => (tr.ax + (W < 820 ? -0.16 : 0)) * W + (n.x * U) + Math.sin(t * 0.6 + tr.ph + n.y * 0.4) * (2 + n.y * 1.6);
-          const py = (n) => (tr.ay - (W < 820 ? -0.08 : 0)) * H - n.y * U;
-          const pos = nodes.map((n, i) => ({ x: px(n, i), y: py(n), s: n.s }));
-          for (let ei = 0; ei < edges.length; ei++) {
-            const a = pos[edges[ei][0]], b = pos[edges[ei][1]];
-            ctx.strokeStyle = 'rgba(200,222,210,0.28)'; ctx.lineWidth = 1.5;
-            ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
-            let f = (t * 0.55 + ei * 0.12) % 1; if (dir < 0) f = 1 - f;
-            const mxp = a.x + (b.x - a.x) * f, myp = a.y + (b.y - a.y) * f;
-            ctx.beginPath(); ctx.fillStyle = 'rgba(127,212,176,0.95)';
-            ctx.shadowColor = 'rgba(127,212,176,0.9)'; ctx.shadowBlur = 9;
-            ctx.arc(mxp, myp, 2.4, 0, 7); ctx.fill(); ctx.shadowBlur = 0;
+        const cxBase = W < 820 ? W*0.5 : W*0.68;
+        const laneW  = W < 820 ? W*0.85 : W*0.58;
+        const Ubase  = Math.min(W, H) * 0.05;
+        for (const g of glycans) {
+          const phase = ((t / CYCLE) + g.pOff) % 1;
+          const yStart = H*1.20, yEnd = H*-0.35;
+          const cy = yStart + (yEnd - yStart) * phase;
+          const cx = cxBase + g.xOff * laneW + Math.sin(t*0.4 + g.ph) * (W*0.010);
+          const U  = Ubase * g.sc;
+          const fadeIn  = Math.max(0, Math.min(1, phase / 0.10));
+          const fadeOut = Math.max(0, Math.min(1, (1 - phase) / 0.10));
+          const gAlpha  = fadeIn * fadeOut * 0.92;
+          if (gAlpha < 0.02) continue;
+          const arch = archetypes[g.arch];
+          const pos = arch.nodes.map(n => {
+            const swayX = Math.sin(t*0.55 + n.y*0.35 + g.ph) * (0.6 + n.y*0.5);
+            return { x: cx + n.x*U + swayX, y: cy - n.y*U, s:n.s, r:n.r };
+          });
+          ctx.lineWidth = 1.4;
+          ctx.strokeStyle = 'rgba(200,222,210,' + (0.32*gAlpha) + ')';
+          for (const e of arch.edges) {
+            ctx.beginPath(); ctx.moveTo(pos[e[0]].x, pos[e[0]].y); ctx.lineTo(pos[e[1]].x, pos[e[1]].y); ctx.stroke();
           }
-          for (const p of pos) shape(p.x, p.y, U * 0.16, 'rgba(232,240,234,0.92)', 'rgba(12,20,17,0.9)');
+          const R = U*0.30;
+          for (const p of pos) drawShape(p.x, p.y, p.s, R, p.r, gAlpha);
         }
         self._rafs.glycan = requestAnimationFrame(frame);
       };

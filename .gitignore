@@ -1,3 +1,7 @@
 .DS_Store
 .jekyll-cache/
 _site/
+
+# Local-only variants kept for reference
+index-morph.html
+demos/
