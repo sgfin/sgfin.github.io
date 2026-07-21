@@ -352,7 +352,7 @@ document.addEventListener('DOMContentLoaded', function() {
       };
 
       const frame = () => {
-        t += 0.002;
+        t += 0.0028;
         const { W, H } = S;
         ctx.clearRect(0, 0, W, H);
         const SEG = scenes.length, segF = (t % SEG), si = Math.floor(segF), local = segF - si;
