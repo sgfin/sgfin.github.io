@@ -334,6 +334,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const landVal = (nx, ny) => { let v = 0; for (const c of landCenters) { const dx = nx - c[0], dy = ny - c[1]; v += c[2] * Math.exp(-(dx * dx + dy * dy) / 0.26); } return v; };
       let opt = null, optTrail = [];
       let t = 0;
+      let lastTs = 0;
 
       const drawGlyph = (type, x, y, r, alpha, colArr) => {
         if (alpha <= 0.02) return;
@@ -425,8 +426,12 @@ document.addEventListener('DOMContentLoaded', function() {
         if (route === 'arrow') { const a = Math.atan2(by - ay, bx - ax); const hx = bx - Math.cos(a) * 9, hy = by - Math.sin(a) * 9; ctx.beginPath(); ctx.moveTo(bx, by); ctx.lineTo(hx - Math.sin(a) * 3.5, hy + Math.cos(a) * 3.5); ctx.lineTo(hx + Math.sin(a) * 3.5, hy - Math.cos(a) * 3.5); ctx.closePath(); ctx.fillStyle = 'rgba(' + colArr.join(',') + ',' + alpha + ')'; ctx.fill(); }
       };
 
-      const frame = () => {
-        t += 0.0028;
+      const frame = (ts) => {
+        // wall-clock pacing so mobile (often ~30 fps for this canvas) advances
+        // at the same real-time rate as desktop (~60 fps). 0.168 = 0.0028 * 60.
+        const dt = lastTs ? Math.min(0.1, (ts - lastTs) / 1000) : 1/60;
+        lastTs = ts;
+        t += dt * 0.168;
         const { W, H } = S;
         ctx.clearRect(0, 0, W, H);
         const SEG = scenes.length, segF = (t % SEG), si = Math.floor(segF), local = segF - si;
